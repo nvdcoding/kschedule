@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "types": ["node"],
+    "importHelpers": true,
+    "target": "es6",
+    "module": "esnext",
+    "jsx": "react-native",
+    "noEmit": true,
+    "strict": false,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "lib": [
+      "dom",
+      "es6",
+      "es2017",
+      "esnext"
+    ],
+    "resolveJsonModule": true,
+  }
+}
