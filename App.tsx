@@ -23,9 +23,9 @@ const App = () => {
             barStyle={'dark-content'}
             backgroundColor={'transparent'}
           />
-          <GestureHandlerRootView style={Styles.root}>
+          {/* <GestureHandlerRootView style={Styles.root}> */}
             <GlobalStackNavigation />
-          </GestureHandlerRootView>
+          {/* </GestureHandlerRootView> */}
         </PersistGate>
       </Provider>
     </SafeAreaProvider>

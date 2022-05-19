@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: getSize.m(30),
     left: getSize.m(30),
+    zIndex: 100,
   },
 
   btnGoLogin: {
@@ -111,6 +112,19 @@ const styles = StyleSheet.create({
   formData: {
     marginHorizontal: Dimens.DEVICE_WIDTH * 0.12,
   },
+
+  textTitle: {
+    color: Color.RED_HOLDER,
+    fontFamily: Font.font_bold_700,
+    fontSize: getSize.m(50, 0.3),
+  },
+
+  textEdu: {
+    fontFamily: Font.font_bold_700,
+    fontSize: getSize.m(50, 0.3),
+    color: Color.GREEN_HOLDER,
+  },
+
 });
 
 export default styles;

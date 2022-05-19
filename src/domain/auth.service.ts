@@ -1,18 +1,24 @@
 import base64 from 'react-native-base64';
 import {URL_MAIN} from 'src/base/common/Constants';
 import api from 'src/base/domain/api';
-
+import {debug} from 'src/base/utils/DebugUtil';
 import {IRegisterAccount} from './local/IRegisterAccount';
 
 export default class AuthService {
-  login(username: string, password: string): Promise<any> {
-    return api('account/v1/authorize/token', null, {
-      method: 'GET',
-      headers: {
-        Authorization: `Basic ${base64.encode(`${username}:${password}`)}`,
-      },
+  login(studentCode: string, password: string): Promise<any> {
+    debug('sf3...', {studentCode, password})
+    return api('v1/auth/login', {studentCode, password}, {
+      method: 'POST',
     });
   }
+  // login(username: string, password: string): Promise<any> {
+  //   return api('account/v1/authorize/token', null, {
+  //     method: 'GET',
+  //     headers: {
+  //       Authorization: `Basic ${base64.encode(`${username}:${password}`)}`,
+  //     },
+  //   });
+  // }
 
   registerAccount({
     job,

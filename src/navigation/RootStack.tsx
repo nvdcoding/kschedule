@@ -111,7 +111,8 @@ const GlobalStackNavigation = () => {
 
         <Stack.Screen
           name={HOME_TAB_NAVIGATOR}
-          component={infoUser.isLogged ? HomeTabNavigator : LoginScreen}
+          // component={infoUser.isLogged ? HomeTabNavigator : LoginScreen}
+          component={HomeTabNavigator}
         />
         <Stack.Screen
           name={CHANGE_PASSWORD_SUCCESS_SCREEN}

@@ -24,6 +24,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		13D230747160483FB4D8EE9A /* SVN-Avo bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 266B81B0A75246E6A38348F6 /* SVN-Avo bold.ttf */; };
 		272255A6ED9F4AF18F821EEE /* SVN-Avo-bold-italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5AC1A5FF9D2475A934AF8BD /* SVN-Avo-bold-italic.ttf */; };
 		399C2BFE63F14A34A38596F2 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 116B59BF67554219AEA15F89 /* Poppins-Light.ttf */; };
 		5E84F2C33CC74D2D9F83C475 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 869A1B49D75C4AE1A7ABC65B /* Poppins-SemiBold.ttf */; };
@@ -37,7 +38,6 @@
 		D4A7C606037A4DD68C3E23C1 /* SVN-Avo-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE598486A2243CFB0E02B77 /* SVN-Avo-bold.ttf */; };
 		DB50C4458F094981B1F19F7A /* goEdu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2536814D19504B23A2C43C3F /* goEdu.ttf */; };
 		EA576A2E268441C3BE5C47BF /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 481D3CD3141B492D9008C3E0 /* Poppins-Medium.ttf */; };
-		13D230747160483FB4D8EE9A /* SVN-Avo bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 266B81B0A75246E6A38348F6 /* SVN-Avo bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +78,7 @@
 		1C9B8372EEC14D8FBCA54CBC /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-GoEdu-GoEduTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoEdu-GoEduTests.release.xcconfig"; path = "Target Support Files/Pods-GoEdu-GoEduTests/Pods-GoEdu-GoEduTests.release.xcconfig"; sourceTree = "<group>"; };
 		2536814D19504B23A2C43C3F /* goEdu.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = goEdu.ttf; path = ../src/assets/fonts/goEdu.ttf; sourceTree = "<group>"; };
+		266B81B0A75246E6A38348F6 /* SVN-Avo bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Avo bold.ttf"; path = "../src/assets/fonts/SVN-Avo bold.ttf"; sourceTree = "<group>"; };
 		43203E7504084B969224B3DB /* SVN-Avo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Avo.ttf"; path = "../src/assets/fonts/SVN-Avo.ttf"; sourceTree = "<group>"; };
 		481D3CD3141B492D9008C3E0 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-GoEdu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoEdu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +93,6 @@
 		D5AC1A5FF9D2475A934AF8BD /* SVN-Avo-bold-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = file; name = "SVN-Avo-bold-italic.ttf"; path = "../src/assets/fonts/SVN-Avo-bold-italic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FB4ABB792D074916A03B2FC3 /* SVN-Avo-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = file; name = "SVN-Avo-italic.ttf"; path = "../src/assets/fonts/SVN-Avo-italic.ttf"; sourceTree = "<group>"; };
-		266B81B0A75246E6A38348F6 /* SVN-Avo bold.ttf */ = {isa = PBXFileReference; name = "SVN-Avo bold.ttf"; path = "../src/assets/fonts/SVN-Avo bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

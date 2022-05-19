@@ -24,6 +24,7 @@
     "react-native": "0.67.3",
     "react-native-base64": "^0.2.1",
     "react-native-bootsplash": "^3.2.6",
+    "react-native-calendars": "^1.1284.0",
     "react-native-code-push": "^7.0.4",
     "react-native-device-info": "^8.5.0",
     "react-native-fast-image": "^8.5.11",

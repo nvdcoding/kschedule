@@ -13,6 +13,7 @@ import {
   JWT_KEY,
 } from 'src/base/common/Constants';
 import Styles from 'src/base/common/Styles';
+import { debug } from 'src/base/utils/DebugUtil';
 import Helper from 'src/base/utils/helper';
 import {notifyInvalid} from 'src/base/utils/Utils';
 import {
@@ -25,6 +26,7 @@ import AuthService from 'src/domain/auth.service';
 import {
   DRAWER_STACK,
   FORGET_PASSWORD_SCREEN,
+  HOME_TAB_NAVIGATOR,
   REGISTER_SCREEN,
 } from 'src/navigation/screen';
 import {setAccount} from 'src/redux/slices/accountSlice';
@@ -51,19 +53,21 @@ const LoginScreen = ({navigation}) => {
       if (!password) {
         throw t('NOT_ENTER_PASSWORD');
       }
-      setLoading(true);
-      const authService = new AuthService();
-      const {data} = await authService.login(username, password);
-      if (data.access_token) {
-        data.access_token && Helper.storeData(JWT_KEY, data.access_token);
-        const infoUser = await authService.getInfoUser();
-        setLoading(false);
-        infoUser.data.message === '+OK' &&
-          dispatch(setAccount(infoUser.data.data));
-        navigation.navigate(isTablet ? DRAWER_STACK : DRAWER_STACK);
-      } else {
-        throw t('LOGIN_FAIL');
-      }
+      // setLoading(true);
+      navigation.navigate(HOME_TAB_NAVIGATOR);
+      // const authService = new AuthService();
+      // const {data} = await authService.login(username, password);
+      // debug('asdf55>>>', data);
+      // if (data.access_token) {
+      //   data.access_token && Helper.storeData(JWT_KEY, data.access_token);
+      //   const infoUser = await authService.getInfoUser();
+      //   setLoading(false);
+      //   infoUser.data.message === '+OK' &&
+      //     dispatch(setAccount(infoUser.data.data));
+      //   navigation.navigate(isTablet ? DRAWER_STACK : DRAWER_STACK);
+      // } else {
+      //   throw t('LOGIN_FAIL');
+      // }
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);

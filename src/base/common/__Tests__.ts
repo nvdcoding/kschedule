@@ -122,33 +122,19 @@ export const LIST_TYPE_LIST_COURSE = [
 ];
 
 export const FORM_REGISTER = [
+  {id: 0, title: 'EMAIL_LOGIN', placeholder: 'ENTER_EMAIL', key: 'email'},
   {
-    id: 0,
-    title: 'FIRST_NAME',
-    placeholder: 'ENTER_FIRST_NAME',
-    key: 'firstName',
-  },
-  {id: 1, title: 'LAST_NAME', placeholder: 'ENTER_LAST_NAME', key: 'lastName'},
-  {id: 2, title: 'EMAIL_LOGIN', placeholder: 'ENTER_EMAIL', key: 'email'},
-  {
-    id: 3,
+    id: 1,
     title: 'PASSWORD',
     placeholder: 'ENTER_PASSWORD',
     key: 'password',
     security: true,
   },
   {
-    id: 4,
+    id: 2,
     title: 'CONFIRM_PASSWORD',
     placeholder: 'RE_ENTER_PASSWORD',
     key: 'confirmPassword',
     security: true,
   },
-  {
-    id: 5,
-    title: 'PHONE_NUMBER',
-    placeholder: 'ENTER_PHONE_NUMBER',
-    key: 'mobile',
-  },
-  {id: 6, title: 'JOB', placeholder: 'ENTER_JOB', key: 'job'},
 ];
