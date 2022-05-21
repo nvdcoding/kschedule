@@ -1,19 +1,13 @@
 import React, {memo} from 'react';
 
 import {useTranslation} from 'react-i18next';
-import {
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import CloseIcon from 'src/assets/icon/CloseIcon';
 import {isTablet} from 'src/base/common/Constants';
 import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {
-  Block,
-  Text,
-} from 'src/components';
+import {Block, Text} from 'src/components';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
 
@@ -46,7 +40,7 @@ const styles = StyleSheet.create({
 
   btnModal: {
     height: getSize.m(38),
-    backgroundColor: Color.GREEN,
+    backgroundColor: Color.TEXT_PRIMARY,
     borderRadius: getSize.m(10),
     ...Styles.centerNoFlex,
     marginTop: getSize.m(40),
