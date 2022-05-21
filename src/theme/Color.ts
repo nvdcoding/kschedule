@@ -25,4 +25,6 @@ export default {
   RED_HOLDER: '#EF251B',
   ORANGE: '#FF382E',
   BLOCK_GRAY: '#212924',
+  TEXT_PRIMARY: '#E22323',
+  TEXT_SECONDARY: '#1F9CDF',
 };

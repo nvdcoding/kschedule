@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import {debounce} from 'lodash';
 import {useTranslation} from 'react-i18next';
-import {SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Images} from 'src/assets/images';
 import {FORM_REGISTER} from 'src/base/common/__Tests__';
@@ -104,9 +104,17 @@ const RegisterScreen = ({navigation}) => {
         />
       )}
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
-        <Block marginTop={isTablet ? 0 : 20} row alignSelf="center">
-          <Text style={styles.textTitle}>Go</Text>
-          <Text style={styles.textEdu}>Edu</Text>
+        <Block
+          marginTop={isTablet ? 0 : 40}
+          row
+          alignSelf="center"
+          style={styles.blockLogo}>
+          <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
+          <View style={{display: 'flex'}}>
+            <Text style={styles.textTitle}>
+              Schedule <Text style={styles.textEdu}>KMA</Text>
+            </Text>
+          </View>
         </Block>
         <TouchableOpacity
           style={styles.btnBack}
@@ -115,7 +123,7 @@ const RegisterScreen = ({navigation}) => {
           <Icon
             name={'arrow-back-outline'}
             size={getSize.m(24)}
-            color={Color.GREEN}
+            color={Color.RED}
           />
         </TouchableOpacity>
         <Block alignCenter marginTop={10} marginBottom={40}>

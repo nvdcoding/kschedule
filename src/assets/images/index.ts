@@ -5,4 +5,5 @@ export const Images = {
   IMG_COURSE: require('src/assets/images/img_course.png'),
   IMG_POSTER_DETAIL: require('src/assets/images/img_poster_detail.png'),
   AVATAR_DEFAULT: require('src/assets/images/avatar.png'),
+  IMG_LOGO: require('src/assets/images/logokma.png'),
 };

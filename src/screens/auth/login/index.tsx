@@ -1,27 +1,15 @@
 import React, {useState} from 'react';
 
 import {useTranslation} from 'react-i18next';
-import {
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {Images} from 'src/assets/images';
-import {
-  isTablet,
-  JWT_KEY,
-} from 'src/base/common/Constants';
+import {isTablet, JWT_KEY} from 'src/base/common/Constants';
 import Styles from 'src/base/common/Styles';
-import { debug } from 'src/base/utils/DebugUtil';
+import {debug} from 'src/base/utils/DebugUtil';
 import Helper from 'src/base/utils/helper';
 import {notifyInvalid} from 'src/base/utils/Utils';
-import {
-  Block,
-  Image,
-  Spinner,
-  Text,
-} from 'src/components';
+import {Block, Image, Spinner, Text} from 'src/components';
 import AuthService from 'src/domain/auth.service';
 import {
   DRAWER_STACK,
@@ -86,9 +74,17 @@ const LoginScreen = ({navigation}) => {
       )}
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Block marginTop={isTablet ? 0 : 20} row alignSelf="center">
-            <Text style={styles.textTitle}>K</Text>
-            <Text style={styles.textEdu}>Schedule</Text>
+          <Block
+            marginTop={isTablet ? 0 : 20}
+            row
+            alignSelf="center"
+            style={styles.blockLogo}>
+            <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
+            <View style={{display: 'flex'}}>
+              <Text style={styles.textTitle}>
+                Schedule <Text style={styles.textEdu}>KMA</Text>
+              </Text>
+            </View>
           </Block>
           <Block alignCenter marginTop={isTablet ? 0 : 20}>
             <Text style={styles.textTitleLogin}>{t('LOGIN')}</Text>
@@ -102,8 +98,8 @@ const LoginScreen = ({navigation}) => {
           <Block marginHorizontal={30} marginTop={isTablet ? 30 : 60}>
             <InputComponent
               marginBottom={25}
-              title={t('EMAIL_LOGIN')}
-              placeholder={t('ENTER_EMAIL')}
+              title={t('CODE_LOGIN')}
+              placeholder={t('ENTER_CODE')}
               value={username}
               onChangeText={setUsername}
             />

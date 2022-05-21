@@ -12,11 +12,13 @@
   "REGISTER": "Đăng ký",
   "SEND_OTP": "Gửi mã otp",
   "EMAIL_LOGIN": "Email",
+  "CODE_LOGIN": "Mã sinh viên",
   "PASSWORD": "Mật khẩu",
   "RE_PASSWORD": "Xác nhận mật khẩu",
   "FORGET_PASSWORD": "Quên mật khẩu",
   "ENTER_EMAIL": "Nhập email...",
   "ENTER_PASSWORD": "Nhập mật khẩu...",
+  "ENTER_CODE": "Nhập mã sinh viên...",
   "RE_ENTER_PASSWORD": "Nhập lại mật khẩu...",
   "OTP": "Mã xác nhận",
   "ENTER_OTP": "Nhập mã xác nhận",
@@ -78,5 +80,10 @@
   "NOT_EMPTY": "Không để trống trường",
   "EMAIL_INVALID": "Email không hợp lệ !",
   "ERROR_REGISTER": "Lỗi đăng ký",
-  "CHANGE_PASSWORD_FAIL": "Thay đổi mật khẩu thất bại hãy kiểm tra email mới nhất được gửi đến!"
+  "CHANGE_PASSWORD_FAIL": "Thay đổi mật khẩu thất bại hãy kiểm tra email mới nhất được gửi đến!",
+  "SEARCH_BY": "Tìm kiếm theo ngày",
+  "INFORMATION": "Thông tin cá nhân",
+  "SECURITY": "Bảo mật & mật khẩu",
+  "LANGUAGE": "Tiếng Việt",
+  "SIGN-OUT": "Đăng xuất"
 }
