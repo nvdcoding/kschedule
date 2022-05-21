@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
   textEdu: {
     fontFamily: Font.font_bold_700,
-    fontSize: getSize.m(20, 0.3),
+    fontSize: getSize.m(30, 0.3),
     color: Color.GREEN_HOLDER,
   },
 

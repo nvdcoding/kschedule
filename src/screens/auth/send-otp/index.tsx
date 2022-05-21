@@ -13,12 +13,13 @@ import {validateEmail, validatePhone} from 'src/base/utils/ValidationUtils';
 import {Block, Image, Spinner, Text} from 'src/components';
 import ModalErrorComponent from 'src/components/ModalError';
 import AuthService from 'src/domain/auth.service';
-import {SIGN_UP_SUCCESS_SCREEN} from 'src/navigation/screen';
+import {REGISTER_SCREEN, SIGN_UP_SUCCESS_SCREEN} from 'src/navigation/screen';
 import styles from 'src/screens/auth/send-otp/send-otp.style';
 import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 import Helper from 'src/base/utils/helper';
+import { REGISTER } from 'redux-persist';
 // import {IDataSignUp} from './types';
 
 const defaultSendOtp = {
@@ -38,10 +39,6 @@ const SendOtpScreen = ({navigation}) => {
     setInvalid(null);
     try {
       Object.keys(dataSendOtp).forEach((item, index) => {
-        // if (!dataSignUp[item]) {
-        //   setInvalid(index);
-        //   throw `${t('NOT_EMPTY')} ${t(FORM_REGISTER[index].title)}`;
-        // }
         if (index === 0 && !validateEmail(dataSendOtp[item])) {
           setInvalid(index);
           throw t('EMAIL_INVALID');
@@ -52,13 +49,14 @@ const SendOtpScreen = ({navigation}) => {
         }
       });
       setLoading(true);
-      // const {data} = await authService.registerAccount(dataSignUp);
-      // if (data.apiStatus !== 'SUCCESS') {
-      //   throw data.description;
-      // }
+      const { data } = await authService.sendOtp(dataSendOtp);
+      if (data.data.statusCode !== 200) {
+        throw data.data.message;
+        // throw data.description;
+      }
       setLoading(false);
       navigation.popToTop();
-      navigation.navigate(SIGN_UP_SUCCESS_SCREEN);
+      navigation.navigate(REGISTER_SCREEN);
     } catch (err) {
       setLoading(false);
       setError(err);

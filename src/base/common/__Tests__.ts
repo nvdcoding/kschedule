@@ -122,20 +122,38 @@ export const LIST_TYPE_LIST_COURSE = [
 ];
 
 export const FORM_REGISTER = [
-  { id: 0, title: 'EMAIL_LOGIN', placeholder: 'ENTER_EMAIL', key: 'email' },
+  { id: 0, title: 'STUDENT_CODE', placeholder: 'ENTER_STUDENT_CODE', key: 'studentCode' },
   {
     id: 1,
+    title: 'NAME',
+    placeholder: 'ENTER_NAME',
+    key: 'name',
+  },
+  {
+    id: 2,
+    title: 'EMAIL_LOGIN',
+    placeholder: 'ENTER_EMAIL',
+    key: 'email',
+  },
+  {
+    id: 3,
     title: 'PASSWORD',
     placeholder: 'ENTER_PASSWORD',
     key: 'password',
     security: true,
   },
   {
-    id: 2,
-    title: 'CONFIRM_PASSWORD',
+    id: 4,
+    title: 'RE_PASSWORD',
     placeholder: 'RE_ENTER_PASSWORD',
     key: 'confirmPassword',
     security: true,
+  },
+  {
+    id: 5,
+    title: 'OTP',
+    placeholder: 'ENTER_OTP',
+    key: 'otp',
   },
 ];
 export const FORM_SEND_OTP = [

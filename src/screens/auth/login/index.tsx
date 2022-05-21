@@ -87,8 +87,8 @@ const LoginScreen = ({navigation}) => {
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Block marginTop={isTablet ? 0 : 20} row alignSelf="center">
-            <Text style={styles.textTitle}>Go</Text>
-            <Text style={styles.textEdu}>Edu</Text>
+            <Text style={styles.textTitle}>K</Text>
+            <Text style={styles.textEdu}>Schedule</Text>
           </Block>
           <Block alignCenter marginTop={isTablet ? 0 : 20}>
             <Text style={styles.textTitleLogin}>{t('LOGIN')}</Text>

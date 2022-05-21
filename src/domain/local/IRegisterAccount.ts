@@ -1,11 +1,7 @@
 export interface IRegisterAccount {
-  job: string;
-  source: string;
-  firstName: string;
-  lastName: string;
-  mobile: string;
+  studentCode: string;
+  name: string;
   email: string;
   password: string;
-  verifyUrl: string;
-  fullName?: string;
+  otp: string;
 }
