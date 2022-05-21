@@ -40,7 +40,7 @@ import SendOtpScreen from '../send-otp';
 const LoginScreen = ({navigation}) => {
   const {t} = useTranslation();
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [username, setUsername] = useState<string>(null);
+  const [studentCode, setStudentCode] = useState<string>(null);
   const [password, setPassword] = useState<string>(null);
   const dispatch = useDispatch();
 
@@ -49,27 +49,28 @@ const LoginScreen = ({navigation}) => {
 
   const handleLogin = async () => {
     try {
-      if (!username) {
-        throw t('NOT_ENTER_EMAIL');
+      if (!studentCode) {
+        throw t('NOT_ENTER_STUDENT_CODE');
       }
       if (!password) {
         throw t('NOT_ENTER_PASSWORD');
       }
       // setLoading(true);
       navigation.navigate(HOME_TAB_NAVIGATOR);
-      // const authService = new AuthService();
-      // const {data} = await authService.login(username, password);
-      // debug('asdf55>>>', data);
-      // if (data.access_token) {
-      //   data.access_token && Helper.storeData(JWT_KEY, data.access_token);
-      //   const infoUser = await authService.getInfoUser();
-      //   setLoading(false);
-      //   infoUser.data.message === '+OK' &&
-      //     dispatch(setAccount(infoUser.data.data));
-      //   navigation.navigate(isTablet ? DRAWER_STACK : DRAWER_STACK);
-      // } else {
-      //   throw t('LOGIN_FAIL');
-      // }
+      const authService = new AuthService();
+      const {data} = await authService.login(studentCode, password);
+      console.log(data);
+      debug('asdf55>>>', data);
+      if (data.data.accessToken) {
+        data.data.accessToken && Helper.storeData(JWT_KEY, data.data.accessToken);
+        // const infoUser = await authService.getInfoUser();
+        setLoading(false);
+        // infoUser.data.message === '+OK' &&
+        //   dispatch(setAccount(infoUser.data.data));
+        navigation.navigate(isTablet ? DRAWER_STACK : DRAWER_STACK);
+      } else {
+        throw t('LOGIN_FAIL');
+      }
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);
@@ -102,10 +103,10 @@ const LoginScreen = ({navigation}) => {
           <Block marginHorizontal={30} marginTop={isTablet ? 30 : 60}>
             <InputComponent
               marginBottom={25}
-              title={t('EMAIL_LOGIN')}
-              placeholder={t('ENTER_EMAIL')}
-              value={username}
-              onChangeText={setUsername}
+              title={t('STUDENT_CODE')}
+              placeholder={t('ENTER_STUDENT_CODE')}
+              value={studentCode}
+              onChangeText={setStudentCode}
             />
             <InputComponent
               title={t('PASSWORD')}
