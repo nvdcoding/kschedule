@@ -72,7 +72,7 @@ const RegisterScreen = ({navigation}) => {
         }
       });
       setLoading(true);
-      const {data} = await authService.registerAccount(dataSignUp);
+      const { data } = await authService.registerAccount(dataSignUp);
       if (data.data.statusCode !== 200) {
         throw data.data.message;
         // throw data.description;
@@ -81,7 +81,6 @@ const RegisterScreen = ({navigation}) => {
       navigation.popToTop();
       navigation.navigate(SIGN_UP_SUCCESS_SCREEN);
     } catch (err) {
-      console.log(err)
       setLoading(false);
       setError(err);
     }

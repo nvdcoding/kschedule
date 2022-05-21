@@ -7,7 +7,7 @@ import { IRegisterAccount } from './local/IRegisterAccount';
 export default class AuthService {
   login(studentCode: string, password: string): Promise<any> {
     debug('sf3...', { studentCode, password })
-    return api('v1/auth/login', { studentCode, password }, {
+    return api('api/v1/auth/login', { studentCode, password }, {
       method: 'POST',
     });
   }

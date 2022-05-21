@@ -47,6 +47,7 @@
   "NOT_ENTER_EMAIL": "Bạn chưa nhập email!",
   "NOT_ENTER_PASSWORD": "Bạn chưa nhập mật khẩu!",
   "NOT_ENTER_NAME": "Bạn chưa nhập tên",
+  "NOT_ENTER_STUDENT_CODE": "Bạn chưa nhập mã sinh viên",
   "INVALID_OTP": "Mã xác nhận không hợp lệ",
   "ACTIVE_COURSE": "KÍCH HOẠT KHÓA HỌC",
   "ACTIVE_COURSE_SUCCESS": "KÍCH HOẠT KHÓA HỌC THÀNH CÔNG",
