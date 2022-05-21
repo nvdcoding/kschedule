@@ -28,12 +28,14 @@ import {
   FORGET_PASSWORD_SCREEN,
   HOME_TAB_NAVIGATOR,
   REGISTER_SCREEN,
+  SEND_OTP_SCREEN,
 } from 'src/navigation/screen';
 import {setAccount} from 'src/redux/slices/accountSlice';
 import styles from 'src/screens/auth/login/login.style';
 import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
+import SendOtpScreen from '../send-otp';
 
 const LoginScreen = ({navigation}) => {
   const {t} = useTranslation();
@@ -42,7 +44,7 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState<string>(null);
   const dispatch = useDispatch();
 
-  const handleRegister = () => navigation.navigate(REGISTER_SCREEN);
+  const handleRegister = () => navigation.navigate(SEND_OTP_SCREEN);
   const handleForgetPass = () => navigation.navigate(FORGET_PASSWORD_SCREEN);
 
   const handleLogin = async () => {

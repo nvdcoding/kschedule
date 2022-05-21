@@ -10,7 +10,7 @@ export const FORGET_PASSWORD_SCREEN = 'ForgetPassword';
 export const RESET_SUCCESS_SCREEN = 'ResetSuccess';
 export const NEW_PASSWORD_SCREEN = 'NewPassword';
 export const CHANGE_PASSWORD_SUCCESS_SCREEN = 'ChangePasswordSuccess';
-
+export const SEND_OTP_SCREEN = "SendOtpScreen";
 //dashboard
 export const DRAWER_STACK = 'DrawerStack';
 export const HOME_TAB_NAVIGATOR = 'HomeTabNavigator';

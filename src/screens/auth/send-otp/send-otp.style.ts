@@ -17,31 +17,14 @@ const styles = StyleSheet.create({
   contentTablet: {
     alignSelf: 'center',
     width: Dimens.DEVICE_WIDTH * 0.75,
-    marginVertical: getSize.v(20),
+    marginVertical: getSize.m(20),
     elevation: 3,
     shadowColor: Color.GRAY_DEEP,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: 2,
-    paddingHorizontal: Dimens.DEVICE_WIDTH * 0.12,
+    paddingHorizontal: Dimens.DEVICE_WIDTH * 0.06,
     backgroundColor: Color.WHITE,
-  },
-
-  textTitle: {
-    color: Color.RED_HOLDER,
-    fontFamily: Font.font_bold_700,
-    fontSize: getSize.m(30, 0.3),
-  },
-
-  textEdu: {
-    fontFamily: Font.font_bold_700,
-    fontSize: getSize.m(20, 0.3),
-    color: Color.GREEN_HOLDER,
-  },
-
-  contentLogin: {
-    marginTop: getSize.v(20),
-    alignItems: 'center',
   },
 
   textTitleLogin: {
@@ -64,27 +47,13 @@ const styles = StyleSheet.create({
     paddingVertical: getSize.m(5),
   },
 
-  textForgetPassword: {
-    color: Color.GREEN_HOLDER,
-    fontFamily: Font.font_SVN_400,
-    fontSize: getSize.m(13, 0.3),
-  },
-
-  btnForget: {
-    alignSelf: 'flex-end',
-  },
-
   btnLogin: {
     backgroundColor: Color.GREEN_HOLDER,
     height: getSize.m(48),
     borderRadius: getSize.m(24),
     marginTop: getSize.m(30),
     ...Styles.centerNoFlex,
-  },
-
-  btnResetPasswordTablet: {
-    width: Dimens.DEVICE_WIDTH * 0.4,
-    alignSelf: 'center',
+    marginBottom: getSize.m(20),
   },
 
   textLogin: {
@@ -95,17 +64,26 @@ const styles = StyleSheet.create({
 
   btnBack: {
     position: 'absolute',
-    top: getSize.m(20),
-    left: getSize.m(20),
+    top: getSize.m(30),
+    left: getSize.m(30),
+    zIndex: 100,
   },
 
-  textResetSuccess: {
-    textAlign: 'center',
-    fontSize: getSize.m(15, 0.3),
-    fontFamily: Font.font_SVN_400,
-    color: '#2E2E2E',
+  btnGoLogin: {
+    backgroundColor: Color.GREEN,
+    height: getSize.m(48),
+    borderRadius: getSize.m(24),
+    position: 'absolute',
+    bottom: getSize.m(40),
     marginHorizontal: getSize.m(30),
-    marginTop: getSize.m(14),
+    width: Dimens.DEVICE_WIDTH - getSize.m(60),
+    ...Styles.centerNoFlex,
+  },
+
+  btnGoLoginTablet: {
+    position: 'relative',
+    width: Dimens.DEVICE_WIDTH * 0.75 - getSize.m(80),
+    bottom: 0,
   },
 
   contentSignSuccess: {
@@ -131,22 +109,22 @@ const styles = StyleSheet.create({
     marginBottom: getSize.m(25),
   },
 
-  btnGoLogin: {
-    backgroundColor: Color.GREEN,
-    height: getSize.m(48),
-    borderRadius: getSize.m(24),
-    position: 'absolute',
-    bottom: getSize.m(40),
-    marginHorizontal: getSize.m(30),
-    width: Dimens.DEVICE_WIDTH - getSize.m(60),
-    ...Styles.centerNoFlex,
+  formData: {
+    marginHorizontal: Dimens.DEVICE_WIDTH * 0.12,
   },
 
-  btnGoLoginTablet: {
-    position: 'relative',
-    width: Dimens.DEVICE_WIDTH * 0.75 - getSize.m(100),
-    bottom: 0,
+  textTitle: {
+    color: Color.RED_HOLDER,
+    fontFamily: Font.font_bold_700,
+    fontSize: getSize.m(30, 0.3),
   },
+
+  textEdu: {
+    fontFamily: Font.font_bold_700,
+    fontSize: getSize.m(30, 0.3),
+    color: Color.GREEN_HOLDER,
+  },
+
 });
 
 export default styles;

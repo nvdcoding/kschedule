@@ -8,24 +8,34 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Helper = {
+
+  isValidStudentCode: (value: string) => {
+    return value.match(/^(CT|AT|DT)(\d){6}$/);
+  },
+
   getDataStored: (value: string) => {
     return AsyncStorage.getItem(value);
   },
+
   storeData: (key: string, value: string) => {
     return AsyncStorage.setItem(key, value);
   },
+
   removeDataStored: (key?: string) => {
     if (key) {
       return AsyncStorage.removeItem(key);
     }
     return AsyncStorage.clear();
   },
+
   getHitSlop: (value: number = 5) => {
-    return {top: value, right: value, bottom: value, left: value};
+    return { top: value, right: value, bottom: value, left: value };
   },
+
   formatNumberWith(number: number, character: string = '.') {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, character);
   },
+
   showAlert: (message: string) => {
     if (Platform.OS === 'ios') {
       Alert.alert('', message);
@@ -33,6 +43,7 @@ const Helper = {
       ToastAndroid.show(message, ToastAndroid.SHORT);
     }
   },
+
   getTime: (time: number) => {
     let hour = Math.floor(time / 60);
     let minute =
@@ -42,6 +53,7 @@ const Helper = {
 
     return `${hour}:${minute}`;
   },
+
   isOpen: (open: number, close: number) => {
     const date = new Date();
     let hours = date.getHours() * 60;
@@ -50,6 +62,7 @@ const Helper = {
     }
     return false;
   },
+
   getAxiosErrorMessage: (error: any) => {
     if (axios.isAxiosError(error)) {
       if (error.response?.data?.message) {
@@ -58,6 +71,7 @@ const Helper = {
     }
     return error;
   },
+
 };
 
 export default Helper;

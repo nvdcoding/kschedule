@@ -44,7 +44,9 @@ import {
   REGISTER_SCREEN,
   RESET_SUCCESS_SCREEN,
   SIGN_UP_SUCCESS_SCREEN,
+  SEND_OTP_SCREEN
 } from './screen';
+import SendOtpScreen from 'src/screens/auth/send-otp';
 
 const Stack = createNativeStackNavigator();
 
@@ -107,6 +109,7 @@ const GlobalStackNavigation = () => {
           component={IntroNotifyScreen}
         />
         <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
+        <Stack.Screen name={SEND_OTP_SCREEN} component={SendOtpScreen} />
         <Stack.Screen name={REGISTER_SCREEN} component={RegisterScreen} />
 
         <Stack.Screen

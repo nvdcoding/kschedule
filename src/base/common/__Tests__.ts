@@ -15,7 +15,7 @@ import {
   TEMPLATE_SCREEN,
 } from 'src/navigation/screen';
 
-import {isTablet} from './Constants';
+import { isTablet } from './Constants';
 
 export const LIST_LANGUAGE = ['', '', 'Tiếng việt', 'US English', '', ''];
 
@@ -102,27 +102,27 @@ export const LIST_COURSE = [
 export const LIST_COURSE_TABLET = [
   {
     title: 'Cơ bản',
-    data: [{data: [1, 1, 4, 4]}],
+    data: [{ data: [1, 1, 4, 4] }],
   },
   {
     title: 'Nâng cao',
-    data: [{data: [1, 1, 4, 4, 4]}],
+    data: [{ data: [1, 1, 4, 4, 4] }],
   },
   {
     title: 'Chuyên gia',
-    data: [{data: [1, 1, 2, 3]}],
+    data: [{ data: [1, 1, 2, 3] }],
   },
 ];
 
 export const LIST_TYPE_LIST_COURSE = [
-  {id: 0, name: 'ALL'},
-  {id: 1, name: 'Cơ bản'},
-  {id: 2, name: 'Nâng cao'},
-  {id: 3, name: 'Chuyên gia'},
+  { id: 0, name: 'ALL' },
+  { id: 1, name: 'Cơ bản' },
+  { id: 2, name: 'Nâng cao' },
+  { id: 3, name: 'Chuyên gia' },
 ];
 
 export const FORM_REGISTER = [
-  {id: 0, title: 'EMAIL_LOGIN', placeholder: 'ENTER_EMAIL', key: 'email'},
+  { id: 0, title: 'EMAIL_LOGIN', placeholder: 'ENTER_EMAIL', key: 'email' },
   {
     id: 1,
     title: 'PASSWORD',
@@ -138,3 +138,7 @@ export const FORM_REGISTER = [
     security: true,
   },
 ];
+export const FORM_SEND_OTP = [
+  { id: 0, title: 'EMAIL_LOGIN', placeholder: 'ENTER_EMAIL', key: 'email' },
+  { id: 1, title: 'STUDENT_CODE', placeholder: 'ENTER_STUDENT_CODE', key: 'studentCode' }
+]
