@@ -19,6 +19,7 @@ import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 import Helper from 'src/base/utils/helper';
+import { REGISTER } from 'redux-persist';
 // import {IDataSignUp} from './types';
 
 const defaultSendOtp = {
@@ -52,13 +53,15 @@ const SendOtpScreen = ({navigation}) => {
         }
       });
       setLoading(true);
-      // const {data} = await authService.registerAccount(dataSignUp);
-      // if (data.apiStatus !== 'SUCCESS') {
-      //   throw data.description;
-      // }
+      const { data } = await authService.sendOtp(dataSendOtp);
+      console.log(data);
+      if (data.data.statusCode !== 200) {
+        throw data.data.message;
+        // throw data.description;
+      }
       setLoading(false);
       navigation.popToTop();
-      navigation.navigate(SIGN_UP_SUCCESS_SCREEN);
+      navigation.navigate(REGISTER);
     } catch (err) {
       setLoading(false);
       setError(err);

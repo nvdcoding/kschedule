@@ -1,13 +1,13 @@
 import base64 from 'react-native-base64';
-import {URL_MAIN} from 'src/base/common/Constants';
+import { URL_MAIN } from 'src/base/common/Constants';
 import api from 'src/base/domain/api';
-import {debug} from 'src/base/utils/DebugUtil';
-import {IRegisterAccount} from './local/IRegisterAccount';
+import { debug } from 'src/base/utils/DebugUtil';
+import { IRegisterAccount } from './local/IRegisterAccount';
 
 export default class AuthService {
   login(studentCode: string, password: string): Promise<any> {
-    debug('sf3...', {studentCode, password})
-    return api('v1/auth/login', {studentCode, password}, {
+    debug('sf3...', { studentCode, password })
+    return api('v1/auth/login', { studentCode, password }, {
       method: 'POST',
     });
   }
@@ -44,8 +44,16 @@ export default class AuthService {
     });
   }
 
+  sendOtp({ email, studentCode }): Promise<any> {
+
+    return api('api/v1/auth/send-otp', {
+      email,
+      studentCode
+    }, { method: "POST" });
+  }
+
   getInfoUser(): Promise<any> {
-    return api('admin/account/v1/user/info', null, {method: 'GET'});
+    return api('admin/account/v1/user/info', null, { method: 'GET' });
   }
 
   changePassword(
@@ -82,10 +90,10 @@ export default class AuthService {
     email: string,
     url: string = URL_MAIN + 'change-pass',
   ): Promise<any> {
-    return api('admin/account/v1/user/reset/password', {email, url});
+    return api('admin/account/v1/user/reset/password', { email, url });
   }
 
   changePasswordOtp(password: string, token: string): Promise<any> {
-    return api('admin/account/v1/user/update/otp-password', {password, token});
+    return api('admin/account/v1/user/update/otp-password', { password, token });
   }
 }

@@ -1,9 +1,9 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {JWT_KEY} from 'src/base/common/Constants';
+import axios, { AxiosRequestConfig } from 'axios';
+import { JWT_KEY } from 'src/base/common/Constants';
 
 import Helper from '../utils/helper';
 
-const apiServerUrl = 'http://7539-222-252-28-142.ngrok.io/api/';
+const apiServerUrl = 'http://aae3-2402-800-6117-a777-c953-91a4-cc98-7e1b.ngrok.io';
 // const apiServerUrl = 'http://dev.learn.goedu.asia/api/';
 
 const getAxiosInstance = async () => {
@@ -42,7 +42,7 @@ const api = async (
 ) => {
   try {
     const API = await getAxiosInstance();
-    return API({url, data, method: 'POST', ...options});
+    return API({ url, data, method: 'POST', ...options });
   } catch (error) {
     return Promise.reject(error);
   }
