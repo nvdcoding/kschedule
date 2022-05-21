@@ -19,11 +19,16 @@ import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 import {IDataSignUp} from './types';
+import Helper from 'src/base/utils/helper';
+import { Value } from 'react-native-reanimated';
 
 const defaultRegister = {
+  studentCode: '',
+  name: '',
   email: '',
   password: '',
   confirmPassword: '',
+  otp: ''
 };
 
 const RegisterScreen = ({navigation}) => {
@@ -38,28 +43,45 @@ const RegisterScreen = ({navigation}) => {
     setInvalid(null);
     try {
       Object.keys(dataSignUp).forEach((item, index) => {
-        // if (!dataSignUp[item]) {
-        //   setInvalid(index);
-        //   throw `${t('NOT_EMPTY')} ${t(FORM_REGISTER[index].title)}`;
-        // }
-        if (index === 0 && !validateEmail(dataSignUp[item])) {
+        if (index === 0 && !Helper.isValidStudentCode(dataSignUp[item])) {
+          setInvalid(index);
+          throw t('INVALID_STUDENT_CODE');
+        }
+        if (index === 1 && dataSignUp[item].length == 0) {
+          setInvalid(index);
+          throw t('NOT_ENTER_NAME');
+        }
+        if (index === 2 && !validateEmail(dataSignUp[item])) {
           setInvalid(index);
           throw t('EMAIL_INVALID');
         }
-        if (index === 1 && dataSignUp.password !== dataSignUp.confirmPassword) {
-          setInvalid(1);
+
+        if ((index === 3  && dataSignUp[item].length == 0) || (index === 4 && dataSignUp[item].length === 0)) {
+          setInvalid(index);
+          throw t('NOT_ENTER_PASSWORD');
+        }
+
+        if (index === 4 && dataSignUp.password !== dataSignUp.confirmPassword) {
+          setInvalid(index);
           throw t('INVALID_CONFIRM_PASSWORD');
+        }
+
+        if (index === 5 && !dataSignUp[item]) {
+          setInvalid(index);
+          throw t('INVALID_OTP');
         }
       });
       setLoading(true);
-      // const {data} = await authService.registerAccount(dataSignUp);
-      // if (data.apiStatus !== 'SUCCESS') {
-      //   throw data.description;
-      // }
+      const {data} = await authService.registerAccount(dataSignUp);
+      if (data.data.statusCode !== 200) {
+        throw data.data.message;
+        // throw data.description;
+      }
       setLoading(false);
       navigation.popToTop();
       navigation.navigate(SIGN_UP_SUCCESS_SCREEN);
     } catch (err) {
+      console.log(err)
       setLoading(false);
       setError(err);
     }

@@ -21,26 +21,18 @@ export default class AuthService {
   // }
 
   registerAccount({
-    job,
-    source,
-    firstName,
-    lastName,
-    mobile,
+    studentCode,
+    name,
     email,
     password,
-    verifyUrl,
-    fullName = '',
+    otp
   }: IRegisterAccount): Promise<any> {
-    return api('account/v1/anonymous/register/user', {
-      job,
-      source,
-      firstName,
-      lastName,
-      mobile,
+    return api('/api/v1/auth/register', {
+      studentCode,
+      name,
       email,
       password,
-      verifyUrl,
-      fullName,
+      otp
     });
   }
 
