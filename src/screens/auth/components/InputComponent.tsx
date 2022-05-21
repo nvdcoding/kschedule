@@ -1,19 +1,9 @@
-import React, {
-  memo,
-  useState,
-} from 'react';
+import React, {memo, useState} from 'react';
 
-import {
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {getIconComponent} from 'src/assets/icon';
 import {getSize} from 'src/base/common/responsive';
-import {
-  Block,
-  Text,
-} from 'src/components';
+import {Block, Text} from 'src/components';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
 
@@ -29,7 +19,7 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    borderBottomColor: Color.GREEN_HOLDER,
+    borderBottomColor: Color.TEXT_PRIMARY,
     borderBottomWidth: getSize.m(1),
     color: Color.BLACK,
     fontFamily: Font.font_SVN_400,
