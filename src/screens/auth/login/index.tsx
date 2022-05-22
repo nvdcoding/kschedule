@@ -14,6 +14,7 @@ import AuthService from 'src/domain/auth.service';
 import {
   DRAWER_STACK,
   FORGET_PASSWORD_SCREEN,
+  HOME_SCREEN,
   HOME_TAB_NAVIGATOR,
   REGISTER_SCREEN,
   SEND_OTP_SCREEN,
@@ -43,12 +44,11 @@ const LoginScreen = ({navigation}) => {
       if (!password) {
         throw t('NOT_ENTER_PASSWORD');
       }
-      // setLoading(true);
+      setLoading(true);
       navigation.navigate(HOME_TAB_NAVIGATOR);
       const authService = new AuthService();
       const {data} = await authService.login(studentCode, password);
       console.log(data);
-      debug('asdf55>>>', data);
       if (data.data.accessToken) {
         data.data.accessToken &&
           Helper.storeData(JWT_KEY, data.data.accessToken);
@@ -56,7 +56,7 @@ const LoginScreen = ({navigation}) => {
         setLoading(false);
         // infoUser.data.message === '+OK' &&
         //   dispatch(setAccount(infoUser.data.data));
-        navigation.navigate(isTablet ? DRAWER_STACK : DRAWER_STACK);
+        navigation.navigate(isTablet ? DRAWER_STACK : HOME_SCREEN);
       } else {
         throw t('LOGIN_FAIL');
       }

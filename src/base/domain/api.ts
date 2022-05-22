@@ -3,7 +3,7 @@ import { JWT_KEY } from 'src/base/common/Constants';
 
 import Helper from '../utils/helper';
 
-const apiServerUrl = 'http://aae3-2402-800-6117-a777-c953-91a4-cc98-7e1b.ngrok.io';
+const apiServerUrl = 'http://2073-2405-4802-22b-c8b0-3ca7-9956-e52b-1dc0.ngrok.io';
 // const apiServerUrl = 'http://dev.learn.goedu.asia/api/';
 
 const getAxiosInstance = async () => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
   SafeAreaView,
@@ -7,28 +7,40 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from 'src/base/common/Styles';
-import {Block, Image} from 'src/components';
-import {Images} from 'src/assets/images';
+import { Block, Image } from 'src/components';
+import { Images } from 'src/assets/images';
 import styles from './home.style';
-import {isTablet} from 'src/base/common/Constants';
+import { isTablet } from 'src/base/common/Constants';
 import Color from 'src/theme/Color';
-import {getSize} from 'src/base/common/responsive';
-import {LIVE_CLASS_SCREEN} from 'src/navigation/screen';
+import { getSize } from 'src/base/common/responsive';
+import { CHANGE_INFORMATION_SCREEN, CHANGE_LANGUAGE_SCREEN, CHANGE_SECURITY_SCREEN } from 'src/navigation/screen';
 
-const InformationScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const InformationScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const [avt, setAvt] = useState(Images.AVATAR_DEFAULT);
   const changeAVT = () => {
     console.log('state changed!');
     setAvt(Images.IMG_LOGO);
   };
-  const handleChangeScreen = () => {
+  const changeInformation = () => {
     console.log('state changed!');
-    navigation.navigate(LIVE_CLASS_SCREEN);
+    navigation.navigate(CHANGE_INFORMATION_SCREEN);
   };
+
+  const changeSecurity = () => {
+    navigation.navigate(CHANGE_SECURITY_SCREEN);
+  }
+
+  const changeLang = () => {
+    navigation.navigate(CHANGE_LANGUAGE_SCREEN);
+  }
+
+  const handleLogout = () => {
+    console.log("Logout");
+  }
 
   return (
     <SafeAreaView style={Styles.container}>
@@ -45,12 +57,12 @@ const InformationScreen = ({navigation}) => {
             />
           </TouchableOpacity>
           <View style={styles.containerHome}>
-            <View style={styles.avtUser} onPress={changeAVT}>
+            <TouchableOpacity style={styles.avtUser} onPress={changeAVT}>
               <Image source={avt} style={styles.avtImg} />
               <Text style={styles.textAvt}>Lam Lam Mai</Text>
-            </View>
+            </TouchableOpacity>
             <Block style={styles.ListInfo}>
-              <Block style={styles.ItemInfo} onPress={handleChangeScreen}>
+              <TouchableOpacity style={styles.ItemInfo} onPress={changeInformation}>
                 <View style={styles.mainItem}>
                   <Icon
                     name={'person-circle'}
@@ -64,8 +76,8 @@ const InformationScreen = ({navigation}) => {
                   size={getSize.m(24)}
                   color={'#CACDCF'}
                 />
-              </Block>
-              <Block style={styles.ItemInfo}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.ItemInfo} onPress={changeSecurity}>
                 <View style={styles.mainItem}>
                   <Icon name={'key'} size={getSize.m(24)} color={'#F1EF4C'} />
                   <Text style={styles.settingUser}>{t('SECURITY')}</Text>
@@ -75,8 +87,8 @@ const InformationScreen = ({navigation}) => {
                   size={getSize.m(24)}
                   color={'#CACDCF'}
                 />
-              </Block>
-              <Block style={styles.ItemInfo}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.ItemInfo} onPress={changeLang}>
                 <View style={styles.mainItem}>
                   <Icon
                     name={'language'}
@@ -85,8 +97,8 @@ const InformationScreen = ({navigation}) => {
                   />
                   <Text style={styles.settingUser}>{t('LANGUAGE')}</Text>
                 </View>
-              </Block>
-              <Block style={styles.ItemInfo}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.ItemInfo} onPress={handleLogout}>
                 <View style={styles.mainItem}>
                   <Icon
                     name={'power-outline'}
@@ -95,7 +107,7 @@ const InformationScreen = ({navigation}) => {
                   />
                   <Text style={styles.settingUser}>{t('SIGN-OUT')}</Text>
                 </View>
-              </Block>
+              </TouchableOpacity>
             </Block>
           </View>
         </ScrollView>

@@ -29,11 +29,11 @@ export const BLOG_STACK = 'Todo';
 
 //listCourse
 export const LIST_COURSE_SCREEN = 'ListCourseStack';
-export const TIMETABLE_SYNC_SCREEN = 'Add Timetable';
+export const TIMETABLE_SYNC_SCREEN = 'AddTimetable';
 
 //live class
 export const LIVE_CLASS_STACK = 'User';
-export const LIVE_CLASS_SCREEN = 'Infomation User';
+export const LIVE_CLASS_SCREEN = 'InfomationUser';
 export const DETAIL_LIVE_CLASS_SCREEN = 'DetailLiveClass';
 
 //Profile
@@ -41,3 +41,7 @@ export const PROFILE_SCREEN = 'Profile';
 
 //Template
 export const TEMPLATE_SCREEN = 'Template';
+
+export const CHANGE_INFORMATION_SCREEN = 'ChangeInformationScreen';
+export const CHANGE_SECURITY_SCREEN = 'ChangeSecurityScreen';
+export const CHANGE_LANGUAGE_SCREEN = 'ChangeLanguageScreen';
