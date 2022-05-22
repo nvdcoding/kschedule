@@ -107,6 +107,9 @@ const styles = StyleSheet.create({
     fontFamily: Font.font_SVN_400,
     color: '#A7A7A7',
   },
+  blockLogo: {},
+  logoLogin: {},
+  textEdu: {},
 });
 
 export default styles;
