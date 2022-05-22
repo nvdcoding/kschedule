@@ -50,7 +50,8 @@ const LoginScreen = ({navigation}) => {
       console.log(data);
       debug('asdf55>>>', data);
       if (data.data.accessToken) {
-        data.data.accessToken && Helper.storeData(JWT_KEY, data.data.accessToken);
+        data.data.accessToken &&
+          Helper.storeData(JWT_KEY, data.data.accessToken);
         // const infoUser = await authService.getInfoUser();
         setLoading(false);
         // infoUser.data.message === '+OK' &&
@@ -129,7 +130,7 @@ const LoginScreen = ({navigation}) => {
         </ScrollView>
       </Block>
       {isLoading && (
-        <Spinner mode={'overlay'} size={'large'} color={Color.GREEN} />
+        <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
       )}
     </SafeAreaView>
   );

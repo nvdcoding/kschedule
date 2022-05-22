@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import Dimens from 'src/base/common/Dimens';
-import { getSize } from 'src/base/common/responsive';
+import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginVertical: getSize.m(20),
     elevation: 3,
     shadowColor: Color.GRAY_DEEP,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: 2,
     paddingHorizontal: Dimens.DEVICE_WIDTH * 0.06,
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
 
   textRegister: {
     fontFamily: Font.font_SVN_700,
-    color: Color.GREEN_HOLDER,
+    color: Color.TEXT_PRIMARY,
     fontSize: getSize.m(13, 0.3),
     paddingHorizontal: getSize.m(5),
     paddingVertical: getSize.m(5),
   },
 
   btnLogin: {
-    backgroundColor: Color.GREEN_HOLDER,
+    backgroundColor: Color.TEXT_PRIMARY,
     height: getSize.m(48),
     borderRadius: getSize.m(24),
     marginTop: getSize.m(30),
@@ -114,17 +114,30 @@ const styles = StyleSheet.create({
   },
 
   textTitle: {
-    color: Color.RED_HOLDER,
+    color: Color.TEXT_PRIMARY,
     fontFamily: Font.font_bold_700,
     fontSize: getSize.m(30, 0.3),
   },
 
   textEdu: {
     fontFamily: Font.font_bold_700,
-    fontSize: getSize.m(30, 0.3),
-    color: Color.GREEN_HOLDER,
+    fontSize: getSize.m(25, 0.3),
+    color: Color.TEXT_SECONDARY,
   },
-
+  logoLogin: {
+    width: 50,
+    height: 50,
+  },
+  blockLogo: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  textLogo: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 });
 
 export default styles;
