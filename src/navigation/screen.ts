@@ -29,11 +29,11 @@ export const BLOG_STACK = 'Todo';
 
 //listCourse
 export const LIST_COURSE_SCREEN = 'ListCourseStack';
-export const LIST_COURSE_STACK = 'Search';
+export const TIMETABLE_SYNC_SCREEN = 'Add Timetable';
 
 //live class
 export const LIVE_CLASS_STACK = 'User';
-export const LIVE_CLASS_SCREEN = 'LiveClassScreen';
+export const LIVE_CLASS_SCREEN = 'Infomation User';
 export const DETAIL_LIVE_CLASS_SCREEN = 'DetailLiveClass';
 
 //Profile

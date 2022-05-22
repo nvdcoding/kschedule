@@ -1,3 +1,4 @@
+import {get} from 'immer/dist/internal';
 import {StyleSheet} from 'react-native';
 import Dimens from 'src/base/common/Dimens';
 import {getSize} from 'src/base/common/responsive';
@@ -10,8 +11,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   containerHome: {
+    marginTop: getSize.m(20),
     display: 'flex',
     flexDirection: 'column',
+    paddingLeft: getSize.m(15),
+    paddingRight: getSize.m(15),
+    width: Dimens.DEVICE_WIDTH,
   },
   content: {
     flex: 1,
@@ -64,10 +69,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   main: {},
-  // search
-  search: {
-    color: Color.TEXT_PRIMARY,
-  },
   // user
   textUser: {
     color: Color.TEXT_PRIMARY,
@@ -87,18 +88,79 @@ const styles = StyleSheet.create({
     fontSize: getSize.m(20),
   },
   settingUser: {
-    color: '#ccc',
+    color: '#686862',
+    marginLeft: getSize.m(4),
+    fontSize: getSize.m(12),
   },
   ItemInfo: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: getSize.m(10),
   },
   mainItem: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  // timetable
+  timetableTitle: {
+    color: Color.TEXT_PRIMARY,
+    fontSize: getSize.m(20),
+    textAlign: 'center',
+    fontWeight: '700',
+    marginBottom: getSize.m(20),
+  },
+  status: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: getSize.m(10),
+  },
+  statusTitle: {
+    color: '#232323',
+    fontWeight: '500',
+    fontSize: getSize.m(15),
+    marginRight: getSize.m(10),
+  },
+  statusY: {
+    fontSize: getSize.m(15),
+    color: Color.TEXT_SECONDARY,
+  },
+  statusN: {
+    fontSize: getSize.m(15),
+    color: Color.TEXT_PRIMARY,
+  },
+  Notes: {
+    overflow: 'visible',
+    flexDirection: 'row',
+    marginTop: getSize.m(15),
+  },
+  notesTitle: {
+    color: Color.TEXT_PRIMARY,
+    fontWeight: '500',
+    fontSize: getSize.m(15),
+    marginRight: getSize.m(10),
+  },
+  notesDes: {
+    color: '#232323',
+    fontSize: getSize.m(15),
+    width: Dimens.DEVICE_WIDTH,
+  },
+  btnLogin: {
+    backgroundColor: Color.TEXT_PRIMARY,
+    height: getSize.m(48),
+    borderRadius: getSize.m(24),
+    marginTop: getSize.m(30),
+    ...Styles.centerNoFlex,
+    marginBottom: getSize.m(20),
+  },
+  textLogin: {
+    color: Color.WHITE,
+    fontFamily: Font.font_SVN_700,
+    fontSize: getSize.m(15, 0.3),
   },
 });
 

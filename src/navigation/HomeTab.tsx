@@ -4,7 +4,6 @@ import {StyleSheet} from 'react-native';
 import {getIconComponent} from 'src/assets/icon';
 import {getSize} from 'src/base/common/responsive';
 import HomeScreen from 'src/screens/dashboard/home';
-import SearchScreen from 'src/screens/dashboard/home/SearchScreen';
 import AddScheduleScreeen from 'src/screens/dashboard/home/AddScheduleScreen';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
@@ -14,12 +13,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   BLOG_STACK,
   HOME_SCREEN,
-  LIST_COURSE_STACK,
+  TIMETABLE_SYNC_SCREEN,
   LIVE_CLASS_STACK,
 } from './screen';
 import InformationScreen from 'src/screens/dashboard/home/InformationScreen';
+import TimetableSync from 'src/screens/dashboard/home/TimetableSync';
 
-const Icon = getIconComponent('goEdu');
+const Icon = getIconComponent('ionicons');
 
 const HomeTab = createBottomTabNavigator();
 
@@ -30,31 +30,31 @@ const HomeTabNavigator = () => {
         tabBarIcon: ({focused, size}) => {
           let iconName;
           if (route.name === HOME_SCREEN) {
-            iconName = 'book-2';
-          } else if (route.name === LIST_COURSE_STACK) {
-            iconName = 'book-1';
+            iconName = 'home';
+          } else if (route.name === TIMETABLE_SYNC_SCREEN) {
+            iconName = 'sync';
           } else if (route.name === BLOG_STACK) {
-            iconName = 'carbon-blog';
+            iconName = 'medkit-outline';
           } else {
-            iconName = 'tivi-icon';
+            iconName = 'ios-settings-outline';
           }
           return (
             <Icon
               name={iconName}
-              color={focused ? Color.GREEN : '#C4C4C4'}
+              color={focused ? Color.TEXT_PRIMARY : '#C4C4C4'}
               size={size}
             />
           );
         },
         headerShown: false,
-        tabBarActiveTintColor: Color.GREEN,
+        tabBarActiveTintColor: Color.TEXT_PRIMARY,
         tabBarInactiveTintColor: '#C4C4C4',
         tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabBarLabelStyle,
         // tabBarShowLabel: false,
       })}>
       <HomeTab.Screen name={HOME_SCREEN} component={HomeScreen} />
-      <HomeTab.Screen name={LIST_COURSE_STACK} component={SearchScreen} />
+      <HomeTab.Screen name={TIMETABLE_SYNC_SCREEN} component={TimetableSync} />
       <HomeTab.Screen name={BLOG_STACK} component={AddScheduleScreeen} />
       <HomeTab.Screen name={LIVE_CLASS_STACK} component={InformationScreen} />
     </HomeTab.Navigator>

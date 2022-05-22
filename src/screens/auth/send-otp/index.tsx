@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import {debounce} from 'lodash';
 import {useTranslation} from 'react-i18next';
-import {SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Images} from 'src/assets/images';
 import {FORM_SEND_OTP} from 'src/base/common/__Tests__';
@@ -19,12 +19,12 @@ import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 import Helper from 'src/base/utils/helper';
-import { REGISTER } from 'redux-persist';
+import {REGISTER} from 'redux-persist';
 // import {IDataSignUp} from './types';
 
 const defaultSendOtp = {
   email: '',
-  studentCode: ''
+  studentCode: '',
 };
 
 const SendOtpScreen = ({navigation}) => {
@@ -49,7 +49,7 @@ const SendOtpScreen = ({navigation}) => {
         }
       });
       setLoading(true);
-      const { data } = await authService.sendOtp(dataSendOtp);
+      const {data} = await authService.sendOtp(dataSendOtp);
       if (data.data.statusCode !== 200) {
         throw data.data.message;
         // throw data.description;
@@ -80,9 +80,17 @@ const SendOtpScreen = ({navigation}) => {
         />
       )}
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
-        <Block marginTop={isTablet ? 0 : 20} row alignSelf="center">
-          <Text style={styles.textTitle}>K</Text>
-          <Text style={styles.textEdu}>Schedule</Text>
+        <Block
+          marginTop={isTablet ? 0 : 40}
+          row
+          alignSelf="center"
+          style={styles.blockLogo}>
+          <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
+          <View style={{display: 'flex'}}>
+            <Text style={styles.textTitle}>
+              Schedule <Text style={styles.textEdu}>KMA</Text>
+            </Text>
+          </View>
         </Block>
         <TouchableOpacity
           style={styles.btnBack}
@@ -91,7 +99,7 @@ const SendOtpScreen = ({navigation}) => {
           <Icon
             name={'arrow-back-outline'}
             size={getSize.m(24)}
-            color={Color.GREEN}
+            color={Color.RED}
           />
         </TouchableOpacity>
         <Block alignCenter marginTop={10} marginBottom={40}>
@@ -132,7 +140,9 @@ const SendOtpScreen = ({navigation}) => {
         handleClose={handleCloseModal}
         error={error}
       />
-      {isLoading && <Spinner mode={'overlay'} />}
+      {isLoading && (
+        <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
+      )}
     </SafeAreaView>
   );
 };

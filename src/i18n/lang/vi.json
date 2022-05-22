@@ -82,9 +82,15 @@
   "EMAIL_INVALID": "Email không hợp lệ !",
   "ERROR_REGISTER": "Lỗi đăng ký",
   "CHANGE_PASSWORD_FAIL": "Thay đổi mật khẩu thất bại hãy kiểm tra email mới nhất được gửi đến!",
-  "SEARCH_BY": "Tìm kiếm theo ngày",
+  "TIMETABLE_SYNC": "Đồng bộ thời khóa biểu",
   "INFORMATION": "Thông tin cá nhân",
   "SECURITY": "Bảo mật & mật khẩu",
   "LANGUAGE": "Tiếng Việt",
-  "SIGN-OUT": "Đăng xuất"
+  "SIGN-OUT": "Đăng xuất",
+  "UNDERSTOOD": "Tôi đã hiểu.",
+  "PASSWORD_CODE": "Mật khẩu tài khoản sinh viên",
+  "STATUS": "Trạng thái",
+  "NOTE": "Ghi chú:*",
+  "NOTE_TEXT": "KSchedule không lưu trữ mật khẩu của bạn.Nhằm tăng tính bảo mật cho tài khoản của bạn vui lòng đổi mật khẩu sinh viên sau khi đã đồng bộ thời khóa biểu",
+  "SYNC_TIMETABLE_BTN": "Đồng bộ"
 }

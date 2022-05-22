@@ -20,7 +20,7 @@ import Color from 'src/theme/Color';
 import InputComponent from '../components/InputComponent';
 import {IDataSignUp} from './types';
 import Helper from 'src/base/utils/helper';
-import { Value } from 'react-native-reanimated';
+import {Value} from 'react-native-reanimated';
 
 const defaultRegister = {
   studentCode: '',
@@ -28,7 +28,7 @@ const defaultRegister = {
   email: '',
   password: '',
   confirmPassword: '',
-  otp: ''
+  otp: '',
 };
 
 const RegisterScreen = ({navigation}) => {
@@ -56,7 +56,10 @@ const RegisterScreen = ({navigation}) => {
           throw t('EMAIL_INVALID');
         }
 
-        if ((index === 3  && dataSignUp[item].length == 0) || (index === 4 && dataSignUp[item].length === 0)) {
+        if (
+          (index === 3 && dataSignUp[item].length == 0) ||
+          (index === 4 && dataSignUp[item].length === 0)
+        ) {
           setInvalid(index);
           throw t('NOT_ENTER_PASSWORD');
         }
@@ -72,7 +75,7 @@ const RegisterScreen = ({navigation}) => {
         }
       });
       setLoading(true);
-      const { data } = await authService.registerAccount(dataSignUp);
+      const {data} = await authService.registerAccount(dataSignUp);
       if (data.data.statusCode !== 200) {
         throw data.data.message;
         // throw data.description;
@@ -164,7 +167,9 @@ const RegisterScreen = ({navigation}) => {
         handleClose={handleCloseModal}
         error={error}
       />
-      {isLoading && <Spinner mode={'overlay'} />}
+      {isLoading && (
+        <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
+      )}
     </SafeAreaView>
   );
 };
