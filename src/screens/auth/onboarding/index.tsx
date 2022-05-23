@@ -1,18 +1,11 @@
 import React from 'react';
 
 import {useTranslation} from 'react-i18next';
-import {
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, TouchableOpacity} from 'react-native';
 import {Images} from 'src/assets/images';
 import {isTablet} from 'src/base/common/Constants';
 import Styles from 'src/base/common/Styles';
-import {
-  Block,
-  Image,
-  Text,
-} from 'src/components';
+import {Block, Image, Text} from 'src/components';
 import {INTRO_NOTIFY_SCREEN} from 'src/navigation/screen';
 
 import styles from './onboarding.style';
@@ -29,10 +22,10 @@ const OnBoardingScreen = ({navigation}) => {
   return (
     <SafeAreaView style={Styles.container}>
       <Block marginTop={10} row alignCenter alignSelf="center">
-        <Text style={styles.textTitle}>Go</Text>
-        <Text style={styles.textTitleEdu}>Edu</Text>
+        <Text style={styles.textTitle}>Schedule</Text>
+        <Text style={styles.textTitleEdu}>KMA</Text>
       </Block>
-      <Image source={Images.IMG_INTRO_1} style={styles.imgIntro} />
+      <Image source={Images.IMG_LOGO} style={styles.imgIntro} />
       <Block style={isTablet ? styles.contentTablet : styles.content}>
         <Text center={isTablet} style={styles.textWelcome}>
           {t('TITLE_WELCOME_APP')}
