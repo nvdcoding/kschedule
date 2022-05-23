@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-} from 'react';
+import React, {useEffect, useRef} from 'react';
 
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
@@ -14,8 +11,7 @@ import {IUserState} from 'src/redux/slices/accountSlice';
 import {IAppState} from 'src/redux/slices/appSlice';
 import {IRootState} from 'src/redux/store';
 import LoginScreen from 'src/screens/auth/login';
-import ChangePasswordSuccessScreen
-  from 'src/screens/auth/login/ChangePasswordSuccessScreen';
+import ChangePasswordSuccessScreen from 'src/screens/auth/login/ChangePasswordSuccessScreen';
 import ForgetPasswordScreen from 'src/screens/auth/login/ForgetPasswordScreen';
 import NewPasswordScreen from 'src/screens/auth/login/NewPasswordScreen';
 import ResetSuccessScreen from 'src/screens/auth/login/ResetSuccessScreen';
@@ -27,11 +23,7 @@ import SignUpSuccessScreen from 'src/screens/auth/register/SignUpSuccessScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {
-  APP_PREFIX,
-  navigationRef,
-  PATH_SCREENS,
-} from './actions';
+import {APP_PREFIX, navigationRef, PATH_SCREENS} from './actions';
 import HomeTabNavigator from './HomeTab';
 import {
   CHANGE_PASSWORD_SUCCESS_SCREEN,
@@ -47,10 +39,9 @@ import {
   SEND_OTP_SCREEN,
   CHANGE_INFORMATION_SCREEN,
   CHANGE_SECURITY_SCREEN,
-  CHANGE_LANGUAGE_SCREEN
+  CHANGE_LANGUAGE_SCREEN,
 } from './screen';
 import SendOtpScreen from 'src/screens/auth/send-otp';
-import InformationScreen from 'src/screens/dashboard/home/InformationScreen';
 import ChangeInformationScreen from 'src/screens/dashboard/user/information';
 import ChangeSecurityScreen from 'src/screens/dashboard/user/information';
 import ChangeLanguageScreen from 'src/screens/dashboard/user/languague';
@@ -118,8 +109,14 @@ const GlobalStackNavigation = () => {
         <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
         <Stack.Screen name={SEND_OTP_SCREEN} component={SendOtpScreen} />
         <Stack.Screen name={REGISTER_SCREEN} component={RegisterScreen} />
-        <Stack.Screen name={CHANGE_INFORMATION_SCREEN} component={ChangeInformationScreen} />
-        <Stack.Screen name={CHANGE_SECURITY_SCREEN} component={ChangeSecurityScreen} />
+        <Stack.Screen
+          name={CHANGE_INFORMATION_SCREEN}
+          component={ChangeInformationScreen}
+        />
+        <Stack.Screen
+          name={CHANGE_SECURITY_SCREEN}
+          component={ChangeSecurityScreen}
+        />
         {/* <Stack.Screen name={CHANGE_LANGUAGE_SCREEN} component={ChangeLanguageScreen} /> */}
 
         <Stack.Screen

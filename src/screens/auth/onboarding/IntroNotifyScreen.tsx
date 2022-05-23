@@ -1,20 +1,13 @@
 import React from 'react';
 
 import {useTranslation} from 'react-i18next';
-import {
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {Images} from 'src/assets/images';
 import {isTablet} from 'src/base/common/Constants';
 import Dimens from 'src/base/common/Dimens';
 import Styles from 'src/base/common/Styles';
-import {
-  Block,
-  Image,
-  Text,
-} from 'src/components';
+import {Block, Image, Text} from 'src/components';
 import {LOGIN_SCREEN} from 'src/navigation/screen';
 import {setNotifyFirstBoot} from 'src/redux/slices/appSlice';
 
@@ -44,12 +37,12 @@ const IntroNotifyScreen = ({navigation}) => {
     <SafeAreaView style={Styles.container}>
       {isTablet && (
         <Block row alignCenter alignSelf="center">
-          <Text style={styles.textTitle}>Go</Text>
-          <Text style={styles.textTitleEdu}>Edu</Text>
+          <Text style={styles.textTitle}>Schedule</Text>
+          <Text style={styles.textTitleEdu}>KMA</Text>
         </Block>
       )}
       <Image
-        source={Images.IMG_INTRO_2}
+        source={Images.IMG_LOGO}
         style={styles.imgIntro}
         width={isTablet ? Dimens.DEVICE_WIDTH * 0.22 : Dimens.DEVICE_WIDTH}
         height={
