@@ -1,96 +1,84 @@
-import React, {useState} from 'react';
+import React, {
+  useCallback,
+  useMemo,
+} from 'react';
 
-import {SafeAreaView, View, Text, ScrollView} from 'react-native';
-import {Calendar} from 'react-native-calendars';
-import Styles from 'src/base/common/Styles';
-import {Block} from 'src/components';
+import isEmpty from 'lodash/isEmpty';
+import {
+  SafeAreaView,
+  StatusBar,
+  Text,
+} from 'react-native';
+import {
+  AgendaList,
+  CalendarProvider,
+  WeekCalendar,
+} from 'react-native-calendars';
+import {Images} from 'src/assets/images';
+import {DATA_CALENDER} from 'src/base/common/__Tests__';
+import {
+  Block,
+  Image,
+} from 'src/components';
+
+import ItemAgendaComponent from './components/ItemAgendaComponent';
 import styles from './home.style';
-import Color from 'src/theme/Color';
-import {isTablet} from 'src/base/common/Constants';
+import testIDs from './testIDs';
+
+const dataDate = DATA_CALENDER.map(item => {
+  return {
+    title: item.day.split('/').reverse().join('-'),
+    data: [item],
+  };
+});
+
+type MarkedDate = {
+  [key: string]: object;
+};
+
+const getMarkedDates = (items: any[]) => {
+  const marked: MarkedDate = {};
+
+  items.forEach(item => {
+    if (item.data && item.data.length > 0 && !isEmpty(item.data[0])) {
+      marked[item.title] = {marked: true};
+    } else {
+      marked[item.title] = {disabled: true};
+    }
+  });
+  return marked;
+};
+
 const HomeScreen = () => {
-  const [day, setDay] = useState(new Date().getDate());
+  const marked = useMemo(() => getMarkedDates(dataDate), [dataDate]);
+
+  const renderItem = useCallback(({item}) => {
+    return <ItemAgendaComponent item={item} />;
+  }, []);
+
   return (
-    <SafeAreaView style={Styles.container}>
-      <Block style={[styles.content, isTablet && styles.contentTablet]}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.containerHome}>
-            <Calendar
-              theme={{
-                backgroundColor: '#ffffff',
-                calendarBackground: '#ffffff',
-                textSectionTitleColor: '#b6c1cd',
-                selectedDayBackgroundColor: '#00adf5',
-                selectedDayTextColor: '#ffffff',
-                todayTextColor: '#00adf5',
-                dayTextColor: '#2d4150',
-                textDisabledColor: '#d9e1e8',
-                dotColor: '#F21C1A',
-                selectedDotColor: '#ffffff',
-                arrowColor: Color.TEXT_PRIMARY,
-                monthTextColor: Color.TEXT_PRIMARY,
-                indicatorColor: Color.TEXT_PRIMARY,
-                textDayFontFamily: 'monospace',
-                textDayFontWeight: '300',
-                textMonthFontWeight: 'bold',
-                textDayHeaderFontWeight: '300',
-                textDayFontSize: 16,
-                textMonthFontSize: 16,
-                textDayHeaderFontSize: 16,
-              }}
-              onDayPress={day => {
-                setDay(day.dateString);
-              }}
-              onDayLongPress={day => {
-                console.log('selected day', day);
-              }}
-              monthFormat={'yyyy MM'}
-              onMonthChange={month => {
-                console.log('month changed', month);
-              }}
-              hideArrows={false}
-              hideExtraDays={false}
-              disableMonthChange={false}
-              firstDay={1}
-              hideDayNames={false}
-              showWeekNumbers={false}
-              onPressArrowLeft={subtractMonth => subtractMonth()}
-              onPressArrowRight={addMonth => addMonth()}
-              disableArrowLeft={false}
-              disableArrowRight={false}
-              disableAllTouchEventsForDisabledDays={false}
-              markedDates={{
-                [day]: {
-                  selected: true,
-                  disableTouchEvent: true,
-                  selectedColor: Color.TEXT_PRIMARY,
-                  selectedTextColor: '#fff',
-                  // marked: true,
-                  // dotColor: Color.TEXT_SECONDARY,
-                },
-              }}
-            />
-            <View style={styles.contentHome}>
-              <Text style={styles.text}>
-                Schedule <Text style={styles.number}>2</Text>
-              </Text>
-              <View style={styles.tableSchedule}>
-                <View style={styles.time}>
-                  <Text style={styles.hour}>{day}</Text>
-                  <Text style={styles.main}>Mon 1</Text>
-                </View>
-                <View style={styles.time}>
-                  <Text style={styles.hour}>18:00-21:00</Text>
-                  <Text style={styles.main}>Mon 1</Text>
-                </View>
-                <View style={styles.time}>
-                  <Text style={styles.hour}>18:00-21:00</Text>
-                  <Text style={styles.main}>Mon 1</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <StatusBar translucent />
+      <Block style={styles.headerContent}>
+        <Block flex>
+          <Text numberOfLines={1} style={styles.textDateTitle}>
+            Phạm Văn Đức
+          </Text>
+          <Text style={styles.textId}>CT030215</Text>
+        </Block>
+        <Image source={Images.AVATAR_DEFAULT} style={styles.avatar} />
       </Block>
+      <CalendarProvider
+        date={dataDate[1].title}
+        showTodayButton
+        disabledOpacity={0.6}>
+        <WeekCalendar
+          testID={testIDs.weekCalendar.CONTAINER}
+          firstDay={1}
+          markedDates={marked}
+        />
+        <AgendaList sections={dataDate} renderItem={renderItem} />
+      </CalendarProvider>
     </SafeAreaView>
   );
 };

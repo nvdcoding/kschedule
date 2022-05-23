@@ -4,7 +4,7 @@ import {JWT_KEY} from 'src/base/common/Constants';
 import Helper from '../utils/helper';
 
 const apiServerUrl =
-  'http://2073-2405-4802-22b-c8b0-3ca7-9956-e52b-1dc0.ngrok.io';
+  'http://ba77-2405-4802-24d-bf80-f873-2f23-7c71-a235.ngrok.io';
 // const apiServerUrl = 'http://dev.learn.goedu.asia/api/';
 
 const getAxiosInstance = async () => {

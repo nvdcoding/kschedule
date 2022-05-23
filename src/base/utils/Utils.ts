@@ -1,6 +1,12 @@
-import {Alert, Linking, PermissionsAndroid, ToastAndroid} from 'react-native';
-import {IS_IOS} from '../common/Constants';
 import {t} from 'i18next';
+import {
+  Alert,
+  Linking,
+  PermissionsAndroid,
+  ToastAndroid,
+} from 'react-native';
+
+import {IS_IOS} from '../common/Constants';
 
 export const keyExtractor = (item, index) => 'item_' + item.id + '_' + index;
 
@@ -232,4 +238,19 @@ export const formatListCourse = (listCourse: Array<any>) => {
     const number = lengthListCourse - Math.floor(lengthListCourse / 3) * 3;
     return number === 1 ? [...listCourse, '', ''] : [...listCourse, ''];
   }
+};
+
+export const getRangeTimeCourse = (lesson: string) => {
+  const arrayIndexLesson = lesson.split(',');
+  const lengthIndex = arrayIndexLesson.length;
+  const hourStart =
+    +arrayIndexLesson[0] === 1 ? 7 : +arrayIndexLesson[0] * (2.5 / 3) + 7;
+  const hourEnd =
+    +arrayIndexLesson[lengthIndex - 1] * (2.5 / 3) +
+    (+arrayIndexLesson[lengthIndex - 1] / 3 > 1 &&
+    +arrayIndexLesson[lengthIndex - 1] <= 5
+      ? (+arrayIndexLesson[lengthIndex - 1] - 1) * (5 / 60)
+      : 0) +
+    7;
+  return hourStart + ' : ' + hourEnd;
 };
