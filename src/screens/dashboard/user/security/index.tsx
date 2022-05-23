@@ -15,7 +15,7 @@ import {isTablet} from 'src/base/common/Constants';
 import InputComponent from '../../../auth/components/InputComponent';
 import Color from 'src/theme/Color';
 
-const ChangeInformationScreen = () => {
+const ChangeSecurityScreen = () => {
   const {t} = useTranslation();
   const [password, setPassword] = useState(null);
   const [status, setStatus] = useState(false);
@@ -36,4 +36,4 @@ const ChangeInformationScreen = () => {
   );
 };
 
-export default ChangeInformationScreen;
+export default ChangeSecurityScreen;
