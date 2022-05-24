@@ -62,9 +62,9 @@ const HomeScreen = () => {
       <Block style={styles.headerContent}>
         <Block flex>
           <Text numberOfLines={1} style={styles.textDateTitle}>
-            Phạm Văn Đức
+            Nguyễn Văn Duy
           </Text>
-          <Text style={styles.textId}>CT030215</Text>
+          <Text style={styles.textId}>CT030233</Text>
         </Block>
         <Image source={Images.AVATAR_DEFAULT} style={styles.avatar} />
       </Block>

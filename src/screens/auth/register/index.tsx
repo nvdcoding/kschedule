@@ -1,26 +1,22 @@
-import React, {useState} from 'react';
-
 import {debounce} from 'lodash';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Images} from 'src/assets/images';
-import {FORM_REGISTER} from 'src/base/common/__Tests__';
-import {isTablet, VERIFY_URL} from 'src/base/common/Constants';
+import {isTablet} from 'src/base/common/Constants';
 import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {validateEmail, validatePhone} from 'src/base/utils/ValidationUtils';
+import {FORM_REGISTER} from 'src/base/common/__Tests__';
+import Helper from 'src/base/utils/helper';
+import {validateEmail} from 'src/base/utils/ValidationUtils';
 import {Block, Image, Spinner, Text} from 'src/components';
 import ModalErrorComponent from 'src/components/ModalError';
 import AuthService from 'src/domain/auth.service';
 import {SIGN_UP_SUCCESS_SCREEN} from 'src/navigation/screen';
 import styles from 'src/screens/auth/register/register.style';
 import Color from 'src/theme/Color';
-
 import InputComponent from '../components/InputComponent';
-import {IDataSignUp} from './types';
-import Helper from 'src/base/utils/helper';
-import {Value} from 'react-native-reanimated';
 
 const defaultRegister = {
   studentCode: '',
@@ -47,7 +43,7 @@ const RegisterScreen = ({navigation}) => {
           setInvalid(index);
           throw t('INVALID_STUDENT_CODE');
         }
-        if (index === 1 && dataSignUp[item].length == 0) {
+        if (index === 1 && dataSignUp[item].length === 0) {
           setInvalid(index);
           throw t('NOT_ENTER_NAME');
         }
@@ -57,7 +53,7 @@ const RegisterScreen = ({navigation}) => {
         }
 
         if (
-          (index === 3 && dataSignUp[item].length == 0) ||
+          (index === 3 && dataSignUp[item].length === 0) ||
           (index === 4 && dataSignUp[item].length === 0)
         ) {
           setInvalid(index);
@@ -85,7 +81,7 @@ const RegisterScreen = ({navigation}) => {
       navigation.navigate(SIGN_UP_SUCCESS_SCREEN);
     } catch (err) {
       setLoading(false);
-      setError(err);
+      setError(`${err}`);
     }
   };
 
