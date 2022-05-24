@@ -74,28 +74,28 @@ const InformationScreen = ({navigation}) => {
                 <View style={styles.mainItem}>
                   <Icon
                     name={'person-circle'}
-                    size={getSize.m(24)}
+                    size={getSize.m(26)}
                     color={Color.BLUE_HOLDER}
                   />
                   <Text style={styles.settingUser}>{t('INFORMATION')}</Text>
                 </View>
                 <Icon
                   name={'chevron-forward-sharp'}
-                  size={getSize.m(24)}
-                  color={'#CACDCF'}
+                  size={getSize.m(26)}
+                  color={'#999999'}
                 />
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.ItemInfo}
                 onPress={changeSecurity}>
                 <View style={styles.mainItem}>
-                  <Icon name={'key'} size={getSize.m(24)} color={'#F1EF4C'} />
+                  <Icon name={'key'} size={getSize.m(26)} color={'#F1EF4C'} />
                   <Text style={styles.settingUser}>{t('SECURITY')}</Text>
                 </View>
                 <Icon
                   name={'chevron-forward-sharp'}
-                  size={getSize.m(24)}
-                  color={'#CACDCF'}
+                  size={getSize.m(26)}
+                  color={'#999999'}
                 />
               </TouchableOpacity>
               {lang === 'vn' ? (
@@ -105,7 +105,7 @@ const InformationScreen = ({navigation}) => {
                   <View style={styles.mainItem}>
                     <Icon
                       name={'language'}
-                      size={getSize.m(24)}
+                      size={getSize.m(26)}
                       color={'#51B3F3'}
                     />
                     <Text style={styles.settingUser}>{t('LANGUAGE')}</Text>

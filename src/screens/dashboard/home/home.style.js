@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignSelf: 'center',
     width: Dimens.DEVICE_WIDTH * 0.8,
-    backgroundColor: '#F75553',
+    height: Dimens.DEVICE_HEIGHT * 0.3,
+    backgroundColor: '#00adf5',
+    //borderColor: 'red',
     borderRadius: getSize.m(10),
   },
   contentTablet: {
@@ -62,11 +64,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 10,
-    borderBottomColor: '#fff',
-    borderBottomWidth: 1,
+    //borderBottomColor: '#EB144C',
+    //borderBottomWidth: 1,
   },
   hour: {
     marginRight: 5,
+    color: '#fff',
+    fontWeight: 'bold',
   },
   main: {},
   // user
@@ -84,13 +88,13 @@ const styles = StyleSheet.create({
     height: getSize.m(100),
   },
   textAvt: {
-    color: '#ccc',
+    color: '#999999',
     fontSize: getSize.m(20),
   },
   settingUser: {
     color: '#686862',
     marginLeft: getSize.m(4),
-    fontSize: getSize.m(12),
+    fontSize: getSize.m(14),
   },
   ItemInfo: {
     display: 'flex',
@@ -111,7 +115,8 @@ const styles = StyleSheet.create({
     fontSize: getSize.m(20),
     textAlign: 'center',
     fontWeight: '700',
-    marginBottom: getSize.m(20),
+    marginTop : getSize.m(40),
+    marginBottom: getSize.m(40),
   },
   status: {
     display: 'flex',
@@ -147,7 +152,7 @@ const styles = StyleSheet.create({
   notesDes: {
     color: '#232323',
     fontSize: getSize.m(15),
-    width: Dimens.DEVICE_WIDTH,
+    width: Dimens.DEVICE_WIDTH * 0.75,
   },
   btnLogin: {
     backgroundColor: Color.TEXT_PRIMARY,

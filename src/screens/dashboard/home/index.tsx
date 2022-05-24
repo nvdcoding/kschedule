@@ -7,6 +7,7 @@ import {Block} from 'src/components';
 import styles from './home.style';
 import Color from 'src/theme/Color';
 import {isTablet} from 'src/base/common/Constants';
+//import { color } from 'react-native-reanimated';
 const HomeScreen = () => {
   const [day, setDay] = useState(new Date().getDate());
   return (
@@ -19,7 +20,7 @@ const HomeScreen = () => {
                 backgroundColor: '#ffffff',
                 calendarBackground: '#ffffff',
                 textSectionTitleColor: '#b6c1cd',
-                selectedDayBackgroundColor: '#00adf5',
+                selectedDayBackgroundColor: '#EB144C',
                 selectedDayTextColor: '#ffffff',
                 todayTextColor: '#00adf5',
                 dayTextColor: '#2d4150',
@@ -53,8 +54,8 @@ const HomeScreen = () => {
               firstDay={1}
               hideDayNames={false}
               showWeekNumbers={false}
-              onPressArrowLeft={subtractMonth => subtractMonth()}
-              onPressArrowRight={addMonth => addMonth()}
+              // onPressArrowLeft={subtractMonth => subtractMonth()}
+              // onPressArrowRight={addMonth => addMonth()}
               disableArrowLeft={false}
               disableArrowRight={false}
               disableAllTouchEventsForDisabledDays={false}
@@ -70,8 +71,8 @@ const HomeScreen = () => {
               }}
             />
             <View style={styles.contentHome}>
-              <Text style={styles.text}>
-                Schedule <Text style={styles.number}>2</Text>
+              <Text style={[styles.text,{color:'#EB144C'},{fontWeight: 'bold'}]}>
+                Schedule <Text style={[styles.number,{color:'#EB144C'},{backgroundColor:'#00adf5'},{fontWeight: 'bold'}]}>2</Text>
               </Text>
               <View style={styles.tableSchedule}>
                 <View style={styles.time}>

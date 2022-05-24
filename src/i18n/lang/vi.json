@@ -91,6 +91,6 @@
   "PASSWORD_CODE": "Mật khẩu tài khoản sinh viên",
   "STATUS": "Trạng thái",
   "NOTE": "Ghi chú:*",
-  "NOTE_TEXT": "KSchedule không lưu trữ mật khẩu của bạn.Nhằm tăng tính bảo mật cho tài khoản của bạn vui lòng đổi mật khẩu sinh viên sau khi đã đồng bộ thời khóa biểu",
+  "NOTE_TEXT": "KSchedule không lưu trữ mật khẩu của bạn. Nhằm tăng tính bảo mật cho tài khoản của bạn vui lòng đổi mật khẩu sinh viên sau khi đã đồng bộ thời khóa biểu.",
   "SYNC_TIMETABLE_BTN": "Đồng bộ"
 }
