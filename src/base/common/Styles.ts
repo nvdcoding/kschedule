@@ -1,4 +1,8 @@
-import {ImageStyle, StyleProp, StyleSheet} from 'react-native';
+import {
+  ImageStyle,
+  StyleProp,
+  StyleSheet,
+} from 'react-native';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
 

@@ -23,12 +23,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: getSize.m(10),
     width: getSize.m(
-      isTablet ? Dimens.DEVICE_WIDTH * 0.22 : Dimens.DEVICE_WIDTH,
+      isTablet ? Dimens.DEVICE_WIDTH * 0.22 : Dimens.DEVICE_WIDTH * 0.6,
     ),
     height: getSize.m(
-      isTablet
-        ? (Dimens.DEVICE_WIDTH * 0.22 * 1176) / 1648
-        : (Dimens.DEVICE_WIDTH * 1176) / 1648,
+      isTablet ? Dimens.DEVICE_WIDTH * 0.22 : Dimens.DEVICE_WIDTH * 0.6,
     ),
   },
 
