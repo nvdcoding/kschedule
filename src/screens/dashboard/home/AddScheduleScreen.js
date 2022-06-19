@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, {useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,14 +8,37 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 import Styles from 'src/base/common/Styles';
-// import {StatusBar} from 'expo-status-bar';
-import {Block} from 'src/components';
-// import styles from './home.style';
+import {Block, Spinner} from 'src/components';
 import {isTablet} from 'src/base/common/Constants';
+import Color from 'src/theme/Color';
 
 const AddScheduleScreeen = () => {
+  const [isLoading, setLoading] = useState(false);
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState('');
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
   return (
     <SafeAreaView style={Styles.container}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
@@ -24,6 +47,7 @@ const AddScheduleScreeen = () => {
             {/* <StatusBar style="auto" /> */}
             <View>
               <Text style={styles.header}>Create your todo</Text>
+              <Button onPress={showDatepicker} title="Show date picker!" />
             </View>
             <View style={styles.content}>
               <TextInput
@@ -48,7 +72,7 @@ const AddScheduleScreeen = () => {
                 ]}>
                 Set time
               </Text>
-              <TouchableOpacity onPress={() => {}} >
+              <TouchableOpacity onPress={() => {}}>
                 <Text
                   style={[
                     styles.inputBlock,
@@ -56,6 +80,9 @@ const AddScheduleScreeen = () => {
                   ]}>
                   22:00
                 </Text>
+                <View>
+                  <Button onPress={showTimepicker} title="Show time picker!" />
+                </View>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonSave}>
                 <Text
@@ -75,6 +102,18 @@ const AddScheduleScreeen = () => {
           </View>
         </ScrollView>
       </Block>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
+      {isLoading && (
+        <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
+      )}
     </SafeAreaView>
   );
 };
