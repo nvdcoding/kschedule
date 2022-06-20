@@ -25,9 +25,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignSelf: 'center',
     width: Dimens.DEVICE_WIDTH * 0.8,
-    height: Dimens.DEVICE_HEIGHT * 0.3,
-    backgroundColor: '#00adf5',
-    //borderColor: 'red',
+    backgroundColor: '#F75553',
     borderRadius: getSize.m(10),
   },
   contentTablet: {
@@ -63,13 +61,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 10,
-    //borderBottomColor: '#EB144C',
-    //borderBottomWidth: 1,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
   },
   hour: {
     marginRight: 5,
-    color: '#fff',
-    fontWeight: 'bold',
   },
   main: {},
   // user
@@ -87,13 +83,13 @@ const styles = StyleSheet.create({
     height: getSize.m(100),
   },
   textAvt: {
-    color: '#999999',
+    color: '#ccc',
     fontSize: getSize.m(20),
   },
   settingUser: {
     color: '#686862',
     marginLeft: getSize.m(4),
-    fontSize: getSize.m(14),
+    fontSize: getSize.m(12),
   },
   ItemInfo: {
     display: 'flex',
@@ -114,8 +110,7 @@ const styles = StyleSheet.create({
     fontSize: getSize.m(20),
     textAlign: 'center',
     fontWeight: '700',
-    marginTop: getSize.m(40),
-    marginBottom: getSize.m(40),
+    marginBottom: getSize.m(20),
   },
   status: {
     display: 'flex',
@@ -151,7 +146,7 @@ const styles = StyleSheet.create({
   notesDes: {
     color: '#232323',
     fontSize: getSize.m(15),
-    width: Dimens.DEVICE_WIDTH * 0.75,
+    width: Dimens.DEVICE_WIDTH,
   },
   btnLogin: {
     backgroundColor: Color.TEXT_PRIMARY,
@@ -166,151 +161,30 @@ const styles = StyleSheet.create({
     fontFamily: Font.font_SVN_700,
     fontSize: getSize.m(15, 0.3),
   },
-
-  container: {
-    // backgroundColor: '#4B52C3',
-    backgroundColor: '#FFFFFF',
-    flex: 1,
-    // paddingTop: Dimens.toolbarSize,
-  },
-
-  textId: {
-    fontSize: getSize.m(13, 0.3),
-    marginTop: getSize.m(3),
-    color: Color.SMOKE,
-    fontFamily: Font.font_SVN_400,
-    letterSpacing: 0.5,
-  },
-
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: getSize.m(20),
-    paddingTop: Dimens.toolbarSize + getSize.m(10),
-    backgroundColor: '#4B52C3',
-    paddingBottom: getSize.m(16),
-    borderBottomLeftRadius: getSize.m(20),
-    borderBottomRightRadius: getSize.m(20),
-  },
-
-  avatar: {
-    width: getSize.m(38),
-    height: getSize.m(38),
-    borderRadius: getSize.m(16),
-  },
-
-  textDateTitle: {
-    color: Color.WHITE,
-    fontSize: getSize.m(20, 0.3),
-    fontFamily: Font.font_SVN_700,
-  },
-
-  item: {
-    padding: getSize.m(10),
-    flexDirection: 'row',
-    marginHorizontal: getSize.m(10),
-  },
-
-  contentItem: {
-    flex: 1,
-    borderBottomWidth: getSize.m(1),
-    borderColor: '#D7D8F2',
-  },
-
-  contentItemAgenda: {
-    backgroundColor: '#D7D8F2',
-    flex: 1,
-    borderTopLeftRadius: getSize.m(20),
-    borderBottomRightRadius: getSize.m(20),
-    paddingHorizontal: getSize.m(14),
-    paddingVertical: getSize.m(12),
-    marginLeft: getSize.m(15),
-    marginBottom: getSize.m(10),
-  },
-
-  itemHourText: {
-    color: 'black',
-  },
-  itemDurationText: {
-    color: 'grey',
-    fontSize: 12,
-    marginTop: 4,
-    marginLeft: 4,
-  },
-  itemTitleText: {
-    color: '#1F1F1F',
-    fontSize: getSize.m(13, 0.3),
-    fontFamily: Font.font_SVN_700,
-  },
-
-  itemRangeText: {
-    marginTop: getSize.m(10),
-    color: '#1F1F1F',
-    fontSize: getSize.m(12, 0.3),
-    fontFamily: Font.font_medium_500,
-  },
-
-  itemButtonContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-  emptyItem: {
-    paddingLeft: 20,
-    height: 52,
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-  },
-  emptyItemText: {
-    color: 'lightgrey',
-    fontSize: 14,
-  },
-
-  containerCalendar: {
-    marginTop: getSize.m(20),
-  },
-  // add todo
-  header: {
-    marginTop: 60,
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: '#EB144C',
-  },
-  inputBlock: {
-    marginTop: 30,
-    paddingBottom: 15,
-    paddingTop: 15,
-    fontSize: 20,
-    color: '#EB144C',
-    borderRadius: 7,
-    borderWidth: 1.5,
-    borderColor: '#EB144C',
-    width: Dimens.DEVICE_WIDTH * 0.9,
-  },
-  buttonSave: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
-    borderWidth: 1.5,
-    borderColor: '#EB144C',
-    backgroundColor: '#EB144C',
-  },
-  textDate: {
-    color: '#ccc',
-    fontSize: getSize.m(15),
-  },
-  blockDate: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  DateTimePicker: {
+  textTitle: {
+    textAlign: 'center',
+    fontSize: getSize.m(20),
+    fontWeight: '700',
     color: Color.TEXT_PRIMARY,
-    backgroundColor: '#ccc',
+  },
+  blockPass: {
+    paddingLeft: getSize.m(7),
+  },
+  changePassTitle: {
+    fontSize: getSize.m(20),
+    fontWeight: '700',
+    color: '#504e4e',
+  },
+  titlePassDes: {
+    fontSize: getSize.m(12),
+    fontWeight: '500',
+    color: '#6b6b6b',
+    width: Dimens.DEVICE_WIDTH * 0.7,
+  },
+  blockChangePass: {
+    width: Dimens.DEVICE_WIDTH * 0.8,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });
 

@@ -1,10 +1,7 @@
-import {get} from 'immer/dist/internal';
 import {StyleSheet} from 'react-native';
 import Dimens from 'src/base/common/Dimens';
 import {getSize} from 'src/base/common/responsive';
-import Styles from 'src/base/common/Styles';
 import Color from 'src/theme/Color';
-import Font from 'src/theme/Font';
 
 const styles = StyleSheet.create({
   backgroundLogin: {
