@@ -289,6 +289,48 @@ const styles = StyleSheet.create({
   containerCalendar: {
     marginTop: getSize.m(20),
   },
+  // add todo
+  header: {
+    marginTop: 60,
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#EB144C',
+  },
+  inputBlock: {
+    marginTop: 30,
+    paddingBottom: 15,
+    paddingTop: 15,
+    fontSize: 20,
+    color: '#EB144C',
+    borderRadius: 7,
+    borderWidth: 1.5,
+    borderColor: '#EB144C',
+    width: Dimens.DEVICE_WIDTH * 0.9,
+  },
+  buttonSave: {
+    marginTop: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderWidth: 1.5,
+    borderColor: '#EB144C',
+    backgroundColor: '#EB144C',
+  },
+  textDate: {
+    color: '#ccc',
+    fontSize: getSize.m(15),
+  },
+  blockDate: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  DateTimePicker: {
+    color: Color.TEXT_PRIMARY,
+    backgroundColor: '#ccc',
+  },
 });
 
 export default styles;

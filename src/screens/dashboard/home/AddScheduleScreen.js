@@ -13,18 +13,39 @@ import {
 import Styles from 'src/base/common/Styles';
 import {Block, Spinner} from 'src/components';
 import {isTablet} from 'src/base/common/Constants';
+import {getIconComponent} from 'src/assets/icon';
 import Color from 'src/theme/Color';
-
+import styles from './home.style';
+import {getSize} from 'src/base/common/responsive';
+const Icon = getIconComponent('ionicons');
 const AddScheduleScreeen = () => {
+  let dateCurrent =
+    new Date().getDate() +
+    '/' +
+    (new Date().getMonth() + 1) +
+    '/' +
+    new Date().getFullYear();
+  let timeCurrent = new Date().getHours() + ':' + new Date().getMinutes();
   const [isLoading, setLoading] = useState(false);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [text, setText] = useState('');
+  const [textDate, setTextDate] = useState(dateCurrent);
+  const [textTime, setTextTime] = useState(timeCurrent);
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
+    const currentDate = selectedDate || date;
     setShow(false);
     setDate(currentDate);
+    let tempDate = new Date(currentDate);
+    let fDate =
+      tempDate.getDate() +
+      '/' +
+      (tempDate.getMonth() + 1) +
+      '/' +
+      tempDate.getFullYear();
+    let fTime = tempDate.getHours() + ':' + tempDate.getMinutes();
+    setTextDate(fDate);
+    setTextTime(fTime);
   };
 
   const showMode = currentMode => {
@@ -39,15 +60,25 @@ const AddScheduleScreeen = () => {
   const showTimepicker = () => {
     showMode('time');
   };
+  const handleAdd = async () => {};
   return (
     <SafeAreaView style={Styles.container}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.containerHome}>
-            {/* <StatusBar style="auto" /> */}
             <View>
               <Text style={styles.header}>Create your todo</Text>
-              <Button onPress={showDatepicker} title="Show date picker!" />
+              <TouchableOpacity
+                style={styles.blockDate}
+                onPress={showDatepicker}>
+                <Icon
+                  name="calendar-outline"
+                  color="#ccc"
+                  size={getSize.m(15)}
+                />
+                <Text style={styles.textDate}>{textDate}</Text>
+              </TouchableOpacity>
+              {/* <Button onPress={showDatepicker} title="Show date picker!" /> */}
             </View>
             <View style={styles.content}>
               <TextInput
@@ -58,7 +89,7 @@ const AddScheduleScreeen = () => {
               <TextInput
                 style={[
                   styles.inputBlock,
-                  {paddingTop: 50},
+                  {paddingTop: 20},
                   {paddingBottom: 50},
                 ]}
                 placeholder="Note"
@@ -72,32 +103,20 @@ const AddScheduleScreeen = () => {
                 ]}>
                 Set time
               </Text>
-              <TouchableOpacity onPress={() => {}}>
-                <Text
-                  style={[
-                    styles.inputBlock,
-                    {alignSelf: 'center', paddingLeft: 155, paddingRight: 155},
-                  ]}>
-                  22:00
+              <TouchableOpacity onPress={showTimepicker}>
+                <Text style={[styles.inputBlock, {textAlign: 'center'}]}>
+                  {textTime}
                 </Text>
-                <View>
-                  <Button onPress={showTimepicker} title="Show time picker!" />
-                </View>
+                {/* <Button onPress={showTimepicker} title="Show time picker!" /> */}
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonSave}>
-                <Text
-                  style={[
-                    styles.Save,
-                    {
-                      alignSelf: 'center',
-                      fontSize: 20,
-                      fontWeight: 'bold',
-                      color: 'white',
-                    },
-                  ]}>
-                  Save
-                </Text>
-              </TouchableOpacity>
+              <Block marginHorizontal={30}>
+                <TouchableOpacity
+                  style={[styles.btnLogin, {fontSize: 20, fontWeight: 'bold'}]}
+                  activeOpacity={0.5}
+                  onPress={handleAdd}>
+                  <Text style={styles.textLogin}>Save</Text>
+                </TouchableOpacity>
+              </Block>
             </View>
           </View>
         </ScrollView>
@@ -108,6 +127,9 @@ const AddScheduleScreeen = () => {
           value={date}
           mode={mode}
           is24Hour={true}
+          display="default"
+          textColor="red"
+          style={styles.DateTimePicker}
           onChange={onChange}
         />
       )}
@@ -117,45 +139,4 @@ const AddScheduleScreeen = () => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    // paddingTop: ConstantSourceNode.StatusBar,
-  },
-  header: {
-    //backgroundColor:''
-    marginTop: 60,
-    marginLeft: 20,
-    fontSize: 25,
-    fontWeight: 'bold',
-    //textTransform:"uppercase",
-    color: '#EB144C',
-  },
-  inputBlock: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    paddingBottom: 15,
-    paddingTop: 15,
-    paddingLeft: 10,
-    fontSize: 20,
-    color: '#EB144C',
-    borderRadius: 7,
-    borderWidth: 1.5,
-    borderColor: '#EB144C',
-  },
-  buttonSave: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
-    borderWidth: 1.5,
-    borderColor: '#EB144C',
-    backgroundColor: '#EB144C',
-  },
-});
 export default AddScheduleScreeen;

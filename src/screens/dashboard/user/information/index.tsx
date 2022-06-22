@@ -18,7 +18,7 @@ import {getSize} from 'src/base/common/responsive';
 import Color from 'src/theme/Color';
 import InputComponent from 'src/screens/auth/components/InputComponent';
 
-const ChangeSecurityScreen = ({navigation}) => {
+const ChangeInformationScreen = ({navigation}) => {
   const {t} = useTranslation();
   const [isLoading, setLoading] = useState(false);
   const [disable, setSwitch] = useState(false);
@@ -33,54 +33,56 @@ const ChangeSecurityScreen = ({navigation}) => {
     <SafeAreaView style={Styles.container}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <TouchableOpacity
-            style={styles.btnBack}
-            activeOpacity={0.5}
-            onPress={navigation.goBack}>
-            <Icon
-              name={'arrow-back-outline'}
-              size={getSize.m(24)}
-              color={Color.RED}
-            />
-          </TouchableOpacity>
-          <Text style={styles.textTitle}>Thông tin chung</Text>
-          <Block marginHorizontal={20}>
-            <InputComponent
-              title={'Họ tên'}
-              placeholder={t('Nhập họ tên')}
-              marginBottom={25}
-              onChangeText={setName}
-              value={name}
-            />
-            <InputComponent
-              title={'Mã sinh viên'}
-              placeholder={'Nhập mã sinh viên..'}
-              marginBottom={25}
-              onChangeText={setCode}
-              value={code}
-            />
-            <InputComponent
-              title={'Email'}
-              placeholder={'Nhập email'}
-              marginBottom={25}
-              onChangeText={setMail}
-              value={mail}
-            />
-            <View style={styles.Notification}>
-              <Text style={styles.NotificationText}>Bật thông báo</Text>
-              <Switch
-                style={styles.NotificationSwitch}
-                trackColor={{
-                  false: Color.TEXT_PRIMARY,
-                  true: Color.TEXT_SECONDARY,
-                }}
-                thumbColor={'#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={disable}
+          <View style={styles.containerHome}>
+            <TouchableOpacity
+              style={styles.btnBack}
+              activeOpacity={0.5}
+              onPress={navigation.goBack}>
+              <Icon
+                name={'arrow-back-outline'}
+                size={getSize.m(24)}
+                color={Color.RED}
               />
-            </View>
-          </Block>
+            </TouchableOpacity>
+            <Text style={styles.textTitle}>Thông tin chung</Text>
+            <Block marginHorizontal={20}>
+              <InputComponent
+                title={'Họ tên'}
+                placeholder={t('Nhập họ tên')}
+                marginBottom={25}
+                onChangeText={setName}
+                value={name}
+              />
+              <InputComponent
+                title={'Mã sinh viên'}
+                placeholder={'Nhập mã sinh viên..'}
+                marginBottom={25}
+                onChangeText={setCode}
+                value={code}
+              />
+              <InputComponent
+                title={'Email'}
+                placeholder={'Nhập email'}
+                marginBottom={25}
+                onChangeText={setMail}
+                value={mail}
+              />
+              <View style={styles.Notification}>
+                <Text style={styles.NotificationText}>Bật thông báo</Text>
+                <Switch
+                  style={styles.NotificationSwitch}
+                  trackColor={{
+                    false: Color.TEXT_PRIMARY,
+                    true: Color.TEXT_SECONDARY,
+                  }}
+                  thumbColor={'#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch}
+                  value={disable}
+                />
+              </View>
+            </Block>
+          </View>
         </ScrollView>
       </Block>
       {isLoading && (
@@ -90,4 +92,4 @@ const ChangeSecurityScreen = ({navigation}) => {
   );
 };
 
-export default ChangeSecurityScreen;
+export default ChangeInformationScreen;

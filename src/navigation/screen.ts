@@ -45,3 +45,6 @@ export const TEMPLATE_SCREEN = 'Template';
 export const CHANGE_INFORMATION_SCREEN = 'ChangeInformationScreen';
 export const CHANGE_SECURITY_SCREEN = 'ChangeSecurityScreen';
 export const CHANGE_LANGUAGE_SCREEN = 'ChangeLanguageScreen';
+// teacher
+export const CHANGE_FIND = 'ChangeFind';
+export const CHANGE_CLASS = 'ChangeClass';
