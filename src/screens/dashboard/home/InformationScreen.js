@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 import {
   SafeAreaView,
@@ -7,23 +7,23 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from 'src/base/common/Styles';
-import { Block, Image } from 'src/components';
-import { Images } from 'src/assets/images';
+import {Block, Image} from 'src/components';
+import {Images} from 'src/assets/images';
 import styles from './home.style';
-import { isTablet } from 'src/base/common/Constants';
+import {isTablet} from 'src/base/common/Constants';
 import Color from 'src/theme/Color';
-import { getSize } from 'src/base/common/responsive';
+import {getSize} from 'src/base/common/responsive';
 import {
   CHANGE_INFORMATION_SCREEN,
   CHANGE_LANGUAGE_SCREEN,
   CHANGE_SECURITY_SCREEN,
 } from 'src/navigation/screen';
 
-const InformationScreen = ({ navigation }) => {
-  const { t, i18n } = useTranslation();
+const InformationScreen = ({navigation}) => {
+  const {t, i18n} = useTranslation();
   const [avt, setAvt] = useState(Images.AVATAR_DEFAULT);
   const [lang, setLang] = useState('vn');
   const changeAVT = () => {
@@ -38,7 +38,7 @@ const InformationScreen = ({ navigation }) => {
   const changeSecurity = () => {
     navigation.navigate(CHANGE_SECURITY_SCREEN);
   };
-  const changeLang = () => {
+  const changeLang = lang => {
     console.log(lang);
     // i18n.changeLanguage(lang);
     // setLang(lang);
@@ -101,14 +101,14 @@ const InformationScreen = ({ navigation }) => {
               {lang === 'vn' ? (
                 <TouchableOpacity
                   style={styles.ItemInfo}
-                  onPress={changeLang()}>
+                  onPress={changeLang('en')}>
                   <View style={styles.mainItem}>
                     <Icon
                       name={'language'}
                       size={getSize.m(26)}
                       color={'#51B3F3'}
                     />
-                    <Text style={styles.settingUser}>{t('LANGUAGE')}</Text>
+                    <Text style={styles.settingUser}>Tiếng Việt</Text>
                   </View>
                 </TouchableOpacity>
               ) : (
@@ -121,7 +121,7 @@ const InformationScreen = ({ navigation }) => {
                       size={getSize.m(24)}
                       color={'#ccc'}
                     />
-                    <Text style={styles.settingUser}>{t('LANGUAGE')}</Text>
+                    <Text style={styles.settingUser}>English</Text>
                   </View>
                 </TouchableOpacity>
               )}

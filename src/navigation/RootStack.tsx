@@ -39,12 +39,10 @@ import {
   SEND_OTP_SCREEN,
   CHANGE_INFORMATION_SCREEN,
   CHANGE_SECURITY_SCREEN,
-  CHANGE_LANGUAGE_SCREEN,
 } from './screen';
 import SendOtpScreen from 'src/screens/auth/send-otp';
 import ChangeInformationScreen from 'src/screens/dashboard/user/information';
 import ChangeSecurityScreen from 'src/screens/dashboard/user/security';
-import ChangeLanguageScreen from 'src/screens/dashboard/user/languague';
 
 const Stack = createNativeStackNavigator();
 
