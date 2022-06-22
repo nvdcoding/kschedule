@@ -40,11 +40,13 @@ import {
   CHANGE_INFORMATION_SCREEN,
   CHANGE_SECURITY_SCREEN,
   CHANGE_LANGUAGE_SCREEN,
+  HOME_SCREEN,
 } from './screen';
 import SendOtpScreen from 'src/screens/auth/send-otp';
 import ChangeInformationScreen from 'src/screens/dashboard/user/information';
 import ChangeSecurityScreen from 'src/screens/dashboard/user/security';
 import ChangeLanguageScreen from 'src/screens/dashboard/user/languague';
+import HomeScreen from 'src/screens/dashboard/home';
 
 const Stack = createNativeStackNavigator();
 
@@ -143,6 +145,10 @@ const GlobalStackNavigation = () => {
         <Stack.Screen
           name={SIGN_UP_SUCCESS_SCREEN}
           component={SignUpSuccessScreen}
+        />
+        <Stack.Screen
+          name={HOME_SCREEN}
+          component={HomeScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

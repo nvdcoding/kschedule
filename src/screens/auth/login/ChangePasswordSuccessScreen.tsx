@@ -1,20 +1,20 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
-import {useTranslation} from 'react-i18next';
-import {BackHandler, SafeAreaView, TouchableOpacity} from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { BackHandler, SafeAreaView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Images} from 'src/assets/images';
-import {isTablet} from 'src/base/common/Constants';
-import {getSize} from 'src/base/common/responsive';
+import { Images } from 'src/assets/images';
+import { isTablet } from 'src/base/common/Constants';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {Block, Image, Text} from 'src/components';
-import {LOGIN_SCREEN} from 'src/navigation/screen';
+import { Block, Image, Text } from 'src/components';
+import { LOGIN_SCREEN } from 'src/navigation/screen';
 import Color from 'src/theme/Color';
 
 import styles from './login.style';
 
-const ChangePasswordSuccessScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const ChangePasswordSuccessScreen = ({ navigation }) => {
+  const { t } = useTranslation();
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBack);

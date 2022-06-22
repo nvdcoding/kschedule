@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import deviceInfoModule from 'react-native-device-info';
 
 export const AppInfo = require('../../../app.json');
@@ -31,7 +31,7 @@ export const STORAGE_KEYS = {
   USER_TOKEN: 'user_token',
 };
 
-export const JWT_KEY = 'JWT_KEY_GO_EDU';
+export const JWT_KEY = '@JWT_KEY_GO_EDU';
 
 export const isTablet = deviceInfoModule.isTablet();
 

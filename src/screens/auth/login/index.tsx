@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {useTranslation} from 'react-i18next';
-import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {Images} from 'src/assets/images';
-import {isTablet, JWT_KEY} from 'src/base/common/Constants';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { Images } from 'src/assets/images';
+import { isTablet, JWT_KEY } from 'src/base/common/Constants';
 import Styles from 'src/base/common/Styles';
-import {debug} from 'src/base/utils/DebugUtil';
+import { debug } from 'src/base/utils/DebugUtil';
 import Helper from 'src/base/utils/helper';
-import {notifyInvalid} from 'src/base/utils/Utils';
-import {Block, Image, Spinner, Text} from 'src/components';
+import { notifyInvalid } from 'src/base/utils/Utils';
+import { Block, Image, Spinner, Text } from 'src/components';
 import AuthService from 'src/domain/auth.service';
 import {
   DRAWER_STACK,
@@ -19,15 +19,15 @@ import {
   REGISTER_SCREEN,
   SEND_OTP_SCREEN,
 } from 'src/navigation/screen';
-import {setAccount} from 'src/redux/slices/accountSlice';
+import { setAccount } from 'src/redux/slices/accountSlice';
 import styles from 'src/screens/auth/login/login.style';
 import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 import SendOtpScreen from '../send-otp';
 
-const LoginScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const LoginScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const [isLoading, setLoading] = useState<boolean>(false);
   const [studentCode, setStudentCode] = useState<string>(null);
   const [password, setPassword] = useState<string>(null);
@@ -45,21 +45,19 @@ const LoginScreen = ({navigation}) => {
         throw t('NOT_ENTER_PASSWORD');
       }
       setLoading(true);
-      navigation.navigate(HOME_TAB_NAVIGATOR);
       const authService = new AuthService();
-      const {data} = await authService.login(studentCode, password);
-      console.log(data);
-      if (data.data.accessToken) {
-        data.data.accessToken &&
-          Helper.storeData(JWT_KEY, data.data.accessToken);
-        // const infoUser = await authService.getInfoUser();
-        setLoading(false);
-        // infoUser.data.message === '+OK' &&
-        //   dispatch(setAccount(infoUser.data.data));
-        navigation.navigate(isTablet ? DRAWER_STACK : HOME_SCREEN);
-      } else {
-        throw t('LOGIN_FAIL');
+      const { data } = await authService.login(studentCode, password);
+      if (data.data.statusCode !== 200) {
+        throw data.data.message;
+        // throw data.description;
       }
+      await Helper.storeData(JWT_KEY, data.data.accessToken);
+      const infoUser = await authService.getInfoUser();
+      setLoading(false);
+      console.log(infoUser.data.code, 123213);
+      // infoUser.data.code === 200 &&
+      dispatch(setAccount(infoUser.data.data));
+      navigation.navigate(isTablet ? DRAWER_STACK : HOME_TAB_NAVIGATOR);
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);
@@ -82,7 +80,7 @@ const LoginScreen = ({navigation}) => {
             alignSelf="center"
             style={styles.blockLogo}>
             <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
-            <View style={{display: 'flex'}}>
+            <View style={{ display: 'flex' }}>
               <Text style={styles.textTitle}>
                 Schedule <Text style={styles.textEdu}>KMA</Text>
               </Text>

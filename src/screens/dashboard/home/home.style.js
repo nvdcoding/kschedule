@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import Dimens from 'src/base/common/Dimens';
-import {getSize} from 'src/base/common/responsive';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: Dimens.DEVICE_WIDTH * 0.8,
     height: Dimens.DEVICE_HEIGHT * 0.3,
-    backgroundColor: '#00adf5',
+    backgroundColor: '#7adaf0',
     //borderColor: 'red',
     borderRadius: getSize.m(10),
   },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginVertical: getSize.v(20),
     elevation: 3,
     shadowColor: Color.GRAY_DEEP,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: 2,
     paddingHorizontal: Dimens.DEVICE_WIDTH * 0.12,
@@ -49,29 +49,48 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   number: {
-    backgroundColor: Color.TEXT_PRIMARY,
+    backgroundColor: "#f07179",
     color: '#fff',
-    borderRadius: getSize.m(10),
+    borderRadius: getSize.m(50),
     padding: getSize.m(10),
     width: 20,
     height: 20,
   },
-  tableSchedule: {},
+  tableSchedule: {
+
+  },
   time: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
     padding: 10,
-    //borderBottomColor: '#EB144C',
-    //borderBottomWidth: 1,
+  },
+  leftTime: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRightColor: '#e8e4d8',
+    borderRightWidth: 1,
+  },
+  rightTime: {
+    paddingLeft: 5
   },
   hour: {
     marginRight: 5,
     color: '#fff',
     fontWeight: 'bold',
+    flex: 1,
+    width: 40,
+    minWidth: 40
   },
-  main: {},
+  hourBold: {
+    marginRight: 10,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  main: {
+  },
   // user
   textUser: {
     color: Color.TEXT_PRIMARY,
@@ -114,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: getSize.m(20),
     textAlign: 'center',
     fontWeight: '700',
-    marginTop : getSize.m(40),
+    marginTop: getSize.m(40),
     marginBottom: getSize.m(40),
   },
   status: {

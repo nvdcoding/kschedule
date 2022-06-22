@@ -6,7 +6,6 @@ import { IRegisterAccount } from './local/IRegisterAccount';
 
 export default class AuthService {
   login(studentCode: string, password: string): Promise<any> {
-    debug('sf3...', { studentCode, password })
     return api('api/v1/auth/login', { studentCode, password }, {
       method: 'POST',
     });
@@ -45,7 +44,7 @@ export default class AuthService {
   }
 
   getInfoUser(): Promise<any> {
-    return api('admin/account/v1/user/info', null, { method: 'GET' });
+    return api('api/v1/auth/me', null, { method: 'GET' });
   }
 
   changePassword(
