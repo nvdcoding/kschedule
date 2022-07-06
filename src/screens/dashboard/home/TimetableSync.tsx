@@ -15,11 +15,15 @@ import { isTablet } from 'src/base/common/Constants';
 import InputComponent from '../../auth/components/InputComponent';
 import Color from 'src/theme/Color';
 import ScheduleService from 'src/domain/schedule.service';
-
+import { useSelector } from 'react-redux';
+import { IUserState } from 'src/redux/slices/accountSlice';
+import { IRootState } from 'src/redux/store';
 const TimetableSync = () => {
   const { t } = useTranslation();
+  const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
+
   const [password, setPassword] = useState(null);
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(infoUser.sync ? true : false);
   const [isLoading, setLoading] = useState(false);
   const handleSync = async () => {
     try {
@@ -40,6 +44,7 @@ const TimetableSync = () => {
       notifyInvalid(`${error}`);
     }
   };
+
   return (
     <SafeAreaView style={Styles.container}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>

@@ -10,6 +10,11 @@ export default class AuthService {
       method: 'POST',
     });
   }
+  teacherLogin(email: string, password: string): Promise<any> {
+    return api('api/v1/auth/teacher/login', { email, password }, {
+      method: 'POST',
+    });
+  }
   // login(username: string, password: string): Promise<any> {
   //   return api('account/v1/authorize/token', null, {
   //     method: 'GET',
@@ -45,6 +50,10 @@ export default class AuthService {
 
   getInfoUser(): Promise<any> {
     return api('api/v1/auth/me', null, { method: 'GET' });
+  }
+
+  getInfoTeacher(): Promise<any> {
+    return api('api/v1/auth/teacher/me', null, { method: 'GET' })
   }
 
   changePassword(
