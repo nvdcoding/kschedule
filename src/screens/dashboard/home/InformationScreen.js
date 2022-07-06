@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
   SafeAreaView,
@@ -7,25 +7,29 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from 'src/base/common/Styles';
-import {Block, Image} from 'src/components';
-import {Images} from 'src/assets/images';
+import { Block, Image } from 'src/components';
+import { Images } from 'src/assets/images';
 import styles from './home.style';
-import {isTablet} from 'src/base/common/Constants';
+import { isTablet } from 'src/base/common/Constants';
 import Color from 'src/theme/Color';
-import {getSize} from 'src/base/common/responsive';
+import { getSize } from 'src/base/common/responsive';
 import {
   CHANGE_INFORMATION_SCREEN,
   CHANGE_LANGUAGE_SCREEN,
   CHANGE_SECURITY_SCREEN,
+  LOGIN_SCREEN,
 } from 'src/navigation/screen';
+import { actionLogout } from 'src/redux/slices/accountSlice';
+import { useDispatch } from 'react-redux';
 
-const InformationScreen = ({navigation}) => {
-  const {t, i18n} = useTranslation();
+const InformationScreen = ({ navigation }) => {
+  const { t, i18n } = useTranslation();
   const [avt, setAvt] = useState(Images.AVATAR_DEFAULT);
   const [lang, setLang] = useState('vn');
+  const dispatch = useDispatch();
   const changeAVT = () => {
     console.log('state changed!');
     setAvt(Images.IMG_LOGO);
@@ -44,8 +48,10 @@ const InformationScreen = ({navigation}) => {
     // setLang(lang);
   };
 
-  const handleLogout = () => {
-    console.log('Logout');
+  const handleLogout = async () => {
+    await dispatch(actionLogout());
+    navigation.navigate(LOGIN_SCREEN);
+
   };
 
   return (

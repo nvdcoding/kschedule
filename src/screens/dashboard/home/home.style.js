@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   textAvt: {
     color: '#999999',
     fontSize: getSize.m(20),
+    marginTop: 10
   },
   settingUser: {
     color: '#686862',

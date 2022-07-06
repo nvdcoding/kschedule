@@ -33,12 +33,10 @@ import { IRootState } from 'src/redux/store';
 import ScheduleService from 'src/domain/schedule.service';
 import { ScrollView } from 'react-native-gesture-handler';
 
-
-
-
 const HomeScreen = () => {
   // const marked = useMemo(() => getMarkedDates(dataDate), [dataDate]);
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
+  console.log(infoUser)
   const scheduleService = new ScheduleService();
   const state = {
     selectedDate: "",
@@ -64,9 +62,9 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await scheduleService.getSchedule();
-      setCalendarData(data.data.data.data);
-      const dataDate = data.data.data.data.map(item => {
+      const { data } = await scheduleService.getSchedule();
+      setCalendarData(data.data.data);
+      const dataDate = data.data.data.map(item => {
         return {
           title: item.date.split('/').reverse().join('-'),
           data: [item],
@@ -101,9 +99,9 @@ const HomeScreen = () => {
       <Block style={styles.headerContent}>
         <Block flex>
           <Text numberOfLines={1} style={styles.textDateTitle}>
-            {infoUser.studentCode}
+            {infoUser.name}
           </Text>
-          {/* <Text style={styles.textId}>{infoUser.studentCode}</Text> */}
+          <Text style={styles.textId}>{infoUser.studentCode}</Text>
         </Block>
         <Image source={Images.AVATAR_DEFAULT} style={styles.avatar} />
       </Block>
