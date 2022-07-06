@@ -1,53 +1,33 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {JWT_KEY} from 'src/base/common/Constants';
+import { createSlice } from '@reduxjs/toolkit';
+import { JWT_KEY } from 'src/base/common/Constants';
 import Helper from 'src/base/utils/helper';
 
 export interface IUserState {
   isLogged: boolean;
-  userId: number;
-  userName: string;
-  password: string;
-  firstName: string;
-  lastName: string;
+  id: number;
+  studentCode: string;
+  name: string;
   email: string;
-  mobile: string;
-  address: string;
-  age: string;
-  sex: string;
-  bod: string;
-  jobTitle: string;
-  cTime: string;
-  mTime: string;
-  active: number;
-  apiDoc: number;
-  imageUrl: string;
-  resetPassword: boolean;
-  ctime: number;
-  mtime: number;
+  birthday: string;
+  phone: string;
+  avatar: string;
+  sync: string;
+  status: string;
+  role: number;
 }
 
 const initialState: IUserState = {
   isLogged: false,
-  userId: 0,
-  userName: '',
-  password: '',
-  firstName: '',
-  lastName: '',
+  id: 0,
+  studentCode: '',
+  name: '',
   email: '',
-  mobile: '',
-  address: null,
-  age: null,
-  sex: null,
-  bod: null,
-  jobTitle: '',
-  cTime: '',
-  mTime: '',
-  active: 1,
-  apiDoc: 0,
-  imageUrl: '',
-  resetPassword: false,
-  ctime: 0,
-  mtime: 0,
+  birthday: null,
+  phone: null,
+  avatar: null,
+  sync: '',
+  status: '',
+  role: 0,
 };
 
 export const accountSlice = createSlice({
@@ -68,5 +48,5 @@ export const accountSlice = createSlice({
   },
 });
 
-export const {setAccount, actionLogout} = accountSlice.actions;
+export const { setAccount, actionLogout } = accountSlice.actions;
 export default accountSlice.reducer;

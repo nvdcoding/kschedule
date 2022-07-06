@@ -1,15 +1,15 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import i18n from 'i18next';
-import {initReactI18next} from 'react-i18next';
+import { initReactI18next } from 'react-i18next';
 import RNBootSplash from 'react-native-bootsplash';
 import deviceInfoModule from 'react-native-device-info';
 import Orientation from 'react-native-orientation';
-import {useSelector} from 'react-redux';
-import {BaseSetting} from 'src/i18n';
-import {IUserState} from 'src/redux/slices/accountSlice';
-import {IAppState} from 'src/redux/slices/appSlice';
-import {IRootState} from 'src/redux/store';
+import { useSelector } from 'react-redux';
+import { BaseSetting } from 'src/i18n';
+import { IUserState } from 'src/redux/slices/accountSlice';
+import { IAppState } from 'src/redux/slices/appSlice';
+import { IRootState } from 'src/redux/store';
 import LoginScreen from 'src/screens/auth/login';
 import ChangePasswordSuccessScreen from 'src/screens/auth/login/ChangePasswordSuccessScreen';
 import ForgetPasswordScreen from 'src/screens/auth/login/ForgetPasswordScreen';
@@ -20,10 +20,10 @@ import IntroNotifyScreen from 'src/screens/auth/onboarding/IntroNotifyScreen';
 import RegisterScreen from 'src/screens/auth/register';
 import SignUpSuccessScreen from 'src/screens/auth/register/SignUpSuccessScreen';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import {APP_PREFIX, navigationRef, PATH_SCREENS} from './actions';
+import { APP_PREFIX, navigationRef, PATH_SCREENS } from './actions';
 import HomeTabNavigator from './HomeTab';
 import {
   CHANGE_PASSWORD_SUCCESS_SCREEN,
@@ -39,10 +39,14 @@ import {
   SEND_OTP_SCREEN,
   CHANGE_INFORMATION_SCREEN,
   CHANGE_SECURITY_SCREEN,
+  CHANGE_LANGUAGE_SCREEN,
+  HOME_SCREEN,
 } from './screen';
 import SendOtpScreen from 'src/screens/auth/send-otp';
 import ChangeInformationScreen from 'src/screens/dashboard/user/information';
 import ChangeSecurityScreen from 'src/screens/dashboard/user/security';
+// import ChangeLanguageScreen from 'src/screens/dashboard/user/languague';
+import HomeScreen from 'src/screens/dashboard/home';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,7 +57,7 @@ const linking: any = {
 
 const GlobalStackNavigation = () => {
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
-  const {firstBoot} = useSelector<IRootState, IAppState>(state => state.app);
+  const { firstBoot } = useSelector<IRootState, IAppState>(state => state.app);
   const routeNameRef = useRef<String>();
 
   const onReady = () => {
@@ -90,13 +94,13 @@ const GlobalStackNavigation = () => {
       linking={linking}
       onStateChange={handleRoute}>
       <Stack.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
         initialRouteName={
           firstBoot
             ? ONBOARDING_SCREEN
             : infoUser.isLogged
-            ? HOME_TAB_NAVIGATOR
-            : LOGIN_SCREEN
+              ? HOME_TAB_NAVIGATOR
+              : LOGIN_SCREEN
         }>
         {/* <Stack.Screen name={SPLASH_SCREEN} component={SplashScreen} /> */}
         <Stack.Screen name={ONBOARDING_SCREEN} component={OnBoardingScreen} />
@@ -141,6 +145,10 @@ const GlobalStackNavigation = () => {
         <Stack.Screen
           name={SIGN_UP_SUCCESS_SCREEN}
           component={SignUpSuccessScreen}
+        />
+        <Stack.Screen
+          name={HOME_SCREEN}
+          component={HomeScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

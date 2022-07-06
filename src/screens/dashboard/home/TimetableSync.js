@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-
-import {useTranslation} from 'react-i18next';
+import React, { useState } from 'react';
+import { notifyInvalid } from 'src/base/utils/Utils';
+import { useTranslation } from 'react-i18next';
 import {
   SafeAreaView,
   View,
@@ -9,18 +9,37 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Styles from 'src/base/common/Styles';
-import {Block, Spinner} from 'src/components';
+import { Block, Spinner } from 'src/components';
 import styles from './home.style';
-import {isTablet} from 'src/base/common/Constants';
+import { isTablet } from 'src/base/common/Constants';
 import InputComponent from '../../auth/components/InputComponent';
 import Color from 'src/theme/Color';
+import ScheduleService from 'src/domain/schedule.service';
 
 const TimetableSync = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [password, setPassword] = useState(null);
   const [status, setStatus] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const handleSync = async () => {};
+  const handleSync = async () => {
+    try {
+      if (!password) {
+        throw t('NOT_ENTER_PASSWORD');
+      }
+      setLoading(true);
+      const scheduleService = new ScheduleService();
+      const { data } = await scheduleService.setSchedule(password);
+      if (data.data.statusCode !== 200) {
+        throw data.data.message;
+        // throw data.description;
+      }
+      setStatus(true);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      notifyInvalid(`${error}`);
+    }
+  };
   return (
     <SafeAreaView style={Styles.container}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
