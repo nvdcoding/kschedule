@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import {
   SafeAreaView,
   View,
@@ -9,16 +9,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Styles from 'src/base/common/Styles';
-import {Block, Spinner} from 'src/components';
+import { Block, Spinner } from 'src/components';
 import styles from './security.style';
-import {isTablet} from 'src/base/common/Constants';
-import {getSize} from 'src/base/common/responsive';
+import { isTablet } from 'src/base/common/Constants';
+import { getSize } from 'src/base/common/responsive';
 import InputComponent from 'src/screens/auth/components/InputComponent';
 import Color from 'src/theme/Color';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const ChangeSecurityScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const ChangeSecurityScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const [passwordOld, setPasswordOld] = useState(null);
   const [passwordNew, setPasswordNew] = useState(null);
   const [passwordConfirm, setPasswordConfirm] = useState(null);
@@ -81,6 +81,7 @@ const ChangeSecurityScreen = ({navigation}) => {
                       placeholder={t('PASSWORD_OLD')}
                       value={passwordOld}
                       onChangeText={setPasswordOld}
+                      editable
                     />
                     <InputComponent
                       title=""
@@ -88,6 +89,7 @@ const ChangeSecurityScreen = ({navigation}) => {
                       placeholder={t('PASSWORD_NEW')}
                       value={passwordNew}
                       onChangeText={setPasswordNew}
+                      editable
                     />
                     <InputComponent
                       title=""
@@ -95,6 +97,7 @@ const ChangeSecurityScreen = ({navigation}) => {
                       placeholder={t('CONFIRM_PASS')}
                       value={passwordConfirm}
                       onChangeText={setPasswordConfirm}
+                      editable
                     />
                     <Block marginHorizontal={30}>
                       <TouchableOpacity

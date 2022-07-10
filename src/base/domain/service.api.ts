@@ -1,14 +1,14 @@
-import axios, {AxiosPromise} from 'axios';
+import axios, { AxiosPromise } from 'axios';
 import {
   RESPONSE_CODES,
   STORAGE_KEYS,
 } from 'src/base/common/Constants';
 import AppError from 'src/base/domain/AppError';
 import ErrorUtil from 'src/base/domain/ErrorUtil';
-import {getData} from 'src/base/utils/AsyncStorageUtils';
-import {addExtendHeader} from 'src/base/utils/ParamsUtil';
+import { getData } from 'src/base/utils/AsyncStorageUtils';
+import { addExtendHeader } from 'src/base/utils/ParamsUtil';
 
-import {debug} from '../utils/DebugUtil';
+import { debug } from '../utils/DebugUtil';
 
 export default class ServiceApi {
   static routes = [];
@@ -54,11 +54,11 @@ export default class ServiceApi {
     };
     if (data) {
       if (data instanceof FormData) {
-        Object.assign(options, {data: data});
+        Object.assign(options, { data: data });
       } else if (data instanceof URLSearchParams) {
-        Object.assign(options, {body: data});
+        Object.assign(options, { body: data });
       } else {
-        Object.assign(options, {data: data});
+        Object.assign(options, { data: data });
       }
       debug('service.api.ts < request data > ===> ', data);
     }

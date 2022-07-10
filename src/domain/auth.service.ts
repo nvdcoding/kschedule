@@ -1,7 +1,6 @@
-import base64 from 'react-native-base64';
+
 import { URL_MAIN } from 'src/base/common/Constants';
 import api from 'src/base/domain/api';
-import { debug } from 'src/base/utils/DebugUtil';
 import { IRegisterAccount } from './local/IRegisterAccount';
 
 export default class AuthService {

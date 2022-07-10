@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {useTranslation} from 'react-i18next';
-import {BackHandler, SafeAreaView, TouchableOpacity, View} from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { BackHandler, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Images} from 'src/assets/images';
-import {isTablet} from 'src/base/common/Constants';
-import {getSize} from 'src/base/common/responsive';
+import { Images } from 'src/assets/images';
+import { isTablet } from 'src/base/common/Constants';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {Block, Image, Spinner, Text} from 'src/components';
+import { Block, Image, Spinner, Text } from 'src/components';
 import ModalError from 'src/components/ModalError';
 import AuthService from 'src/domain/auth.service';
 import {
@@ -19,8 +19,8 @@ import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 
-const NewPasswordScreen = ({navigation, route}) => {
-  const {t} = useTranslation();
+const NewPasswordScreen = ({ navigation, route }) => {
+  const { t } = useTranslation();
   const [password, setPassword] = useState<string>(null);
   const [confirmPassword, setConfirmPassword] = useState<string>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const NewPasswordScreen = ({navigation, route}) => {
       }
       setLoading(true);
       const authService = new AuthService();
-      const {data} = await authService.changePasswordOtp(
+      const { data } = await authService.changePasswordOtp(
         password,
         route.params.item_id,
       );
@@ -98,7 +98,7 @@ const NewPasswordScreen = ({navigation, route}) => {
           alignSelf="center"
           style={styles.blockLogo}>
           <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
-          <View style={{display: 'flex'}}>
+          <View style={{ display: 'flex' }}>
             <Text style={styles.textTitle}>
               Schedule <Text style={styles.textEdu}>KMA</Text>
             </Text>
@@ -117,6 +117,7 @@ const NewPasswordScreen = ({navigation, route}) => {
             marginBottom={25}
             onChangeText={setPassword}
             value={password}
+            editable
           />
           <InputComponent
             title={t('CONFIRM_PASSWORD')}
@@ -124,6 +125,7 @@ const NewPasswordScreen = ({navigation, route}) => {
             placeholder={t('RE_ENTER_PASSWORD')}
             onChangeText={setConfirmPassword}
             value={confirmPassword}
+            editable
           />
           <TouchableOpacity
             onPress={handleSavePass}

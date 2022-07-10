@@ -41,12 +41,14 @@ import {
   CHANGE_SECURITY_SCREEN,
   CHANGE_LANGUAGE_SCREEN,
   HOME_SCREEN,
+  TIMETABLE_SYNC_SCREEN,
 } from './screen';
 import SendOtpScreen from 'src/screens/auth/send-otp';
 import ChangeInformationScreen from 'src/screens/dashboard/user/information';
 import ChangeSecurityScreen from 'src/screens/dashboard/user/security';
 // import ChangeLanguageScreen from 'src/screens/dashboard/user/languague';
 import HomeScreen from 'src/screens/dashboard/home';
+import TimetableSync from 'src/screens/dashboard/home/TimetableSync';
 
 const Stack = createNativeStackNavigator();
 
@@ -111,6 +113,7 @@ const GlobalStackNavigation = () => {
         <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
         <Stack.Screen name={SEND_OTP_SCREEN} component={SendOtpScreen} />
         <Stack.Screen name={REGISTER_SCREEN} component={RegisterScreen} />
+        <Stack.Screen name={TIMETABLE_SYNC_SCREEN} component={TimetableSync} />
         <Stack.Screen
           name={CHANGE_INFORMATION_SCREEN}
           component={ChangeInformationScreen}

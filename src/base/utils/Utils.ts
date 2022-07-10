@@ -1,4 +1,4 @@
-import {t} from 'i18next';
+import { t } from 'i18next';
 import {
   Alert,
   Linking,
@@ -6,7 +6,7 @@ import {
   ToastAndroid,
 } from 'react-native';
 
-import {IS_IOS} from '../common/Constants';
+import { IS_IOS } from '../common/Constants';
 
 export const keyExtractor = (item, index) => 'item_' + item.id + '_' + index;
 
@@ -14,12 +14,12 @@ export const notifyInvalid = message => {
   IS_IOS
     ? alertMsg(message)
     : ToastAndroid.showWithGravityAndOffset(
-        message,
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM,
-        0,
-        50,
-      );
+      message,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+      0,
+      50,
+    );
 };
 
 export const alert = (
@@ -39,7 +39,7 @@ export const alert = (
         style: 'cancel',
       },
     ],
-    {cancelable: false},
+    { cancelable: false },
   );
 };
 
@@ -53,7 +53,7 @@ export const alertMsg = (message: string) => {
         style: 'cancel',
       },
     ],
-    {cancelable: false},
+    { cancelable: false },
   );
 };
 
@@ -72,7 +72,7 @@ export const showComfirm = (body, action, onComfirm) => {
         onPress: () => onComfirm(),
       },
     ],
-    {cancelable: false},
+    { cancelable: false },
   );
 };
 
@@ -95,7 +95,7 @@ export const openDialog = (title, message, confirmText, rejectText?) => {
           },
         },
       ],
-      {cancelable: true},
+      { cancelable: true },
     );
   });
 };
@@ -216,9 +216,8 @@ export const formatTime = (time = 0, total = 0) => {
   const formattedMinutes = Math.floor(time / 60).toFixed(0);
   const formattedSeconds = Math.floor(time % 60).toFixed(0);
 
-  return `${formattedMinutes}:${
-    +formattedSeconds < 10 ? '0' + formattedSeconds : formattedSeconds
-  }`;
+  return `${formattedMinutes}:${+formattedSeconds < 10 ? '0' + formattedSeconds : formattedSeconds
+    }`;
 };
 
 export const openLink = async (link: string, translate?) => {
@@ -248,7 +247,7 @@ export const getRangeTimeCourse = (lesson: string) => {
   const hourEnd =
     +arrayIndexLesson[lengthIndex - 1] * (2.5 / 3) +
     (+arrayIndexLesson[lengthIndex - 1] / 3 > 1 &&
-    +arrayIndexLesson[lengthIndex - 1] <= 5
+      +arrayIndexLesson[lengthIndex - 1] <= 5
       ? (+arrayIndexLesson[lengthIndex - 1] - 1) * (5 / 60)
       : 0) +
     7;

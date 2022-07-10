@@ -18,35 +18,36 @@ import Color from 'src/theme/Color';
 import { getSize } from 'src/base/common/responsive';
 import {
   CHANGE_INFORMATION_SCREEN,
-  CHANGE_LANGUAGE_SCREEN,
   CHANGE_SECURITY_SCREEN,
   LOGIN_SCREEN,
+  TIMETABLE_SYNC_SCREEN,
 } from 'src/navigation/screen';
-import { actionLogout } from 'src/redux/slices/accountSlice';
+import { useSelector } from 'react-redux';
+import { actionLogout, IUserState } from 'src/redux/slices/accountSlice';
 import { useDispatch } from 'react-redux';
+import { IRootState } from 'src/redux/store';
 
 const InformationScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation();
   const [avt, setAvt] = useState(Images.AVATAR_DEFAULT);
   const [lang, setLang] = useState('vn');
+  const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
   const dispatch = useDispatch();
   const changeAVT = () => {
-    console.log('state changed!');
     setAvt(Images.IMG_LOGO);
   };
   const changeInformation = () => {
-    console.log('state changed!');
     navigation.navigate(CHANGE_INFORMATION_SCREEN);
   };
+
+  const changeSync = () => {
+    navigation.navigate(TIMETABLE_SYNC_SCREEN);
+  }
 
   const changeSecurity = () => {
     navigation.navigate(CHANGE_SECURITY_SCREEN);
   };
-  const changeLang = lang => {
-    console.log(lang);
-    // i18n.changeLanguage(lang);
-    // setLang(lang);
-  };
+
 
   const handleLogout = async () => {
     await dispatch(actionLogout());
@@ -71,7 +72,7 @@ const InformationScreen = ({ navigation }) => {
           <View style={styles.containerHome}>
             <TouchableOpacity style={styles.avtUser} onPress={changeAVT}>
               <Image source={avt} style={styles.avtImg} />
-              <Text style={styles.textAvt}>Lam Lam Mai</Text>
+              <Text style={styles.textAvt}>{infoUser.name}</Text>
             </TouchableOpacity>
             <Block style={styles.ListInfo}>
               <TouchableOpacity
@@ -91,6 +92,25 @@ const InformationScreen = ({ navigation }) => {
                   color={'#999999'}
                 />
               </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.ItemInfo}
+                onPress={changeSync}>
+                <View style={styles.mainItem}>
+                  <Icon
+                    name={'person-circle'}
+                    size={getSize.m(26)}
+                    color={Color.BLUE_HOLDER}
+                  />
+                  <Text style={styles.settingUser}>Đồng bộ</Text>
+                </View>
+                <Icon
+                  name={'chevron-forward-sharp'}
+                  size={getSize.m(26)}
+                  color={'#999999'}
+                />
+              </TouchableOpacity>
+
               <TouchableOpacity
                 style={styles.ItemInfo}
                 onPress={changeSecurity}>
@@ -104,33 +124,7 @@ const InformationScreen = ({ navigation }) => {
                   color={'#999999'}
                 />
               </TouchableOpacity>
-              {lang === 'vn' ? (
-                <TouchableOpacity
-                  style={styles.ItemInfo}
-                  onPress={changeLang('en')}>
-                  <View style={styles.mainItem}>
-                    <Icon
-                      name={'language'}
-                      size={getSize.m(26)}
-                      color={'#51B3F3'}
-                    />
-                    <Text style={styles.settingUser}>Tiếng Việt</Text>
-                  </View>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={styles.ItemInfo}
-                  onPress={changeLang()}>
-                  <View style={styles.mainItem}>
-                    <Icon
-                      name={'language'}
-                      size={getSize.m(24)}
-                      color={'#ccc'}
-                    />
-                    <Text style={styles.settingUser}>English</Text>
-                  </View>
-                </TouchableOpacity>
-              )}
+
 
               <TouchableOpacity style={styles.ItemInfo} onPress={handleLogout}>
                 <View style={styles.mainItem}>
