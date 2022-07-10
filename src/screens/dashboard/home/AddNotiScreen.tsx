@@ -22,7 +22,7 @@ import { IRootState } from 'src/redux/store';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getSize } from 'src/base/common/responsive';
 import { Value } from 'react-native-reanimated';
-const Notifi = () => {
+const AddNotifyScreen = () => {
     const { t } = useTranslation();
     const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
 
@@ -54,7 +54,7 @@ const Notifi = () => {
                                         color={Color.RED}
                                     />
                                     <View style={styles.blockPass}>
-                                        <Text style={styles.changePassTitle}>ĐÂY LÀ THÔNG BÁO CỦA Sinh viên</Text>
+                                        <Text style={styles.changePassTitle}>THÊM THÔNG BÁO</Text>
                                         <Text style={styles.titlePassDes}>
                                             Ngày mai thi
                                         </Text>
@@ -136,7 +136,10 @@ const Notifi = () => {
                 <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
             )}
         </SafeAreaView>
+        // List danh sách lớp ra ( gọi api list classes)
+        // Teacher nhấn vào lớp => ra màn chi tiết lớp, bao gồm: tên lớp, 1 button thêm thông báo.
+
     );
 };
 
-export default Notifi;
+export default AddNotifyScreen;

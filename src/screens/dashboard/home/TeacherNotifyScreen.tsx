@@ -7,6 +7,7 @@ import {
     Text,
     ScrollView,
     TouchableOpacity,
+    Pressable,
 } from 'react-native';
 import Styles from 'src/base/common/Styles';
 import { Block, Spinner } from 'src/components';
@@ -21,8 +22,8 @@ import { IUserState } from 'src/redux/slices/accountSlice';
 import { IRootState } from 'src/redux/store';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getSize } from 'src/base/common/responsive';
-import { Value } from 'react-native-reanimated';
-const Notifi = () => {
+import { ADD_NOTIFY_SCREEN } from 'src/navigation/screen';
+const NotifiTeacher = ({ navigation }) => {
     const { t } = useTranslation();
     const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
 
@@ -37,10 +38,17 @@ const Notifi = () => {
 
         // }));
     };
-
+    const handleChangeScreen = () => {
+        navigation.navigate(ADD_NOTIFY_SCREEN);
+    }
     return (
         <SafeAreaView style={Styles.container}>
             <Block style={[styles.content, isTablet && styles.contentTablet]}>
+                <View>
+                    <TouchableOpacity style={styles.ItemInfo} onPress={handleChangeScreen}>
+                        <View><Text>Clcik</Text></View>
+                    </TouchableOpacity>
+                </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View>
                         {
@@ -54,7 +62,7 @@ const Notifi = () => {
                                         color={Color.RED}
                                     />
                                     <View style={styles.blockPass}>
-                                        <Text style={styles.changePassTitle}>ĐÂY LÀ THÔNG BÁO CỦA Sinh viên</Text>
+                                        <Text style={styles.changePassTitle}>Thông báo của giảng viên</Text>
                                         <Text style={styles.titlePassDes}>
                                             Ngày mai thi
                                         </Text>
@@ -129,14 +137,21 @@ const Notifi = () => {
                             </Block>
 
                         )}
+
                     </View>
+
                 </ScrollView>
+
             </Block>
             {isLoading && (
                 <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
             )}
+
         </SafeAreaView>
+        // List thông báo của teacher đó
+        // 1 button thêm thông báo.ở cuối
+
     );
 };
 
-export default Notifi;
+export default NotifiTeacher;
