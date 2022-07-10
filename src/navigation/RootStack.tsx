@@ -42,6 +42,7 @@ import {
   CHANGE_LANGUAGE_SCREEN,
   HOME_SCREEN,
   TIMETABLE_SYNC_SCREEN,
+  ADD_NOTIFY_SCREEN,
 } from './screen';
 import SendOtpScreen from 'src/screens/auth/send-otp';
 import ChangeInformationScreen from 'src/screens/dashboard/user/information';
@@ -49,6 +50,7 @@ import ChangeSecurityScreen from 'src/screens/dashboard/user/security';
 // import ChangeLanguageScreen from 'src/screens/dashboard/user/languague';
 import HomeScreen from 'src/screens/dashboard/home';
 import TimetableSync from 'src/screens/dashboard/home/TimetableSync';
+import AddNotifyScreen from 'src/screens/dashboard/home/AddNotiScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -152,6 +154,10 @@ const GlobalStackNavigation = () => {
         <Stack.Screen
           name={HOME_SCREEN}
           component={HomeScreen}
+        />
+        <Stack.Screen
+          name={ADD_NOTIFY_SCREEN}
+          component={AddNotifyScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

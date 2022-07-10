@@ -51,30 +51,29 @@ const NotifiTeacher = ({ navigation }) => {
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View>
-                        {
-                            <TouchableOpacity style={styles.ItemInfo} onPress={(key) => {
-                                setIndex(0);
-                            }}>
-                                <View style={styles.mainItem} >
-                                    <Icon
-                                        name={'md-key-outline'}
-                                        size={getSize.m(24)}
-                                        color={Color.RED}
-                                    />
-                                    <View style={styles.blockPass}>
-                                        <Text style={styles.changePassTitle}>Thông báo của giảng viên</Text>
-                                        <Text style={styles.titlePassDes}>
-                                            Ngày mai thi
-                                        </Text>
-                                    </View>
-                                </View>
+
+                        <TouchableOpacity style={styles.ItemInfo} onPress={(key) => {
+                            handleChangeScreen
+                        }}>
+                            <View style={styles.mainItem} >
                                 <Icon
-                                    name={'ios-chevron-down-sharp'}
-                                    size={getSize.m(20)}
-                                    color={'#999999'}
+                                    name={'md-key-outline'}
+                                    size={getSize.m(24)}
+                                    color={Color.RED}
                                 />
-                            </TouchableOpacity>
-                        }
+                                <View style={styles.blockPass}>
+                                    <Text style={styles.changePassTitle}>Thông báo của giảng viên</Text>
+                                    <Text style={styles.titlePassDes}>
+                                        Ngày mai thi
+                                    </Text>
+                                </View>
+                            </View>
+                            <Icon
+                                name={'ios-chevron-down-sharp'}
+                                size={getSize.m(20)}
+                                color={'#999999'}
+                            />
+                        </TouchableOpacity>
                         {index == 0 && (
                             <View style={styles.blockChangePass}>
                                 <Text>Vip khoong</Text>
