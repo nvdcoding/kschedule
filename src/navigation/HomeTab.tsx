@@ -16,10 +16,12 @@ import {
   TIMETABLE_SYNC_SCREEN,
   LIVE_CLASS_STACK,
   NOTIFI_SCREEN,
+  NOTIFI_TEACHER_SCREEN,
 } from './screen';
 import InformationScreen from 'src/screens/dashboard/home/InformationScreen';
 import TimetableSync from 'src/screens/dashboard/home/TimetableSync';
 import Notifi from 'src/screens/dashboard/home/NotifiScreen';
+import NotifiTeacher from 'src/screens/dashboard/home/TeacherNotifyScreen';
 
 const Icon = getIconComponent('ionicons');
 
@@ -57,6 +59,7 @@ const HomeTabNavigator = () => {
       })}>
       <HomeTab.Screen name={HOME_SCREEN} component={HomeScreen} />
       <HomeTab.Screen name={NOTIFI_SCREEN} component={Notifi} />
+      <HomeTab.Screen name={NOTIFI_TEACHER_SCREEN} component={NotifiTeacher} />
       <HomeTab.Screen name={BLOG_STACK} component={AddScheduleScreeen} />
       <HomeTab.Screen name={LIVE_CLASS_STACK} component={InformationScreen} />
     </HomeTab.Navigator>
