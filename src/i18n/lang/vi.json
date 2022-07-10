@@ -97,5 +97,8 @@
   "PASSWORD_OLD": "Nhập mật khẩu cũ...",
   "PASSWORD_NEW": "Nhập mật khẩu mới...",
   "CONFIRM_PASS": "Nhập lại mật khẩu",
-  "SAVE_PASS": "Lưu mật khẩu"
+  "SAVE_PASS": "Lưu mật khẩu",
+  "EMAIL_TEACHER": "Email giảng viên",
+  "ENTER_EMAIL_TEACHER": "Nhập email giảng viên",
+  "NOT_ENTER_EMAIL": "Bạn chưa nhập email"
 }

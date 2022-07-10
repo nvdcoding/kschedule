@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {debug} from 'src/base/utils/DebugUtil';
+import { debug } from 'src/base/utils/DebugUtil';
 
 import {
   CommonActions,
   NavigationContainerRef,
 } from '@react-navigation/native';
 
-import {NEW_PASSWORD_SCREEN} from './screen';
+import { NEW_PASSWORD_SCREEN } from './screen';
 
 export const navigationRef = React.createRef<NavigationContainerRef>();
 
@@ -22,7 +22,7 @@ export function reset(name, params?) {
     CommonActions.reset({
       index: 1,
       routes: [
-        {name: 'main'},
+        { name: 'main' },
         {
           name: name,
           params: params,

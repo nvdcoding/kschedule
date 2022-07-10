@@ -1,12 +1,16 @@
-import base64 from 'react-native-base64';
+
 import { URL_MAIN } from 'src/base/common/Constants';
 import api from 'src/base/domain/api';
-import { debug } from 'src/base/utils/DebugUtil';
 import { IRegisterAccount } from './local/IRegisterAccount';
 
 export default class AuthService {
   login(studentCode: string, password: string): Promise<any> {
     return api('api/v1/auth/login', { studentCode, password }, {
+      method: 'POST',
+    });
+  }
+  teacherLogin(email: string, password: string): Promise<any> {
+    return api('api/v1/auth/teacher/login', { email, password }, {
       method: 'POST',
     });
   }
@@ -45,6 +49,10 @@ export default class AuthService {
 
   getInfoUser(): Promise<any> {
     return api('api/v1/auth/me', null, { method: 'GET' });
+  }
+
+  getInfoTeacher(): Promise<any> {
+    return api('api/v1/auth/teacher/me', null, { method: 'GET' })
   }
 
   changePassword(

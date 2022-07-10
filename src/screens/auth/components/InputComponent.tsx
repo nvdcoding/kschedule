@@ -1,13 +1,13 @@
-import React, {memo, useState} from 'react';
+import React, { memo, useState } from 'react';
 
-import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import {getIconComponent} from 'src/assets/icon';
-import {getSize} from 'src/base/common/responsive';
-import {Block, Text} from 'src/components';
+import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { getIconComponent } from 'src/assets/icon';
+import { getSize } from 'src/base/common/responsive';
+import { Block, Text } from 'src/components';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
 
-import {IInput} from '../types';
+import { IInput } from '../types';
 
 const Icon = getIconComponent('goEdu');
 
@@ -50,6 +50,7 @@ const InputComponent = ({
   secureTextEntry,
   placeholder,
   marginBottom,
+  editable
 }: IInput) => {
   const [showPass, setShowPass] = useState<boolean>(
     secureTextEntry ? true : false,
@@ -69,6 +70,7 @@ const InputComponent = ({
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={showPass}
+        editable={editable}
       />
       {secureTextEntry && (
         <TouchableOpacity onPress={handleShowPass} style={styles.btnShowPass}>

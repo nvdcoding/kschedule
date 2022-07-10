@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {useTranslation} from 'react-i18next';
-import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Images} from 'src/assets/images';
-import {isTablet} from 'src/base/common/Constants';
-import {getSize} from 'src/base/common/responsive';
+import { Images } from 'src/assets/images';
+import { isTablet } from 'src/base/common/Constants';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {validateEmail} from 'src/base/utils/ValidationUtils';
-import {Block, Image, Spinner, Text} from 'src/components';
+import { validateEmail } from 'src/base/utils/ValidationUtils';
+import { Block, Image, Spinner, Text } from 'src/components';
 import ModalErrorComponent from 'src/components/ModalError';
 import AuthService from 'src/domain/auth.service';
-import {RESET_SUCCESS_SCREEN} from 'src/navigation/screen';
+import { RESET_SUCCESS_SCREEN } from 'src/navigation/screen';
 import styles from 'src/screens/auth/login/login.style';
 import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 
-const ForgetPasswordScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const ForgetPasswordScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState<string>(null);
   const [error, setError] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,7 +30,7 @@ const ForgetPasswordScreen = ({navigation}) => {
     try {
       setLoading(true);
       const authService = new AuthService();
-      const {data} = await authService.resetPassWord(email);
+      const { data } = await authService.resetPassWord(email);
       if (data.apiStatus !== 'SUCCESS') {
         return setError(data.description);
       }
@@ -71,7 +71,7 @@ const ForgetPasswordScreen = ({navigation}) => {
           alignSelf="center"
           style={styles.blockLogo}>
           <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
-          <View style={{display: 'flex'}}>
+          <View style={{ display: 'flex' }}>
             <Text style={styles.textTitle}>
               Schedule <Text style={styles.textEdu}>KMA</Text>
             </Text>
@@ -86,6 +86,7 @@ const ForgetPasswordScreen = ({navigation}) => {
             placeholder={t('ENTER_EMAIL')}
             onChangeText={onChangeTextEmail}
             value={email}
+            editable
           />
           <TouchableOpacity
             activeOpacity={0.5}

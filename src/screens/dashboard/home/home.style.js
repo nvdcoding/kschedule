@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   textAvt: {
     color: '#999999',
     fontSize: getSize.m(20),
+    marginTop: 10
   },
   settingUser: {
     color: '#686862',
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
 
   textDateTitle: {
     color: Color.WHITE,
-    fontSize: getSize.m(20, 0.3),
+    fontSize: getSize.m(15, 0.3),
     fontFamily: Font.font_SVN_700,
   },
 
@@ -330,6 +331,25 @@ const styles = StyleSheet.create({
   DateTimePicker: {
     color: Color.TEXT_PRIMARY,
     backgroundColor: '#ccc',
+  },
+  blockPass: {
+    paddingLeft: getSize.m(7),
+  },
+  changePassTitle: {
+    fontSize: getSize.m(20),
+    fontWeight: '700',
+    color: '#504e4e',
+  },
+  titlePassDes: {
+    fontSize: getSize.m(12),
+    fontWeight: '500',
+    color: '#6b6b6b',
+    width: Dimens.DEVICE_WIDTH * 0.7,
+  },
+  blockChangePass: {
+    width: Dimens.DEVICE_WIDTH * 0.8,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });
 

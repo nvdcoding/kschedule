@@ -1,25 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {debounce} from 'lodash';
-import {useTranslation} from 'react-i18next';
-import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
+import { debounce } from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Images} from 'src/assets/images';
-import {FORM_SEND_OTP} from 'src/base/common/__Tests__';
-import {isTablet, VERIFY_URL} from 'src/base/common/Constants';
-import {getSize} from 'src/base/common/responsive';
+import { Images } from 'src/assets/images';
+import { FORM_SEND_OTP } from 'src/base/common/__Tests__';
+import { isTablet, VERIFY_URL } from 'src/base/common/Constants';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {validateEmail, validatePhone} from 'src/base/utils/ValidationUtils';
-import {Block, Image, Spinner, Text} from 'src/components';
+import { validateEmail, validatePhone } from 'src/base/utils/ValidationUtils';
+import { Block, Image, Spinner, Text } from 'src/components';
 import ModalErrorComponent from 'src/components/ModalError';
 import AuthService from 'src/domain/auth.service';
-import {REGISTER_SCREEN, SIGN_UP_SUCCESS_SCREEN} from 'src/navigation/screen';
+import { REGISTER_SCREEN, SIGN_UP_SUCCESS_SCREEN } from 'src/navigation/screen';
 import styles from 'src/screens/auth/send-otp/send-otp.style';
 import Color from 'src/theme/Color';
 
 import InputComponent from '../components/InputComponent';
 import Helper from 'src/base/utils/helper';
-import {REGISTER} from 'redux-persist';
+import { REGISTER } from 'redux-persist';
 // import {IDataSignUp} from './types';
 
 const defaultSendOtp = {
@@ -27,8 +27,8 @@ const defaultSendOtp = {
   studentCode: '',
 };
 
-const SendOtpScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const SendOtpScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const authService = new AuthService();
   const [dataSendOtp, setDataSendOtp] = useState(defaultSendOtp);
   const [invalid, setInvalid] = useState<number>(null);
@@ -49,7 +49,7 @@ const SendOtpScreen = ({navigation}) => {
         }
       });
       setLoading(true);
-      const {data} = await authService.sendOtp(dataSendOtp);
+      const { data } = await authService.sendOtp(dataSendOtp);
       if (data.data.statusCode !== 200) {
         throw data.data.message;
         // throw data.description;
@@ -86,7 +86,7 @@ const SendOtpScreen = ({navigation}) => {
           alignSelf="center"
           style={styles.blockLogo}>
           <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
-          <View style={{display: 'flex'}}>
+          <View style={{ display: 'flex' }}>
             <Text style={styles.textTitle}>
               Schedule <Text style={styles.textEdu}>KMA</Text>
             </Text>
@@ -123,6 +123,7 @@ const SendOtpScreen = ({navigation}) => {
                   invalid={invalid === item.id}
                   onChangeText={debounce(_onChangeText, 200)}
                   marginBottom={20}
+                  editable
                 />
               );
             })}

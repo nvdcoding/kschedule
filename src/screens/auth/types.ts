@@ -6,4 +6,5 @@ export interface IInput {
   secureTextEntry?: boolean;
   invalid?: boolean;
   marginBottom?: number;
+  editable: boolean
 }
