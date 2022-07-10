@@ -12,65 +12,70 @@ import {
   View,
 } from 'react-native';
 import {
-  AgendaList,
   Calendar,
-  CalendarProvider,
-  WeekCalendar,
 } from 'react-native-calendars';
 import { Images } from 'src/assets/images';
-import { DATA_CALENDER } from 'src/base/common/__Tests__';
 import {
   Block,
   Image,
 } from 'src/components';
 
-import ItemAgendaComponent from './components/ItemAgendaComponent';
 import styles from './home.style';
-import testIDs from './testIDs';
 import { useSelector } from 'react-redux';
 import { IUserState } from 'src/redux/slices/accountSlice';
 import { IRootState } from 'src/redux/store';
 import ScheduleService from 'src/domain/schedule.service';
 import { ScrollView } from 'react-native-gesture-handler';
+import Swiper from 'react-native-swiper';
 
 const HomeScreen = () => {
   // const marked = useMemo(() => getMarkedDates(dataDate), [dataDate]);
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
-  console.log(infoUser)
   const scheduleService = new ScheduleService();
-  const state = {
-    selectedDate: "",
-    markedDates: {}
-  }
   const [data, setData] = useState([]);
   const [calendarData, setCalendarData] = useState([]);
+  const [scheduleData, setScheduleData] = useState([]);
   const [marked, setMarked] = useState({});
 
   const handleDayPress = (day) => {
-    let result = calendarData.filter(e => day.dateString == e.date.split('/').reverse().join('-'));
+    let result = calendarData.concat(scheduleData).filter(e => day.dateString == e.date.split('/').reverse().join('-'));
     result = result.map(e => {
       return {
         name: e.name,
         room: e.room,
         timeStart: e.timeStart,
         timeEnd: e.timeEnd,
-        teacher: e.teacher
+        teacher: e.teacher,
+        title: e.title,
+        note: e.note,
+        time: e.time,
+        type: e.title ? "personal" : "school"
       }
     });
     setData(result);
+    console.log(data);
   }
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await scheduleService.getSchedule();
+      const personalData = await scheduleService.getPersonalSchedule();
+      setScheduleData(personalData.data.data.data);
       setCalendarData(data.data.data);
       const dataDate = data.data.data.map(item => {
         return {
           title: item.date.split('/').reverse().join('-'),
           data: [item],
+          type: "school"
         };
       });
-
+      const scheduleDate = personalData.data.data.data.map(i => {
+        return {
+          title: i.date.split('/').reverse().join('-'),
+          data: [i],
+          type: "personal"
+        }
+      });
       type MarkedDate = {
         [key: string]: object;
       };
@@ -80,14 +85,14 @@ const HomeScreen = () => {
 
         items.forEach(item => {
           if (item.data && item.data.length > 0 && !isEmpty(item.data[0])) {
-            marked[item.title] = { marked: true };
+            marked[item.title] = { marked: true, dots: item.type ? ['vacation'] : [], dotColor: 'blue', };
           } else {
             marked[item.title] = { disabled: true };
           }
         });
         return marked;
       };
-      const marked = getMarkedDates(dataDate);
+      const marked = getMarkedDates(dataDate.concat(scheduleDate));
       setMarked(marked);
     }
     fetchData();
@@ -97,13 +102,12 @@ const HomeScreen = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar translucent />
       <Block style={styles.headerContent}>
-        <Block flex>
+        <Block>
           <Text numberOfLines={1} style={styles.textDateTitle}>
-            {infoUser.name}
+            {infoUser.name} - {infoUser.studentCode}
           </Text>
-          <Text style={styles.textId}>{infoUser.studentCode}</Text>
         </Block>
-        <Image source={Images.AVATAR_DEFAULT} style={styles.avatar} />
+        {/* <Image source={Images.AVATAR_DEFAULT} style={styles.avatar} /> */}
       </Block>
       <Calendar
         date={new Date().toISOString().split('T')[0]}
@@ -119,29 +123,57 @@ const HomeScreen = () => {
         {/* <AgendaList sections={dataDate} renderItem={renderItem} /> */}
       </Calendar>
       <View style={styles.contentHome}>
-        <View>
-          <Text style={styles.text}>
-            Schedule <Text style={styles.number}>{data.length}</Text>
-          </Text>
-        </View>
-        <ScrollView style={styles.tableSchedule}>
-          {
-            data.map(e => {
-              return (<View style={styles.time}>
-                <View style={styles.leftTime}>
-                  <Text style={styles.hourBold}>{e.timeStart}</Text>
-                  <Text style={styles.hourBold}>-</Text>
-                  <Text style={styles.hourBold}>{e.timeEnd}</Text>
-                </View>
-                <View style={styles.rightTime}>
-                  <Text style={styles.main}>{e.name}</Text>
-                  <Text style={styles.main}>{e.teacher ? e.teacher : "Không có dữ liệu"}</Text>
-                  <Text style={styles.main}>{e.room ? e.room : "Không có dữ liệu"}</Text>
-                </View>
-              </View>)
-            })
-          }
-        </ScrollView>
+        <Swiper showsPagination={false} nextButton>
+          <View style={{ flex: 1 }}>
+            <View>
+              <Text style={styles.text}>
+                Lịch học
+              </Text>
+            </View>
+            <ScrollView style={styles.tableSchedule}>
+              {
+                data.filter(e => e.type != "personal").map(e => {
+                  return (<View style={styles.time}>
+                    <View style={styles.leftTime}>
+                      <Text style={styles.hourBold}>{e.timeStart}</Text>
+                      <Text style={styles.hourBold}>-</Text>
+                      <Text style={styles.hourBold}>{e.timeEnd}</Text>
+                    </View>
+                    <View style={styles.rightTime}>
+                      <Text style={styles.main}>{e.name}</Text>
+                      {e.teacher ? (<Text style={styles.main}>{e.teacher}</Text>) : null}
+                      {e.room ? (<Text style={styles.main}>{e.room}</Text>) : null}
+                    </View>
+                  </View>)
+                })
+              }
+            </ScrollView>
+          </View>
+          <View style={{ flex: 1 }}>
+            <View>
+              <Text style={styles.text}>
+                Lịch cá nhân
+              </Text>
+            </View>
+            <ScrollView style={styles.tableSchedule}>
+              {
+                data.filter(e => e.type == "personal").map(e => {
+                  return (<View style={styles.time}>
+                    <View style={styles.leftTime}>
+                      <Text style={styles.hourBold}>{e.time}</Text>
+                    </View>
+                    <View style={styles.rightTime}>
+                      <Text style={styles.main}>Công việc: {e.title}</Text>
+                      <Text style={styles.main}>Nội dung: {e.note}</Text>
+                    </View>
+                  </View>)
+                })
+              }
+            </ScrollView>
+          </View>
+
+        </Swiper>
+
       </View>
     </SafeAreaView>
   );

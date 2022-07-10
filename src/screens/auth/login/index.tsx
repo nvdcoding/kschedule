@@ -13,17 +13,13 @@ import AuthService from 'src/domain/auth.service';
 import {
   DRAWER_STACK,
   FORGET_PASSWORD_SCREEN,
-  HOME_SCREEN,
   HOME_TAB_NAVIGATOR,
-  REGISTER_SCREEN,
   SEND_OTP_SCREEN,
 } from 'src/navigation/screen';
 import { setAccount } from 'src/redux/slices/accountSlice';
 import styles from 'src/screens/auth/login/login.style';
 import Color from 'src/theme/Color';
-import Swiper from 'react-native-swiper'
 import InputComponent from '../components/InputComponent';
-import SendOtpScreen from '../send-otp';
 
 const LoginScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -40,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       if (!studentCode) {
-        throw t('NOT_ENTER_STUDENT_CODE');
+        throw t('NOT_ENTER_S TUDENT_CODE');
       }
       if (!password) {
         throw t('NOT_ENTER_PASSWORD');
@@ -79,12 +75,10 @@ const LoginScreen = ({ navigation }) => {
         throw data.data.message;
         // throw data.description;
       }
-      console.log('46466446>>>>>', data.data);
       await Helper.storeData(JWT_KEY, data.data.accessToken);
       const infoTeacher = await authService.getInfoTeacher();
       setLoading(false);
       // infoUser.data.code === 200 &&
-      console.log(infoTeacher.data.data);
       dispatch(setAccount(infoTeacher.data.data));
       navigation.navigate(isTablet ? DRAWER_STACK : HOME_TAB_NAVIGATOR);
     } catch (error) {
@@ -133,6 +127,7 @@ const LoginScreen = ({ navigation }) => {
               placeholder={t('ENTER_CODE')}
               value={studentCode}
               onChangeText={setStudentCode}
+              editable
             />
             <InputComponent
               title={t('PASSWORD')}
@@ -140,6 +135,7 @@ const LoginScreen = ({ navigation }) => {
               placeholder={t('ENTER_PASSWORD')}
               value={password}
               onChangeText={setPassword}
+              editable
             />
             <Block row alignCenter style={{ justifyContent: 'space-between' }}>
               <TouchableOpacity
@@ -174,6 +170,7 @@ const LoginScreen = ({ navigation }) => {
                 placeholder={t('ENTER_EMAIL_TEACHER')}
                 value={email}
                 onChangeText={setEmail}
+                editable
               />
               <InputComponent
                 title={t('PASSWORD')}
@@ -181,6 +178,7 @@ const LoginScreen = ({ navigation }) => {
                 placeholder={t('ENTER_PASSWORD')}
                 value={password}
                 onChangeText={setPassword}
+                editable
               />
               <TouchableOpacity
                 style={styles.btnForget}

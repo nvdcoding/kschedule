@@ -17,7 +17,7 @@ export const HOME_TAB_NAVIGATOR = 'HomeTabNavigator';
 export const MY_COURSE_SCREEN = 'MyCourse';
 
 //home
-export const HOME_SCREEN = 'Home';
+export const HOME_SCREEN = 'Lịch';
 export const DETAIL_COURSE_SCREEN = 'DetailCourse';
 export const LEARNING_SCREEN = 'Learning';
 export const NOTIFY_SCREEN = 'Notify';
@@ -25,11 +25,13 @@ export const NOTIFY_SCREEN = 'Notify';
 //Blog
 export const BLOG_SCREEN = 'BlogScreen';
 export const DETAIL_BLOG_SCREEN = 'DetailBlog';
-export const BLOG_STACK = 'Todo';
+export const BLOG_STACK = 'Thêm lịch';
 
 //listCourse
 export const LIST_COURSE_SCREEN = 'ListCourseStack';
 export const TIMETABLE_SYNC_SCREEN = 'AddTimetable';
+
+export const NOTIFI_SCREEN = 'Thông báo';
 
 //live class
 export const LIVE_CLASS_STACK = 'User';

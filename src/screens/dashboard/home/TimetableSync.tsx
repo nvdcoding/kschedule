@@ -57,6 +57,7 @@ const TimetableSync = () => {
               placeholder={t('ENTER_PASSWORD')}
               value={password}
               onChangeText={setPassword}
+              editable
             />
             <Block style={styles.status}>
               <Text style={styles.statusTitle}>{t('STATUS')}:</Text>

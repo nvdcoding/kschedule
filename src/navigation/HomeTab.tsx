@@ -1,23 +1,25 @@
 import React from 'react';
 
-import {StyleSheet} from 'react-native';
-import {getIconComponent} from 'src/assets/icon';
-import {getSize} from 'src/base/common/responsive';
+import { StyleSheet } from 'react-native';
+import { getIconComponent } from 'src/assets/icon';
+import { getSize } from 'src/base/common/responsive';
 import HomeScreen from 'src/screens/dashboard/home';
 import AddScheduleScreeen from 'src/screens/dashboard/home/AddScheduleScreen';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {
   BLOG_STACK,
   HOME_SCREEN,
   TIMETABLE_SYNC_SCREEN,
   LIVE_CLASS_STACK,
+  NOTIFI_SCREEN,
 } from './screen';
 import InformationScreen from 'src/screens/dashboard/home/InformationScreen';
 import TimetableSync from 'src/screens/dashboard/home/TimetableSync';
+import Notifi from 'src/screens/dashboard/home/NotifiScreen';
 
 const Icon = getIconComponent('ionicons');
 
@@ -26,8 +28,8 @@ const HomeTab = createBottomTabNavigator();
 const HomeTabNavigator = () => {
   return (
     <HomeTab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, size}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, size }) => {
           let iconName;
           if (route.name === HOME_SCREEN) {
             iconName = 'home';
@@ -54,7 +56,7 @@ const HomeTabNavigator = () => {
         // tabBarShowLabel: false,
       })}>
       <HomeTab.Screen name={HOME_SCREEN} component={HomeScreen} />
-      <HomeTab.Screen name={TIMETABLE_SYNC_SCREEN} component={TimetableSync} />
+      <HomeTab.Screen name={NOTIFI_SCREEN} component={Notifi} />
       <HomeTab.Screen name={BLOG_STACK} component={AddScheduleScreeen} />
       <HomeTab.Screen name={LIVE_CLASS_STACK} component={InformationScreen} />
     </HomeTab.Navigator>

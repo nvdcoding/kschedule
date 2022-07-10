@@ -1,19 +1,19 @@
-import {debounce} from 'lodash';
-import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
+import { debounce } from 'lodash';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Images} from 'src/assets/images';
-import {isTablet} from 'src/base/common/Constants';
-import {getSize} from 'src/base/common/responsive';
+import { Images } from 'src/assets/images';
+import { isTablet } from 'src/base/common/Constants';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {FORM_REGISTER} from 'src/base/common/__Tests__';
+import { FORM_REGISTER } from 'src/base/common/__Tests__';
 import Helper from 'src/base/utils/helper';
-import {validateEmail} from 'src/base/utils/ValidationUtils';
-import {Block, Image, Spinner, Text} from 'src/components';
+import { validateEmail } from 'src/base/utils/ValidationUtils';
+import { Block, Image, Spinner, Text } from 'src/components';
 import ModalErrorComponent from 'src/components/ModalError';
 import AuthService from 'src/domain/auth.service';
-import {SIGN_UP_SUCCESS_SCREEN} from 'src/navigation/screen';
+import { SIGN_UP_SUCCESS_SCREEN } from 'src/navigation/screen';
 import styles from 'src/screens/auth/register/register.style';
 import Color from 'src/theme/Color';
 import InputComponent from '../components/InputComponent';
@@ -27,8 +27,8 @@ const defaultRegister = {
   otp: '',
 };
 
-const RegisterScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const RegisterScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const authService = new AuthService();
   const [dataSignUp, setDataSignUp] = useState(defaultRegister);
   const [invalid, setInvalid] = useState<number>(null);
@@ -71,7 +71,7 @@ const RegisterScreen = ({navigation}) => {
         }
       });
       setLoading(true);
-      const {data} = await authService.registerAccount(dataSignUp);
+      const { data } = await authService.registerAccount(dataSignUp);
       if (data.data.statusCode !== 200) {
         throw data.data.message;
         // throw data.description;
@@ -108,7 +108,7 @@ const RegisterScreen = ({navigation}) => {
           alignSelf="center"
           style={styles.blockLogo}>
           <Image source={Images.IMG_LOGO} style={styles.logoLogin} />
-          <View style={{display: 'flex'}}>
+          <View style={{ display: 'flex' }}>
             <Text style={styles.textTitle}>
               Schedule <Text style={styles.textEdu}>KMA</Text>
             </Text>
@@ -146,6 +146,7 @@ const RegisterScreen = ({navigation}) => {
                   onChangeText={debounce(_onChangeText, 200)}
                   secureTextEntry={item.security}
                   marginBottom={20}
+                  editable
                 />
               );
             })}
