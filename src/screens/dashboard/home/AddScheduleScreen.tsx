@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   SafeAreaView,
@@ -9,20 +9,26 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Styles from 'src/base/common/Styles';
-import { Block, Spinner } from 'src/components';
-import { isTablet } from 'src/base/common/Constants';
-import { getIconComponent } from 'src/assets/icon';
+import {Block, Spinner} from 'src/components';
+import {isTablet} from 'src/base/common/Constants';
+import {getIconComponent} from 'src/assets/icon';
 import Color from 'src/theme/Color';
 import styles from './home.style';
-import { getSize } from 'src/base/common/responsive';
-import { t } from 'i18next';
+import {getSize} from 'src/base/common/responsive';
+import {t} from 'i18next';
 import ScheduleService from 'src/domain/schedule.service';
-import { notifyInvalid } from 'src/base/utils/Utils';
+import {notifyInvalid} from 'src/base/utils/Utils';
 const Icon = getIconComponent('ionicons');
 const AddScheduleScreeen = () => {
-  let currentMonth = new Date().getMonth() + 1 >= 10 ? new Date().getMonth() + 1 : `0${new Date().getMonth() + 1}`;
+  let currentMonth =
+    new Date().getMonth() + 1 >= 10
+      ? new Date().getMonth() + 1
+      : `0${new Date().getMonth() + 1}`;
   let dateCurrent = `${new Date().getFullYear()}-${currentMonth}-${new Date().getDate()}`;
-  let hourCurrent = new Date().getHours() >= 10 ? new Date().getHours() : `0${new Date().getHours()}`;
+  let hourCurrent =
+    new Date().getHours() >= 10
+      ? new Date().getHours()
+      : `0${new Date().getHours()}`;
   let timeCurrent = hourCurrent + ':' + new Date().getMinutes();
   const [isLoading, setLoading] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -37,10 +43,16 @@ const AddScheduleScreeen = () => {
     setShow(false);
     setDate(currentDate);
     let tempDate = new Date(currentDate);
-    let month = (tempDate.getMonth() + 1) >= 10 ? tempDate.getMonth() + 1 : `0${tempDate.getMonth() + 1}`;
+    let month =
+      tempDate.getMonth() + 1 >= 10
+        ? tempDate.getMonth() + 1
+        : `0${tempDate.getMonth() + 1}`;
     let fDate = `${tempDate.getFullYear()}-${month}-${tempDate.getDate()}`;
 
-    let hour = tempDate.getHours() >= 10 ? tempDate.getHours() : `0${tempDate.getHours()}`
+    let hour =
+      tempDate.getHours() >= 10
+        ? tempDate.getHours()
+        : `0${tempDate.getHours()}`;
     let fTime = hour + ':' + tempDate.getMinutes();
     setTextDate(fDate);
     setTextTime(fTime);
@@ -51,7 +63,7 @@ const AddScheduleScreeen = () => {
     setMode(currentMode);
   };
 
-  const showDatepicker = (e) => {
+  const showDatepicker = e => {
     showMode('date');
   };
 
@@ -75,7 +87,12 @@ const AddScheduleScreeen = () => {
       console.log(textDate, textTime);
       setLoading(true);
       const scheduleService = new ScheduleService();
-      const { data } = await scheduleService.addPersonalSchedule({ title, note, date: textDate, time: textTime });
+      const {data} = await scheduleService.addPersonalSchedule({
+        title,
+        note,
+        date: textDate,
+        time: textTime,
+      });
       console.log(data.data);
       if (data.data.statusCode != 200) {
         throw data.data.message;
@@ -85,8 +102,6 @@ const AddScheduleScreeen = () => {
       setLoading(false);
       notifyInvalid(error);
     }
-
-
   };
   return (
     <SafeAreaView style={Styles.container}>
@@ -118,8 +133,8 @@ const AddScheduleScreeen = () => {
               <TextInput
                 style={[
                   styles.inputBlock,
-                  { paddingTop: 20 },
-                  { paddingBottom: 50 },
+                  {paddingTop: 20},
+                  {paddingBottom: 50},
                 ]}
                 placeholder="Nội dung"
                 placeholderTextColor={'#EB144C'}
@@ -129,20 +144,20 @@ const AddScheduleScreeen = () => {
               <Text
                 style={[
                   styles.inputBlock,
-                  { fontWeight: 'bold' },
-                  { borderWidth: 0 },
+                  {fontWeight: 'bold'},
+                  {borderWidth: 0},
                 ]}>
                 Set time
               </Text>
               <TouchableOpacity onPress={showTimepicker}>
-                <Text style={[styles.inputBlock, { textAlign: 'center' }]}>
+                <Text style={[styles.inputBlock, {textAlign: 'center'}]}>
                   {textTime}
                 </Text>
                 {/* <Button onPress={showTimepicker} title="Show time picker!" /> */}
               </TouchableOpacity>
               <Block marginHorizontal={30}>
                 <TouchableOpacity
-                  style={[styles.btnLogin, { fontSize: 20, fontWeight: 'bold' }]}
+                  style={[styles.btnLogin, {fontSize: 20, fontWeight: 'bold'}]}
                   activeOpacity={0.5}
                   onPress={handleAdd}>
                   <Text style={styles.textLogin}>Lưu</Text>
