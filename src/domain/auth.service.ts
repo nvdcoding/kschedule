@@ -68,21 +68,15 @@ export default class AuthService {
   }
 
   updateProfile(
-    job: string,
-    address: string,
-    mobile: string,
-    firstName: string,
-    lastName: string,
-    fullName?: string,
+    name,
+    phone,
+    avatar
   ): Promise<any> {
-    return api('/admin/account/v1/user/update/profile', {
-      fullName,
-      job,
-      address,
-      mobile,
-      firstName,
-      lastName,
-    });
+    return api('api/v1/users', {
+      name,
+      phone,
+      avatar
+    }, { method: 'PUT' });
   }
 
   resetPassWord(

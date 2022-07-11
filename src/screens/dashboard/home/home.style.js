@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   avtImg: {
     width: getSize.m(100),
     height: getSize.m(100),
+    borderRadius: 50
   },
   textAvt: {
     color: '#999999',
