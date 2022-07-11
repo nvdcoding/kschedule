@@ -27,6 +27,7 @@ import { IRootState } from 'src/redux/store';
 import ScheduleService from 'src/domain/schedule.service';
 import { ScrollView } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
+import InformationScreen from './InformationScreen';
 
 const HomeScreen = () => {
   // const marked = useMemo(() => getMarkedDates(dataDate), [dataDate]);
@@ -58,17 +59,33 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await scheduleService.getSchedule();
+      let dataDate = [];
+      if (infoUser.role == 2) {
+        const { data } = await scheduleService.getTeacherSchedule();
+        setCalendarData(data.data.data);
+        dataDate = data.data.data.map(item => {
+          return {
+            title: item.date.split('/').reverse().join('-'),
+            data: [item],
+            type: "school"
+          };
+        });
+      } else {
+        const { data } = await scheduleService.getSchedule();
+        setCalendarData(data.data.data);
+        dataDate = data.data.data.map(item => {
+          return {
+            title: item.date.split('/').reverse().join('-'),
+            data: [item],
+            type: "school"
+          };
+        });
+      }
+
       const personalData = await scheduleService.getPersonalSchedule();
       setScheduleData(personalData.data.data.data);
-      setCalendarData(data.data.data);
-      const dataDate = data.data.data.map(item => {
-        return {
-          title: item.date.split('/').reverse().join('-'),
-          data: [item],
-          type: "school"
-        };
-      });
+
+
       const scheduleDate = personalData.data.data.data.map(i => {
         return {
           title: i.date.split('/').reverse().join('-'),

@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import Dimens from 'src/base/common/Dimens';
-import {getSize} from 'src/base/common/responsive';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginVertical: getSize.v(20),
     elevation: 3,
     shadowColor: Color.GRAY_DEEP,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: 2,
     paddingHorizontal: Dimens.DEVICE_WIDTH * 0.12,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: getSize.m(10),
+    marginTop: getSize.m(30),
   },
   mainItem: {
     display: 'flex',
@@ -344,8 +344,8 @@ const styles = StyleSheet.create({
     paddingLeft: getSize.m(7),
   },
   changePassTitle: {
-    fontSize: getSize.m(20),
-    fontWeight: '700',
+    fontSize: getSize.m(15),
+    fontWeight: '500',
     color: '#504e4e',
   },
   titlePassDes: {
@@ -355,7 +355,8 @@ const styles = StyleSheet.create({
     width: Dimens.DEVICE_WIDTH * 0.7,
   },
   blockChangePass: {
-    width: Dimens.DEVICE_WIDTH * 0.8,
+    width: 30,
+    height: 30,
     marginLeft: 'auto',
     marginRight: 'auto',
   },

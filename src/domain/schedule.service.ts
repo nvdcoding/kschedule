@@ -26,6 +26,17 @@ export default class ScheduleService {
             method: "GET"
         });
     }
+
+    async getTeacherSchedule(): Promise<any> {
+        const accessToken = await Helper.getDataStored(JWT_KEY);
+        return api('api/v1/schedule/teacher', {}, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            method: "GET"
+        });
+    }
+
     async getPersonalSchedule(): Promise<any> {
         const accessToken = await Helper.getDataStored(JWT_KEY);
         return api('api/v1/schedule/personal-schedule', {}, {
@@ -43,6 +54,16 @@ export default class ScheduleService {
             date,
             time
         }, { method: "POST" });
+    }
+
+    async getNotifications() {
+        const accessToken = await Helper.getDataStored(JWT_KEY);
+        return api('api/v1/notifications', null, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
     }
 
     // login(username: string, password: string): Promise<any> {
