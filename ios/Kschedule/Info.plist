@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>GoEdu</string>
+	<string>Kschedule</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -46,7 +46,6 @@
 		<string>Poppins-Medium.ttf</string>
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-SemiBold.ttf</string>
-		<string>GoEdu.ttf</string>
 		<string>SVN-Avo-bold.ttf</string>
 		<string>SVN-Avo.ttf</string>
 		<string>superKid.ttf</string>

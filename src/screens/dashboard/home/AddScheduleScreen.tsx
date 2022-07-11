@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
-  View,
-  Text,
   ScrollView,
+  Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import Styles from 'src/base/common/Styles';
-import {Block, Spinner} from 'src/components';
-import {isTablet} from 'src/base/common/Constants';
 import {getIconComponent} from 'src/assets/icon';
+import {isTablet} from 'src/base/common/Constants';
+import {getSize} from 'src/base/common/responsive';
+import Styles from 'src/base/common/Styles';
+import {notifyInvalid} from 'src/base/utils/Utils';
+import {Block, Spinner} from 'src/components';
+import ScheduleService from 'src/domain/schedule.service';
 import Color from 'src/theme/Color';
 import styles from './home.style';
-import {getSize} from 'src/base/common/responsive';
-import {t} from 'i18next';
-import ScheduleService from 'src/domain/schedule.service';
-import {notifyInvalid} from 'src/base/utils/Utils';
+
 const Icon = getIconComponent('ionicons');
+
 const AddScheduleScreeen = () => {
   let currentMonth =
     new Date().getMonth() + 1 >= 10
@@ -108,20 +109,11 @@ const AddScheduleScreeen = () => {
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.containerHome}>
-            <View>
-              <Text style={styles.header}>Thêm công việc cá nhân</Text>
-              <TouchableOpacity
-                style={styles.blockDate}
-                onPress={showDatepicker}>
-                <Icon
-                  name="calendar-outline"
-                  color="#ccc"
-                  size={getSize.m(15)}
-                />
-                <Text style={styles.textDate}>{textDate}</Text>
-              </TouchableOpacity>
-              {/* <Button onPress={showDatepicker} title="Show date picker!" /> */}
-            </View>
+            <Text style={styles.header}>Thêm công việc cá nhân</Text>
+            <TouchableOpacity style={styles.blockDate} onPress={showDatepicker}>
+              <Icon name="calendar-outline" color="#ccc" size={getSize.m(15)} />
+              <Text style={styles.textDate}>{textDate}</Text>
+            </TouchableOpacity>
             <View style={styles.content}>
               <TextInput
                 style={styles.inputBlock}

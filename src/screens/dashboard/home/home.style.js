@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import Dimens from 'src/base/common/Dimens';
-import { getSize } from 'src/base/common/responsive';
+import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginVertical: getSize.v(20),
     elevation: 3,
     shadowColor: Color.GRAY_DEEP,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: 2,
     paddingHorizontal: Dimens.DEVICE_WIDTH * 0.12,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   avtImg: {
     width: getSize.m(100),
     height: getSize.m(100),
-    borderRadius: 50
+    borderRadius: 50,
   },
   textAvt: {
     color: '#999999',
@@ -395,6 +395,54 @@ const styles = StyleSheet.create({
     marginLeft: getSize.m(7),
     color: '#ccc',
     fontSize: getSize.m(20),
+  },
+
+  tabBar: {
+    textAlign: 'center',
+    fontSize: getSize.m(18, 0.3),
+    fontFamily: Font.font_SVN_700,
+    color: Color.TEXT_COLOR,
+    marginBottom: getSize.m(20),
+    marginTop: getSize.m(10),
+  },
+
+  modal: {
+    backgroundColor: Color.BLOCK_GRAY,
+    paddingHorizontal: getSize.m(20),
+    paddingBottom: getSize.m(10),
+    paddingTop: getSize.m(20),
+    borderTopLeftRadius: getSize.m(20),
+    borderTopRightRadius: getSize.m(20),
+    zIndex: 100,
+  },
+
+  itemOption: {
+    paddingVertical: getSize.m(5),
+    marginBottom: getSize.m(5),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  textOption: {
+    fontSize: getSize.m(13, 0.3),
+    color: Color.WHITE,
+    fontFamily: Font.font_SVN_400,
+    marginLeft: getSize.m(10),
+  },
+
+  title: {
+    fontSize: getSize.m(15, 0.3),
+    fontFamily: Font.font_semi_bold_600,
+    color: Color.WHITE,
+    marginBottom: getSize.m(5),
+  },
+
+  inputEdit: {
+    height: getSize.m(44),
+    backgroundColor: Color.GRAY,
+    borderRadius: getSize.m(10),
+    paddingHorizontal: getSize.m(10),
+    marginBottom: getSize.m(15),
   },
 });
 

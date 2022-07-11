@@ -30,7 +30,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Color.WHITE,
     paddingTop: Dimens.toolbarSize,
-    paddingLeft: getSize.m(70),
   },
 
   paddingTopTabBar: {

@@ -9,11 +9,8 @@ const styles = StyleSheet.create({
   },
   containerHome: {
     marginTop: getSize.m(20),
-    display: 'flex',
-    flexDirection: 'column',
     paddingLeft: getSize.m(15),
     paddingRight: getSize.m(15),
-    width: Dimens.DEVICE_WIDTH,
   },
   content: {
     flex: 1,
