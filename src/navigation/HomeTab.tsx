@@ -22,12 +22,17 @@ import InformationScreen from 'src/screens/dashboard/home/InformationScreen';
 import TimetableSync from 'src/screens/dashboard/home/TimetableSync';
 import Notifi from 'src/screens/dashboard/home/NotifiScreen';
 import NotifiTeacher from 'src/screens/dashboard/home/TeacherNotifyScreen';
+import { useSelector } from 'react-redux';
+import { IUserState } from 'src/redux/slices/accountSlice';
+import { IRootState } from 'src/redux/store';
 
 const Icon = getIconComponent('ionicons');
 
 const HomeTab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
+  const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
+
   return (
     <HomeTab.Navigator
       screenOptions={({ route }) => ({
@@ -39,6 +44,8 @@ const HomeTabNavigator = () => {
             iconName = 'sync';
           } else if (route.name === BLOG_STACK) {
             iconName = 'medkit-outline';
+          } else if (route.name === NOTIFI_SCREEN || NOTIFI_TEACHER_SCREEN) {
+            iconName = 'notifications-outline';
           } else {
             iconName = 'ios-settings-outline';
           }
@@ -58,8 +65,7 @@ const HomeTabNavigator = () => {
         // tabBarShowLabel: false,
       })}>
       <HomeTab.Screen name={HOME_SCREEN} component={HomeScreen} />
-      <HomeTab.Screen name={NOTIFI_SCREEN} component={Notifi} />
-      <HomeTab.Screen name={NOTIFI_TEACHER_SCREEN} component={NotifiTeacher} />
+      <HomeTab.Screen name={NOTIFI_TEACHER_SCREEN} component={infoUser.role == 2 ? NotifiTeacher : Notifi} />
       <HomeTab.Screen name={BLOG_STACK} component={AddScheduleScreeen} />
       <HomeTab.Screen name={LIVE_CLASS_STACK} component={InformationScreen} />
     </HomeTab.Navigator>

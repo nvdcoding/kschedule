@@ -49,16 +49,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   number: {
-    backgroundColor: "#f07179",
+    backgroundColor: '#f07179',
     color: '#fff',
     borderRadius: getSize.m(50),
     padding: getSize.m(10),
     width: 20,
     height: 20,
   },
-  tableSchedule: {
-
-  },
+  tableSchedule: {},
   time: {
     display: 'flex',
     flexDirection: 'row',
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
   },
   rightTime: {
-    paddingLeft: 5
+    paddingLeft: 5,
   },
   hour: {
     marginRight: 5,
@@ -82,15 +80,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     flex: 1,
     width: 40,
-    minWidth: 40
+    minWidth: 40,
   },
   hourBold: {
     marginRight: 10,
     color: '#fff',
     fontWeight: 'bold',
   },
-  main: {
-  },
+  main: {},
   // user
   textUser: {
     color: Color.TEXT_PRIMARY,
@@ -104,23 +101,34 @@ const styles = StyleSheet.create({
   avtImg: {
     width: getSize.m(100),
     height: getSize.m(100),
+    borderRadius: 50
   },
   textAvt: {
     color: '#999999',
     fontSize: getSize.m(20),
-    marginTop: 10
+    marginTop: 10,
   },
   settingUser: {
     color: '#686862',
     marginLeft: getSize.m(4),
     fontSize: getSize.m(14),
   },
+  NotiItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: getSize.m(0),
+    padding: getSize.m(10),
+    paddingRight: getSize.m(15),
+    backgroundColor: '#EEF7F7',
+  },
   ItemInfo: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: getSize.m(10),
+    marginTop: getSize.m(30),
   },
   mainItem: {
     display: 'flex',
@@ -336,8 +344,8 @@ const styles = StyleSheet.create({
     paddingLeft: getSize.m(7),
   },
   changePassTitle: {
-    fontSize: getSize.m(20),
-    fontWeight: '700',
+    fontSize: getSize.m(15),
+    fontWeight: '500',
     color: '#504e4e',
   },
   titlePassDes: {
@@ -347,9 +355,46 @@ const styles = StyleSheet.create({
     width: Dimens.DEVICE_WIDTH * 0.7,
   },
   blockChangePass: {
-    width: Dimens.DEVICE_WIDTH * 0.8,
+    width: 30,
+    height: 30,
     marginLeft: 'auto',
     marginRight: 'auto',
+  },
+  blockSearchTitle: {
+    margin: getSize.m(15),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textSearchTitle: {
+    fontSize: getSize.m(20),
+    color: Color.TEXT_PRIMARY,
+    fontWeight: '600',
+  },
+  blockSearchContent: {},
+  imgNoti: {
+    width: getSize.m(50),
+    height: getSize.m(50),
+  },
+  iconNoti: {
+    marginRight: getSize.m(30),
+  },
+  headerNoti: {
+    marginTop: 10,
+    fontSize: 25,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#EB144C',
+  },
+  blockDateNoti: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  textDateNoti: {
+    marginLeft: getSize.m(7),
+    color: '#ccc',
+    fontSize: getSize.m(20),
   },
 });
 

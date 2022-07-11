@@ -1,25 +1,10 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
-import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  View,
-} from 'react-native';
-import {
-  Calendar,
-} from 'react-native-calendars';
+import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { Calendar } from 'react-native-calendars';
 import { Images } from 'src/assets/images';
-import {
-  Block,
-  Image,
-} from 'src/components';
-
+import { Block, Image } from 'src/components';
+import Color from 'src/theme/Color';
 import styles from './home.style';
 import { useSelector } from 'react-redux';
 import { IUserState } from 'src/redux/slices/accountSlice';
@@ -27,18 +12,22 @@ import { IRootState } from 'src/redux/store';
 import ScheduleService from 'src/domain/schedule.service';
 import { ScrollView } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
+import InformationScreen from './InformationScreen';
 
 const HomeScreen = () => {
   // const marked = useMemo(() => getMarkedDates(dataDate), [dataDate]);
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
   const scheduleService = new ScheduleService();
   const [data, setData] = useState([]);
+  const [day, setDay] = useState(new Date().getDate());
   const [calendarData, setCalendarData] = useState([]);
   const [scheduleData, setScheduleData] = useState([]);
   const [marked, setMarked] = useState({});
 
-  const handleDayPress = (day) => {
-    let result = calendarData.concat(scheduleData).filter(e => day.dateString == e.date.split('/').reverse().join('-'));
+  const handleDayPress = day => {
+    let result = calendarData
+      .concat(scheduleData)
+      .filter(e => day.dateString == e.date.split('/').reverse().join('-'));
     result = result.map(e => {
       return {
         name: e.name,
@@ -49,32 +38,47 @@ const HomeScreen = () => {
         title: e.title,
         note: e.note,
         time: e.time,
-        type: e.title ? "personal" : "school"
-      }
+        type: e.title ? 'personal' : 'school',
+      };
     });
     setData(result);
-    console.log(data);
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await scheduleService.getSchedule();
+      let dataDate = [];
+      if (infoUser.role == 2) {
+        const { data } = await scheduleService.getTeacherSchedule();
+        setCalendarData(data.data.data);
+        dataDate = data.data.data.map(item => {
+          return {
+            title: item.date.split('/').reverse().join('-'),
+            data: [item],
+            type: "school"
+          };
+        });
+      } else {
+        const { data } = await scheduleService.getSchedule();
+        setCalendarData(data.data.data);
+        dataDate = data.data.data.map(item => {
+          return {
+            title: item.date.split('/').reverse().join('-'),
+            data: [item],
+            type: "school"
+          };
+        });
+      }
+
       const personalData = await scheduleService.getPersonalSchedule();
       setScheduleData(personalData.data.data.data);
-      setCalendarData(data.data.data);
-      const dataDate = data.data.data.map(item => {
-        return {
-          title: item.date.split('/').reverse().join('-'),
-          data: [item],
-          type: "school"
-        };
-      });
+
+
       const scheduleDate = personalData.data.data.data.map(i => {
         return {
           title: i.date.split('/').reverse().join('-'),
           data: [i],
-          type: "personal"
-        }
+          type: 'personal',
+        };
       });
       type MarkedDate = {
         [key: string]: object;
@@ -85,7 +89,13 @@ const HomeScreen = () => {
 
         items.forEach(item => {
           if (item.data && item.data.length > 0 && !isEmpty(item.data[0])) {
-            marked[item.title] = { marked: true, dots: item.type ? ['vacation'] : [], dotColor: 'blue', };
+            marked[item.title] = {
+              marked: true,
+              dots: item.type ? ['vacation'] : [],
+              dotColor: 'blue',
+              selectedColor: Color.TEXT_PRIMARY,
+              selectedTextColor: '#fff',
+            };
           } else {
             marked[item.title] = { disabled: true };
           }
@@ -94,7 +104,7 @@ const HomeScreen = () => {
       };
       const marked = getMarkedDates(dataDate.concat(scheduleDate));
       setMarked(marked);
-    }
+    };
     fetchData();
   }, []);
 
@@ -116,9 +126,27 @@ const HomeScreen = () => {
         markedDates={marked}
         onDayPress={handleDayPress}
         theme={{
-          selectedDayBackgroundColor: "black"
-        }}
-      >
+          backgroundColor: '#ffffff',
+          calendarBackground: '#ffffff',
+          textSectionTitleColor: '#b6c1cd',
+          selectedDayBackgroundColor: '#00adf5',
+          selectedDayTextColor: '#ffffff',
+          todayTextColor: '#00adf5',
+          dayTextColor: '#2d4150',
+          textDisabledColor: '#d9e1e8',
+          dotColor: '#F21C1A',
+          selectedDotColor: '#ffffff',
+          arrowColor: Color.TEXT_PRIMARY,
+          monthTextColor: Color.TEXT_PRIMARY,
+          indicatorColor: Color.TEXT_PRIMARY,
+          textDayFontFamily: 'monospace',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '300',
+          textDayFontSize: 16,
+          textMonthFontSize: 16,
+          textDayHeaderFontSize: 16,
+        }}>
         {/* renderItem= */}
         {/* <AgendaList sections={dataDate} renderItem={renderItem} /> */}
       </Calendar>
@@ -126,54 +154,56 @@ const HomeScreen = () => {
         <Swiper showsPagination={false} nextButton>
           <View style={{ flex: 1 }}>
             <View>
-              <Text style={styles.text}>
-                Lịch học
-              </Text>
+              <Text style={styles.text}>Lịch học</Text>
             </View>
             <ScrollView style={styles.tableSchedule}>
-              {
-                data.filter(e => e.type != "personal").map(e => {
-                  return (<View style={styles.time}>
-                    <View style={styles.leftTime}>
-                      <Text style={styles.hourBold}>{e.timeStart}</Text>
-                      <Text style={styles.hourBold}>-</Text>
-                      <Text style={styles.hourBold}>{e.timeEnd}</Text>
+              {data
+                .filter(e => e.type != 'personal')
+                .map(e => {
+                  return (
+                    <View style={styles.time}>
+                      <View style={styles.leftTime}>
+                        <Text style={styles.hourBold}>{e.timeStart}</Text>
+                        <Text style={styles.hourBold}>-</Text>
+                        <Text style={styles.hourBold}>{e.timeEnd}</Text>
+                      </View>
+                      <View style={styles.rightTime}>
+                        <Text style={styles.main}>{e.name}</Text>
+                        {e.teacher ? (
+                          <Text style={styles.main}>{e.teacher}</Text>
+                        ) : null}
+                        {e.room ? (
+                          <Text style={styles.main}>{e.room}</Text>
+                        ) : null}
+                      </View>
                     </View>
-                    <View style={styles.rightTime}>
-                      <Text style={styles.main}>{e.name}</Text>
-                      {e.teacher ? (<Text style={styles.main}>{e.teacher}</Text>) : null}
-                      {e.room ? (<Text style={styles.main}>{e.room}</Text>) : null}
-                    </View>
-                  </View>)
-                })
-              }
+                  );
+                })}
             </ScrollView>
           </View>
           <View style={{ flex: 1 }}>
             <View>
-              <Text style={styles.text}>
-                Lịch cá nhân
-              </Text>
+              <Text style={styles.text}>Lịch cá nhân</Text>
             </View>
             <ScrollView style={styles.tableSchedule}>
-              {
-                data.filter(e => e.type == "personal").map(e => {
-                  return (<View style={styles.time}>
-                    <View style={styles.leftTime}>
-                      <Text style={styles.hourBold}>{e.time}</Text>
+              {data
+                .filter(e => e.type == 'personal')
+                .map(e => {
+                  return (
+                    <View style={styles.time}>
+                      <View style={styles.leftTime}>
+                        <Text style={styles.hourBold}>{e.time}</Text>
+                      </View>
+                      <View style={styles.rightTime}>
+                        <Text style={styles.main}>Công việc: {e.title}</Text>
+                        <Text style={styles.main}>Nội dung: {e.note}</Text>
+                      </View>
                     </View>
-                    <View style={styles.rightTime}>
-                      <Text style={styles.main}>Công việc: {e.title}</Text>
-                      <Text style={styles.main}>Nội dung: {e.note}</Text>
-                    </View>
-                  </View>)
-                })
-              }
+                  );
+                })}
             </ScrollView>
           </View>
-
         </Swiper>
-
       </View>
     </SafeAreaView>
   );

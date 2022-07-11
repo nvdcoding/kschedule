@@ -70,8 +70,8 @@ const InformationScreen = ({ navigation }) => {
             />
           </TouchableOpacity>
           <View style={styles.containerHome}>
-            <TouchableOpacity style={styles.avtUser} onPress={changeAVT}>
-              <Image source={avt} style={styles.avtImg} />
+            <TouchableOpacity style={styles.avtUser}>
+              <Image source={{ uri: infoUser.avatar }} style={styles.avtImg} />
               <Text style={styles.textAvt}>{infoUser.name}</Text>
             </TouchableOpacity>
             <Block style={styles.ListInfo}>

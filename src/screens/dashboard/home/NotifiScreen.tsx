@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { notifyInvalid } from 'src/base/utils/Utils';
 import { useTranslation } from 'react-i18next';
 import {
@@ -25,117 +25,72 @@ import { Value } from 'react-native-reanimated';
 const Notifi = () => {
     const { t } = useTranslation();
     const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
-
-    const [password, setPassword] = useState(null);
-    const [status, setStatus] = useState(infoUser.sync ? true : false);
+    const scheduleService = new ScheduleService();
     const [isLoading, setLoading] = useState(false);
     const [show, setShow] = useState([]);
-    const [index, setIndex] = useState(-1);
-    const handleShow = async (id) => {
-        console.log(id);
-        // setShow(show.map(e => {
-
-        // }));
-    };
+    const [index, setIndex] = useState([]);
+    const [data, setData] = useState([]);
+    const [ele, setEle] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const eles = [];
+            const res = await scheduleService.getNotifications();
+            setData(res.data.data.data);
+            setIndex(new Array(data.length).fill(false));
+            for (let i = 0; i < data.length; i++) {
+                eles.push(
+                    <View>
+                        <TouchableOpacity style={styles.ItemInfo} onPress={(key) => { }}>
+                            <View style={styles.mainItem} >
+                                <Icon
+                                    name={'md-key-outline'}
+                                    size={getSize.m(24)}
+                                    color={Color.RED}
+                                />
+                                <View style={styles.blockPass}>
+                                    <Text style={styles.changePassTitle}>{data[i].className} - {data[i].teacher}</Text>
+                                    <Text style={styles.titlePassDes}>
+                                        {data[i].title} - {data[i].date}
+                                    </Text>
+                                    <Text style={styles.titlePassDes}>
+                                        {data[i].content}
+                                    </Text>
+                                    {index[0] ? (
+                                        <View style={styles.blockChangePass}>
+                                            <Text>{data[i].content}</Text>
+                                        </View>
+                                    ) : null}
+                                </View>
+                            </View>
+                            <Icon
+                                name={'ios-chevron-down-sharp'}
+                                size={getSize.m(20)}
+                                color={'#999999'}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                )
+            }
+            setEle(eles);
+        }
+        fetchData();
+        // console.log("40lll", data);
+        // console.log(index.length);
+    }, [data]);
 
     return (
         <SafeAreaView style={Styles.container}>
             <Block style={[styles.content, isTablet && styles.contentTablet]}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <View>
-                        {
-                            <TouchableOpacity style={styles.ItemInfo} onPress={(key) => {
-                                setIndex(0);
-                            }}>
-                                <View style={styles.mainItem} >
-                                    <Icon
-                                        name={'md-key-outline'}
-                                        size={getSize.m(24)}
-                                        color={Color.RED}
-                                    />
-                                    <View style={styles.blockPass}>
-                                        <Text style={styles.changePassTitle}>ĐÂY LÀ THÔNG BÁO CỦA Sinh viên</Text>
-                                        <Text style={styles.titlePassDes}>
-                                            Ngày mai thi
-                                        </Text>
-                                    </View>
-                                </View>
-                                <Icon
-                                    name={'ios-chevron-down-sharp'}
-                                    size={getSize.m(20)}
-                                    color={'#999999'}
-                                />
-                            </TouchableOpacity>
-                        }
-                        {index == 0 && (
-                            <View style={styles.blockChangePass}>
-                                <Text>Vip khoong</Text>
-                            </View>
-                        )}
-                    </View>
-                    <View>
-                        <TouchableOpacity style={styles.ItemInfo} key={2} onPress={key => handleShow(key)}>
-                            <View style={styles.mainItem}>
-                                <Icon
-                                    name={'md-key-outline'}
-                                    size={getSize.m(24)}
-                                    color={Color.RED}
-                                />
-                                <View style={styles.blockPass}>
-                                    <Text style={styles.changePassTitle}>Nhúng2</Text>
-                                    <Text style={styles.titlePassDes}>
-                                        Ngày mai thi
-                                    </Text>
-                                </View>
-                            </View>
-                            <Icon
-                                name={'ios-chevron-down-sharp'}
-                                size={getSize.m(20)}
-                                color={'#999999'}
-                            />
-                        </TouchableOpacity>
-                        {show && (
-                            <View style={styles.blockChangePass}>
-                                <Text>Vip khoong 2</Text>
-                            </View>
-                        )}
-                    </View>
-                    <View>
-                        <TouchableOpacity style={styles.ItemInfo} key={3} onPress={key => handleShow(key)}>
-                            <View style={styles.mainItem}>
-                                <Icon
-                                    name={'md-key-outline'}
-                                    size={getSize.m(24)}
-                                    color={Color.RED}
-                                />
-                                <View style={styles.blockPass}>
-                                    <Text style={styles.changePassTitle}>Nhúng 33</Text>
-                                    <Text style={styles.titlePassDes}>
-                                        Ngày mai thi
-                                    </Text>
-                                </View>
-                            </View>
-                            <Icon
-                                name={'ios-chevron-down-sharp'}
-                                size={getSize.m(20)}
-                                color={'#999999'}
-                            />
-                        </TouchableOpacity>
-                        {show && (
-                            <Block>
-                                <View style={styles.blockChangePass}>
-                                    <Text>Vip khoong33</Text>
-                                </View>
-                            </Block>
-
-                        )}
-                    </View>
+                    {ele}
                 </ScrollView>
             </Block>
-            {isLoading && (
-                <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
-            )}
-        </SafeAreaView>
+            {
+                isLoading && (
+                    <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
+                )
+            }
+        </SafeAreaView >
     );
 };
 

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-
-import { useTranslation } from 'react-i18next';
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 import {
   SafeAreaView,
   View,
@@ -9,25 +9,65 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Styles from 'src/base/common/Styles';
-import { Block, Spinner } from 'src/components';
+import {Block, Spinner} from 'src/components';
 import styles from './security.style';
-import { isTablet } from 'src/base/common/Constants';
-import { getSize } from 'src/base/common/responsive';
+import {isTablet, JWT_KEY} from 'src/base/common/Constants';
+import {getSize} from 'src/base/common/responsive';
 import InputComponent from 'src/screens/auth/components/InputComponent';
 import Color from 'src/theme/Color';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-const ChangeSecurityScreen = ({ navigation }) => {
-  const { t } = useTranslation();
+import Helper from 'src/base/utils/helper';
+import {notifyInvalid} from 'src/base/utils/Utils';
+import AuthService from 'src/domain/auth.service';
+import {DRAWER_STACK, HOME_TAB_NAVIGATOR} from 'src/navigation/screen';
+const ChangeSecurityScreen = ({navigation}) => {
+  const {t} = useTranslation();
   const [passwordOld, setPasswordOld] = useState(null);
   const [passwordNew, setPasswordNew] = useState(null);
   const [passwordConfirm, setPasswordConfirm] = useState(null);
   const [show, setShow] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const changePass = () => {
-    console.log('pass_old', passwordOld);
-    console.log('pass_new', passwordNew);
-    console.log('passwordConfirm', passwordConfirm);
+  const dispatch = useDispatch();
+
+  const changePass = async () => {
+    try {
+      if (
+        passwordNew === null ||
+        passwordOld === null ||
+        passwordConfirm === null
+      ) {
+        throw 'Mật khẩu không được để trống';
+      }
+      if (passwordNew !== passwordConfirm) {
+        throw 'Mật khẩu không khớp';
+      }
+      if (
+        passwordNew.length < 8 ||
+        passwordConfirm.length < 8 ||
+        passwordOld.length < 8
+      ) {
+        throw 'Mật khẩu quá ngắn!';
+      }
+      setLoading(true);
+      const authService = new AuthService();
+      const {data} = await authService.changePassword(
+        passwordOld,
+        passwordNew,
+        passwordConfirm,
+      );
+      if (data.data.statusCode !== 200) {
+        throw data.data.message;
+      }
+      if (data.data.message === 200) {
+        throw data.data.message;
+      }
+      await Helper.storeData(JWT_KEY, data.data.accessToken);
+      setLoading(false);
+      navigation.navigate(isTablet ? DRAWER_STACK : HOME_TAB_NAVIGATOR);
+    } catch (error) {
+      setLoading(false);
+      notifyInvalid(error);
+    }
     setPasswordOld(null);
     setPasswordNew(null);
     setPasswordConfirm(null);
