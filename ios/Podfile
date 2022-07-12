@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'GoEdu' do
+target 'Kschedule' do
   config = use_native_modules!
 
   use_react_native!(
@@ -15,7 +15,7 @@ target 'GoEdu' do
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
-  target 'GoEduTests' do
+  target 'KscheduleTests' do
     inherit! :complete
     # Pods for testing
   end

@@ -1,122 +1,151 @@
-import React, {useState} from 'react';
-import {notifyInvalid} from 'src/base/utils/Utils';
-import {useTranslation} from 'react-i18next';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
+  FlatList,
   SafeAreaView,
-  View,
   Text,
-  ScrollView,
+  TextInput,
   TouchableOpacity,
-  Pressable,
 } from 'react-native';
-import Styles from 'src/base/common/Styles';
-import {Block, Spinner, Image} from 'src/components';
-import styles from './home.style';
-import * as securityStyles from '../user/security/security.style';
-import {isTablet} from 'src/base/common/Constants';
-import InputComponent from '../../auth/components/InputComponent';
-import Color from 'src/theme/Color';
-import ScheduleService from 'src/domain/schedule.service';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
+import {getSize} from 'src/base/common/responsive';
+import Styles from 'src/base/common/Styles';
+import api from 'src/base/domain/api';
+import {keyExtractor} from 'src/base/utils/Utils';
+import {Block, Spinner} from 'src/components';
+import ModalBox from 'src/components/ModalBox';
+import {ADD_NOTIFY_SCREEN} from 'src/navigation/screen';
 import {IUserState} from 'src/redux/slices/accountSlice';
 import {IRootState} from 'src/redux/store';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {getSize} from 'src/base/common/responsive';
-import {Images} from 'src/assets/images';
-import {ADD_NOTIFY_SCREEN} from 'src/navigation/screen';
-const NotifiTeacher = ({navigation}) => {
-  const {t} = useTranslation();
-  const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
-  const [password, setPassword] = useState(null);
-  const [status, setStatus] = useState(infoUser.sync ? true : false);
-  const [isLoading, setLoading] = useState(false);
-  const [show, setShow] = useState([]);
-  const [index, setIndex] = useState(-1);
-  const handleShow = async id => {
-    console.log(id);
-    // setShow(show.map(e => {
+import Color from 'src/theme/Color';
+import ItemNotifyTeacherComponent from './components/ItemNotifyTeacherComponent';
+import styles from './home.style';
 
-    // }));
-  };
+const NotifiTeacher = ({navigation}) => {
+  const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
+  const [isLoading, setLoading] = useState(false);
+  const [dataNotify, setDataNotify] = useState([]);
+  const [showModal, setShowModal] = useState<0 | 1 | 2>(0);
+  const [itemSelect, setItemSelect] = useState(null);
+
   const handleChangeScreen = () => {
     navigation.navigate(ADD_NOTIFY_SCREEN);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const {data} = await api('api/v1/notifications', null, {method: 'GET'});
+        setDataNotify(data.data.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+  const renderNotify = useCallback(({item}) => {
+    const _handleItem = () => handleItem(item);
+    return <ItemNotifyTeacherComponent item={item} handleItem={_handleItem} />;
+  }, []);
+
+  const handleItem = item => {
+    setShowModal(1);
+    setItemSelect(item);
+  };
+
+  const handleCloseModal = useCallback(() => {
+    setShowModal(0);
+  }, []);
+
+  const handleEdit = () => {
+    setShowModal(0);
+    setTimeout(() => {
+      setShowModal(2);
+    }, 300);
+  };
+
   return (
     <SafeAreaView style={Styles.container}>
-      <Block style={[styles.content, isTablet && styles.contentTablet]}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View>
-            <Block style={styles.blockSearchTitle}>
-              <Text style={styles.textSearchTitle}>Thông báo</Text>
-              <Icon
-                name={'search-outline'}
-                size={getSize.m(24)}
-                color="#A29D9C"
-              />
-            </Block>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <Block style={styles.blockSearchContent}>
-                <TouchableOpacity
-                  style={[styles.NotiItem]}
-                  key={3}
-                  onPress={key => handleShow(key)}>
-                  <View style={styles.mainItem}>
-                    <Image
-                      source={Images.AVATAR_DEFAULT}
-                      style={styles.imgNoti}
-                    />
-                    <View style={styles.blockPass}>
-                      <Text style={styles.changePassTitle}>Nhúng 33</Text>
-                      <Text style={styles.titlePassDes}>Ngày mai thi</Text>
-                    </View>
-                  </View>
-                  <Icon
-                    style={styles.iconNoti}
-                    name={'ellipsis-horizontal'}
-                    size={getSize.m(20)}
-                    color={'#999999'}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.NotiItem]}
-                  key={2}
-                  onPress={key => handleShow(key)}>
-                  <View style={styles.mainItem}>
-                    <Image
-                      source={Images.AVATAR_DEFAULT}
-                      style={styles.imgNoti}
-                    />
-                    <View style={styles.blockPass}>
-                      <Text style={styles.changePassTitle}>Nhúng 33</Text>
-                      <Text style={styles.titlePassDes}>Ngày mai thi</Text>
-                    </View>
-                  </View>
-                  <Icon
-                    style={styles.iconNoti}
-                    name={'ellipsis-horizontal'}
-                    size={getSize.m(20)}
-                    color={'#999999'}
-                  />
-                </TouchableOpacity>
-              </Block>
-            </ScrollView>
-            <Block marginHorizontal={30}>
-              <TouchableOpacity
-                style={[styles.btnLogin]}
-                activeOpacity={0.5}
-                onPress={handleChangeScreen}>
-                <Text style={styles.textLogin}>Thêm thông báo</Text>
-              </TouchableOpacity>
-            </Block>
-          </View>
-        </ScrollView>
+      <Block style={styles.blockSearchTitle}>
+        <Text style={styles.textSearchTitle}>Thông báo</Text>
+        <Icon name={'search-outline'} size={getSize.m(24)} color="#A29D9C" />
+      </Block>
+      <FlatList
+        data={dataNotify}
+        keyExtractor={keyExtractor}
+        renderItem={renderNotify}
+      />
+      <Block marginHorizontal={30}>
+        <TouchableOpacity
+          style={[styles.btnLogin]}
+          activeOpacity={0.5}
+          onPress={handleChangeScreen}>
+          <Text style={styles.textLogin}>Thêm thông báo</Text>
+        </TouchableOpacity>
       </Block>
       {isLoading && (
         <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
       )}
+      <ModalBox
+        onBackdropPress={handleCloseModal}
+        isVisible={showModal ? true : false}
+        position={'bottom'}>
+        <Block style={styles.modal}>
+          {showModal === 1 && (
+            <>
+              <TouchableOpacity style={styles.itemOption} activeOpacity={0.5}>
+                <Icon
+                  name={'trash-outline'}
+                  color={Color.WHITE}
+                  size={getSize.m(20)}
+                />
+                <Text style={styles.textOption}>Xoá thông báo</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleEdit}
+                activeOpacity={0.5}
+                style={styles.itemOption}>
+                <Icon
+                  name={'create-outline'}
+                  color={Color.WHITE}
+                  size={getSize.m(20)}
+                />
+                <Text style={styles.textOption}>Sửa</Text>
+              </TouchableOpacity>
+            </>
+          )}
+          {showModal === 2 && (
+            <>
+              <Text style={styles.title}>Title</Text>
+              <TextInput
+                style={styles.inputEdit}
+                value={itemSelect.title}
+                placeholder={'Nhập tiêu đề'}
+              />
+              <Text style={styles.title}>Content</Text>
+              <TextInput
+                style={styles.inputEdit}
+                value={itemSelect.content}
+                placeholder={'Nhập tiêu đề'}
+              />
+              <Text style={styles.title}>Class</Text>
+              <TextInput
+                style={styles.inputEdit}
+                value={itemSelect.className}
+                placeholder={'Nhập tiêu đề'}
+              />
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={[styles.btnLogin, {backgroundColor: Color.GREEN}]}>
+                <Text>Edit</Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </Block>
+      </ModalBox>
     </SafeAreaView>
-    // List thông báo của teacher đó
-    // 1 button thêm thông báo.ở cuối
   );
 };
 

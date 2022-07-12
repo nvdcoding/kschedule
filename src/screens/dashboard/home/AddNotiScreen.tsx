@@ -1,29 +1,21 @@
-import React, {useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {notifyInvalid} from 'src/base/utils/Utils';
-import {useTranslation} from 'react-i18next';
+import React, {useState} from 'react';
 
 import {
   SafeAreaView,
-  View,
-  Text,
   ScrollView,
+  Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {isTablet} from 'src/base/common/Constants';
+import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import {Block, Spinner} from 'src/components';
-import styles from './home.style';
-import * as securityStyles from '../user/security/security.style';
-import {isTablet} from 'src/base/common/Constants';
-import InputComponent from '../../auth/components/InputComponent';
 import Color from 'src/theme/Color';
-import ScheduleService from 'src/domain/schedule.service';
-import {useSelector} from 'react-redux';
-import {IUserState} from 'src/redux/slices/accountSlice';
-import {IRootState} from 'src/redux/store';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {getSize} from 'src/base/common/responsive';
+import styles from './home.style';
 const AddNotifyScreen = ({navigation}) => {
   let currentMonth =
     new Date().getMonth() + 1 >= 10
@@ -36,13 +28,7 @@ const AddNotifyScreen = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [textDate, setTextDate] = useState(dateCurrent);
   const [note, setNote] = useState<string>(null);
-  const countries = ['L01', 'L02', 'L03'];
-  const handleShow = async id => {
-    console.log(id);
-  };
-  const changeClass = async e => {
-    setSelectedValue(e);
-  };
+
   const sendNoti = async => {
     console.log('noti');
   };
@@ -68,7 +54,8 @@ const AddNotifyScreen = ({navigation}) => {
     showMode('date');
   };
   return (
-    <SafeAreaView style={Styles.container}>
+    <SafeAreaView
+      style={[Styles.container, {backgroundColor: Color.BACKGROUND}]}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <TouchableOpacity
@@ -96,27 +83,23 @@ const AddNotifyScreen = ({navigation}) => {
               </TouchableOpacity>
             </View>
             <Block>
+              <Text style={[styles.title, {color: Color.TEXT_COLOR}]}>
+                Tiêu đề
+              </Text>
               <TextInput
-                style={[
-                  styles.inputBlock,
-                  {paddingTop: 10},
-                  {paddingBottom: 30},
-                ]}
-                placeholder="Tiêu đề"
-                placeholderTextColor={'#EB144C'}
+                style={styles.inputEdit}
                 value={note}
-                onChangeText={setNote}
+                placeholder={'Nhập tiêu đề'}
+                placeholderTextColor={`${Color.WHITE}80`}
               />
+              <Text style={[styles.title, {color: Color.TEXT_COLOR}]}>
+                Nội dung
+              </Text>
               <TextInput
-                style={[
-                  styles.inputBlock,
-                  {paddingTop: 20},
-                  {paddingBottom: 50},
-                ]}
-                placeholder="Nội dung"
-                placeholderTextColor={'#EB144C'}
+                style={styles.inputEdit}
                 value={note}
-                onChangeText={setNote}
+                placeholder={'Nhập nội dung'}
+                placeholderTextColor={`${Color.WHITE}80`}
               />
             </Block>
             <Block marginHorizontal={30}>
