@@ -53,7 +53,14 @@ const InformationScreen = ({navigation}) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.containerHome}>
             <TouchableOpacity style={styles.avtUser}>
-              <Image source={{uri: infoUser.avatar}} style={styles.avtImg} />
+              <Image
+                source={{
+                  uri: infoUser.avatar
+                    ? infoUser.avatar
+                    : 'https://res.cloudinary.com/ahiho/image/upload/v1657637032/270955281_633868481163504_2151640569797061547_n_ywzt1w.png',
+                }}
+                style={styles.avtImg}
+              />
               <Text style={styles.textAvt}>{infoUser.name}</Text>
             </TouchableOpacity>
             <Block>
