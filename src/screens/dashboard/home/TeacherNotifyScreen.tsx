@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -7,21 +7,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useSelector} from 'react-redux';
-import {getSize} from 'src/base/common/responsive';
+import { useSelector } from 'react-redux';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import api from 'src/base/domain/api';
-import {keyExtractor} from 'src/base/utils/Utils';
-import {Block, Spinner} from 'src/components';
+import { keyExtractor } from 'src/base/utils/Utils';
+import { Block, Spinner } from 'src/components';
 import ModalBox from 'src/components/ModalBox';
-import {ADD_NOTIFY_SCREEN} from 'src/navigation/screen';
-import {IUserState} from 'src/redux/slices/accountSlice';
-import {IRootState} from 'src/redux/store';
+import { ADD_NOTIFY_SCREEN } from 'src/navigation/screen';
+import { IUserState } from 'src/redux/slices/accountSlice';
+import { IRootState } from 'src/redux/store';
 import Color from 'src/theme/Color';
 import ItemNotifyTeacherComponent from './components/ItemNotifyTeacherComponent';
 import styles from './home.style';
 
-const NotifiTeacher = ({navigation}) => {
+const NotifiTeacher = ({ navigation }) => {
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
   const [isLoading, setLoading] = useState(false);
   const [dataNotify, setDataNotify] = useState([]);
@@ -36,7 +36,7 @@ const NotifiTeacher = ({navigation}) => {
     (async () => {
       try {
         setLoading(true);
-        const {data} = await api('api/v1/notifications', null, {method: 'GET'});
+        const { data } = await api('api/v1/notifications', null, { method: 'GET' });
         setDataNotify(data.data.data);
         setLoading(false);
       } catch (error) {
@@ -45,7 +45,7 @@ const NotifiTeacher = ({navigation}) => {
     })();
   }, []);
 
-  const renderNotify = useCallback(({item}) => {
+  const renderNotify = useCallback(({ item }) => {
     const _handleItem = () => handleItem(item);
     return <ItemNotifyTeacherComponent item={item} handleItem={_handleItem} />;
   }, []);
@@ -138,7 +138,7 @@ const NotifiTeacher = ({navigation}) => {
               />
               <TouchableOpacity
                 activeOpacity={0.5}
-                style={[styles.btnLogin, {backgroundColor: Color.GREEN}]}>
+                style={[styles.btnLogin, { backgroundColor: Color.GREEN }]}>
                 <Text>Edit</Text>
               </TouchableOpacity>
             </>

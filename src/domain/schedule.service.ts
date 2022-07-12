@@ -37,6 +37,29 @@ export default class ScheduleService {
         });
     }
 
+    async getClasses(): Promise<any> {
+        const accessToken = await Helper.getDataStored(JWT_KEY);
+        return api('api/v1/schedule/classes', {}, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            method: "GET"
+        });
+    }
+
+    async addNotify(title, content, date, classId): Promise<any> {
+        const accessToken = await Helper.getDataStored(JWT_KEY);
+        return api('api/v1/notifications', {
+            title, content, date, classId
+        }, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            method: "POST"
+        });
+
+    }
+
     async getPersonalSchedule(): Promise<any> {
         const accessToken = await Helper.getDataStored(JWT_KEY);
         return api('api/v1/schedule/personal-schedule', {}, {

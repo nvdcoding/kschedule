@@ -29,6 +29,7 @@
     "react-native-code-push": "^7.0.4",
     "react-native-datefield": "^0.3.5",
     "react-native-device-info": "^8.5.0",
+    "react-native-dropdown-picker": "^5.4.2",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.3.0",
     "react-native-image-picker": "^4.8.4",
