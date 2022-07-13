@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   FlatList,
   SafeAreaView,
@@ -6,25 +7,28 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useSelector } from 'react-redux';
-import { getSize } from 'src/base/common/responsive';
+import {useSelector} from 'react-redux';
+import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import api from 'src/base/domain/api';
-import { keyExtractor } from 'src/base/utils/Utils';
-import { Block, Spinner } from 'src/components';
+import {keyExtractor} from 'src/base/utils/Utils';
+import {Block, Spinner} from 'src/components';
 import ModalBox from 'src/components/ModalBox';
 import ScheduleService from 'src/domain/schedule.service';
-import { ADD_NOTIFY_SCREEN } from 'src/navigation/screen';
-import { IUserState } from 'src/redux/slices/accountSlice';
-import { IRootState } from 'src/redux/store';
+import {ADD_NOTIFY_SCREEN} from 'src/navigation/screen';
+import {IUserState} from 'src/redux/slices/accountSlice';
+import {IRootState} from 'src/redux/store';
 import Color from 'src/theme/Color';
 import ItemNotifyTeacherComponent from './components/ItemNotifyTeacherComponent';
 import styles from './home.style';
 
-const NotifiTeacher = ({ navigation }) => {
+const NotifiTeacher = ({navigation}) => {
+  let currentMonth =
+    new Date().getMonth() + 1 >= 10
+      ? new Date().getMonth() + 1
+      : `0${new Date().getMonth() + 1}`;
+  let dateCurrent = `${new Date().getFullYear()}-${currentMonth}-${new Date().getDate()}`;
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
   const [isLoading, setLoading] = useState(false);
   const [dataNotify, setDataNotify] = useState([]);
@@ -35,13 +39,29 @@ const NotifiTeacher = ({ navigation }) => {
   const [mode, setMode] = useState('date');
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [textDate, setTextDate] = useState(dateCurrent);
+  const [showModalTime, setShowModalTime] = useState(false);
   const handleChangeScreen = () => {
     navigation.navigate(ADD_NOTIFY_SCREEN);
   };
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date.toLocaleDateString();
+    setShowModalTime(false);
+    setDate(currentDate);
+    let tempDate = new Date(currentDate);
+    let month =
+      tempDate.getMonth() + 1 >= 10
+        ? tempDate.getMonth() + 1
+        : `0${tempDate.getMonth() + 1}`;
+    let fDate = `${tempDate.getDate()}/${month}/${tempDate.getFullYear()}`;
+    setTextDate(fDate);
+  };
+
   const showMode = currentMode => {
-    setShow(true);
+    setShowModalTime(true);
     setMode(currentMode);
   };
+
   const showDatepicker = e => {
     showMode('date');
   };
@@ -50,7 +70,7 @@ const NotifiTeacher = ({ navigation }) => {
     (async () => {
       try {
         setLoading(true);
-        const { data } = await api('api/v1/notifications', null, { method: 'GET' });
+        const {data} = await api('api/v1/notifications', null, {method: 'GET'});
         setDataNotify(data.data.data);
         setLoading(false);
       } catch (error) {
@@ -59,7 +79,7 @@ const NotifiTeacher = ({ navigation }) => {
     })();
   }, []);
 
-  const renderNotify = useCallback(({ item }) => {
+  const renderNotify = useCallback(({item}) => {
     const _handleItem = () => handleItem(item);
     return <ItemNotifyTeacherComponent item={item} handleItem={_handleItem} />;
   }, []);
@@ -81,10 +101,14 @@ const NotifiTeacher = ({ navigation }) => {
   };
 
   const sendEdit = async () => {
-    console.log({ title, content: content, date: value });
+    // console.log({title, content: content, date: value});
     return;
-    const res = await scheduleService.editNotify(itemSelect.id, { title, content: content, date: value });
-  }
+    // const res = await scheduleService.editNotify(itemSelect.id, {
+    //   title,
+    //   content: content,
+    //   date: value,
+    // });
+  };
 
   return (
     <SafeAreaView style={Styles.container}>
@@ -165,29 +189,33 @@ const NotifiTeacher = ({ navigation }) => {
                   color="#ccc"
                   size={getSize.m(20)}
                 />
-                <Text style={styles.textDateNoti}>qưe</Text>
+                <Text style={styles.textDateNoti}>{textDate}</Text>
               </TouchableOpacity>
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                is24Hour={true}
-                display="default"
-                textColor="red"
-                style={styles.DateTimePicker}
-              // onChange={onChange}
-              />
               <TouchableOpacity
                 activeOpacity={0.5}
-                style={[styles.btnLogin, { backgroundColor: Color.GREEN }]}
-                onPress={sendEdit}
-              >
+                style={[styles.btnLogin, {backgroundColor: Color.TEXT_PRIMARY}]}
+                onPress={sendEdit}>
                 <Text>Edit</Text>
               </TouchableOpacity>
             </>
           )}
         </Block>
       </ModalBox>
+      {showModalTime && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          textColor="red"
+          style={styles.DateTimePicker}
+          onChange={onChange}
+        />
+      )}
+      {isLoading && (
+        <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />
+      )}
     </SafeAreaView>
   );
 };
