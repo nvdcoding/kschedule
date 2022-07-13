@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {useTranslation} from 'react-i18next';
-import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import {launchImageLibrary} from 'react-native-image-picker';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useDispatch, useSelector} from 'react-redux';
-import {getSize} from 'src/base/common/responsive';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {debug} from 'src/base/utils/DebugUtil';
-import {notifyInvalid} from 'src/base/utils/Utils';
-import {Block, Spinner} from 'src/components';
+import { debug } from 'src/base/utils/DebugUtil';
+import { notifyInvalid } from 'src/base/utils/Utils';
+import { Block, Spinner } from 'src/components';
 import AuthService from 'src/domain/auth.service';
-import {IUserState, setAccount} from 'src/redux/slices/accountSlice';
-import {IRootState} from 'src/redux/store';
+import { IUserState, setAccount } from 'src/redux/slices/accountSlice';
+import { IRootState } from 'src/redux/store';
 import InputComponent from 'src/screens/auth/components/InputComponent';
 import Color from 'src/theme/Color';
 import styles from './information.style';
 
-const ChangeInformationScreen = ({navigation}) => {
-  const {t} = useTranslation();
+const ChangeInformationScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
   const [isLoading, setLoading] = useState(false);
   const [name, setName] = useState(infoUser.name);
@@ -48,7 +48,7 @@ const ChangeInformationScreen = ({navigation}) => {
         includeBase64: true,
       });
       const data = makeUploadFormData(result);
-      const {secure_url} = await fetch(
+      const { secure_url } = await fetch(
         `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
         {
           method: 'post',
@@ -59,7 +59,6 @@ const ChangeInformationScreen = ({navigation}) => {
         .catch(e => console.log(e));
       setAvatar(secure_url);
     } catch (error) {
-      debug('error>>>', error);
     }
   };
   const send = async () => {
@@ -72,7 +71,7 @@ const ChangeInformationScreen = ({navigation}) => {
       }
       setLoading(true);
       const authService = new AuthService();
-      const {data} = await authService.updateProfile(name, phone, avatar);
+      const { data } = await authService.updateProfile(name, phone, avatar);
       // if (data.data.statusCode !== 200) {
       //   throw data.data.message;
       //   // throw data.description;

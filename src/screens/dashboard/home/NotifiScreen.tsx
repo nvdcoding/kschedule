@@ -26,7 +26,6 @@ const Notifi = () => {
       try {
         setLoading(true);
         const {data} = await scheduleService.getNotifications();
-        debug('adf>>>', JSON.stringify(data));
         data.code === '200' && setData(data.data.data);
         setLoading(false);
         console.log(notifyData);

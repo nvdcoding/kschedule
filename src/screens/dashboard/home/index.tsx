@@ -1,15 +1,15 @@
 import isEmpty from 'lodash/isEmpty';
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StatusBar, Text, View} from 'react-native';
-import {Calendar} from 'react-native-calendars';
-import {ScrollView} from 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import { ScrollView } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
-import {useSelector} from 'react-redux';
-import {debug} from 'src/base/utils/DebugUtil';
-import {Block} from 'src/components';
+import { useSelector } from 'react-redux';
+import { debug } from 'src/base/utils/DebugUtil';
+import { Block } from 'src/components';
 import ScheduleService from 'src/domain/schedule.service';
-import {IUserState} from 'src/redux/slices/accountSlice';
-import {IRootState} from 'src/redux/store';
+import { IUserState } from 'src/redux/slices/accountSlice';
+import { IRootState } from 'src/redux/store';
 import Color from 'src/theme/Color';
 import styles from './home.style';
 
@@ -43,13 +43,12 @@ const HomeScreen = () => {
     setData(result);
   };
 
-  debug('asdf>>>', infoUser);
 
   useEffect(() => {
     const fetchData = async () => {
       let dataDate = [];
       if (infoUser.role === 2) {
-        const {data} = await scheduleService.getTeacherSchedule();
+        const { data } = await scheduleService.getTeacherSchedule();
         setCalendarData(data.data.data);
         dataDate = data.data.data.map(item => {
           return {
@@ -59,7 +58,7 @@ const HomeScreen = () => {
           };
         });
       } else {
-        const {data} = await scheduleService.getSchedule();
+        const { data } = await scheduleService.getSchedule();
         setCalendarData(data.data.data);
         dataDate = data.data.data.map(item => {
           return {
@@ -97,7 +96,7 @@ const HomeScreen = () => {
               selectedTextColor: '#fff',
             };
           } else {
-            marked[item.title] = {disabled: true};
+            marked[item.title] = { disabled: true };
           }
         });
         return marked;
@@ -152,7 +151,7 @@ const HomeScreen = () => {
       </Calendar>
       <View style={styles.contentHome}>
         <Swiper showsPagination={false} nextButton>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <View>
               <Text style={styles.text}>Lịch học</Text>
             </View>
@@ -181,7 +180,7 @@ const HomeScreen = () => {
                 })}
             </ScrollView>
           </View>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <View>
               <Text style={styles.text}>Lịch cá nhân</Text>
             </View>

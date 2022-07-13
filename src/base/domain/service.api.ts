@@ -44,8 +44,6 @@ export default class ServiceApi {
       route = `${route}${data}`;
       data = undefined;
     }
-    debug('service.api.ts < request route > ===> ', route);
-    debug('service.api.ts < request headers > ===> ', this.headers);
     let options = {
       method,
       timeout: 15000,
@@ -60,7 +58,6 @@ export default class ServiceApi {
       } else {
         Object.assign(options, { data: data });
       }
-      debug('service.api.ts < request data > ===> ', data);
     }
     return axios(options);
   }
@@ -97,7 +94,6 @@ export default class ServiceApi {
         .then(response => {
           const data = response.data;
           if (data.er && data.er !== RESPONSE_CODES.OK) {
-            debug('service.api.ts < data.er > ===> ', data.er);
             reject(new AppError(data.er, data.msg));
             return;
           }
@@ -108,7 +104,6 @@ export default class ServiceApi {
           resolve(data.data);
         })
         .catch(error => {
-          debug('service.api.ts <  > ===> ', error);
           if (error.response && error.response.status) {
             const errorMsg = error.response.data?.error;
             if (errorMsg) {

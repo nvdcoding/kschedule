@@ -43,6 +43,7 @@ import {
   HOME_SCREEN,
   TIMETABLE_SYNC_SCREEN,
   ADD_NOTIFY_SCREEN,
+  TEACHER_CHANGE_PASS,
 } from './screen';
 import SendOtpScreen from 'src/screens/auth/send-otp';
 import ChangeInformationScreen from 'src/screens/dashboard/user/information';
@@ -51,6 +52,7 @@ import ChangeSecurityScreen from 'src/screens/dashboard/user/security';
 import HomeScreen from 'src/screens/dashboard/home';
 import TimetableSync from 'src/screens/dashboard/home/TimetableSync';
 import AddNotifyScreen from 'src/screens/dashboard/home/AddNotiScreen';
+import TeacherChangePass from 'src/screens/auth/login/TeacherChangePassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -158,6 +160,10 @@ const GlobalStackNavigation = () => {
         <Stack.Screen
           name={ADD_NOTIFY_SCREEN}
           component={AddNotifyScreen}
+        />
+        <Stack.Screen
+          name={TEACHER_CHANGE_PASS}
+          component={TeacherChangePass}
         />
       </Stack.Navigator>
     </NavigationContainer>

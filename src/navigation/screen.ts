@@ -26,7 +26,7 @@ export const NOTIFY_SCREEN = 'Notify';
 export const BLOG_SCREEN = 'BlogScreen';
 export const DETAIL_BLOG_SCREEN = 'DetailBlog';
 export const BLOG_STACK = 'Thêm lịch';
-export const NOTIFI_TEACHER_SCREEN = 'Thông báo1';
+export const NOTIFI_TEACHER_SCREEN = 'Thông báo';
 export const ADD_NOTIFY_SCREEN = 'AddNotifyScreen'
 //listCourse
 export const LIST_COURSE_SCREEN = 'ListCourseStack';
@@ -51,3 +51,4 @@ export const CHANGE_LANGUAGE_SCREEN = 'ChangeLanguageScreen';
 // teacher
 export const CHANGE_FIND = 'ChangeFind';
 export const CHANGE_CLASS = 'ChangeClass';
+export const TEACHER_CHANGE_PASS = 'TeacherChangePass';

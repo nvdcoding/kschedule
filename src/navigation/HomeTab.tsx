@@ -1,18 +1,18 @@
 import React from 'react';
 
-import {StyleSheet} from 'react-native';
-import {getIconComponent} from 'src/assets/icon';
-import {getSize} from 'src/base/common/responsive';
+import { StyleSheet } from 'react-native';
+import { getIconComponent } from 'src/assets/icon';
+import { getSize } from 'src/base/common/responsive';
 import HomeScreen from 'src/screens/dashboard/home';
 import AddScheduleScreeen from 'src/screens/dashboard/home/AddScheduleScreen';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {useSelector} from 'react-redux';
-import {IUserState} from 'src/redux/slices/accountSlice';
-import {IRootState} from 'src/redux/store';
+import { useSelector } from 'react-redux';
+import { IUserState } from 'src/redux/slices/accountSlice';
+import { IRootState } from 'src/redux/store';
 import InformationScreen from 'src/screens/dashboard/home/InformationScreen';
 import Notifi from 'src/screens/dashboard/home/NotifiScreen';
 import NotifiTeacher from 'src/screens/dashboard/home/TeacherNotifyScreen';
@@ -34,8 +34,8 @@ const HomeTabNavigator = () => {
 
   return (
     <HomeTab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, size}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, size }) => {
           let iconName;
           if (route.name === HOME_SCREEN) {
             iconName = 'home';
@@ -65,7 +65,7 @@ const HomeTabNavigator = () => {
       })}>
       <HomeTab.Screen name={HOME_SCREEN} component={HomeScreen} />
       <HomeTab.Screen
-        name={NOTIFI_TEACHER_SCREEN}
+        name={NOTIFI_SCREEN}
         component={infoUser.role === 2 ? NotifiTeacher : Notifi}
       />
       <HomeTab.Screen name={BLOG_STACK} component={AddScheduleScreeen} />
