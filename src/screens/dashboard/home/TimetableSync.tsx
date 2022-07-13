@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {notifyInvalid} from 'src/base/utils/Utils';
 import {useTranslation} from 'react-i18next';
 import {
@@ -21,6 +21,9 @@ import {IRootState} from 'src/redux/store';
 const TimetableSync = () => {
   const {t} = useTranslation();
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
+  console.log('user', infoUser);
+
+  console.log('infoUser.sync', infoUser.sync);
 
   const [password, setPassword] = useState(null);
   const [status, setStatus] = useState(infoUser.sync ? true : false);
@@ -47,6 +50,9 @@ const TimetableSync = () => {
       notifyInvalid(`${error}`);
     }
   };
+  useEffect(() => {
+    handleSync();
+  }, [status]);
 
   return (
     <SafeAreaView style={Styles.container}>

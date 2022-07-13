@@ -1,5 +1,5 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -108,6 +108,9 @@ const AddScheduleScreeen = () => {
       notifyInvalid(error);
     }
   };
+  useEffect(() => {
+    handleAdd();
+  }, []);
   return (
     <SafeAreaView style={Styles.container}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>

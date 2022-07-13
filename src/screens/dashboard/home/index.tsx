@@ -104,7 +104,7 @@ const HomeScreen = () => {
       setMarked(marked);
     };
     fetchData();
-  }, []);
+  }, [data]);
 
   return (
     <SafeAreaView style={styles.container}>
