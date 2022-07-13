@@ -15,6 +15,7 @@ import {
   FORGET_PASSWORD_SCREEN,
   HOME_TAB_NAVIGATOR,
   SEND_OTP_SCREEN,
+  TEACHER_CHANGE_PASS,
 } from 'src/navigation/screen';
 import { setAccount } from 'src/redux/slices/accountSlice';
 import styles from 'src/screens/auth/login/login.style';
@@ -80,7 +81,7 @@ const LoginScreen = ({ navigation }) => {
       setLoading(false);
       // infoUser.data.code === 200 &&
       dispatch(setAccount(infoTeacher.data.data));
-      navigation.navigate(isTablet ? DRAWER_STACK : HOME_TAB_NAVIGATOR);
+      navigation.navigate(infoTeacher.data.data == 0 ? TEACHER_CHANGE_PASS : HOME_TAB_NAVIGATOR);
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);

@@ -51,3 +51,4 @@ export const CHANGE_LANGUAGE_SCREEN = 'ChangeLanguageScreen';
 // teacher
 export const CHANGE_FIND = 'ChangeFind';
 export const CHANGE_CLASS = 'ChangeClass';
+export const TEACHER_CHANGE_PASS = 'TeacherChangePass';
