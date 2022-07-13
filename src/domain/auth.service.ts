@@ -1,13 +1,13 @@
-import {JWT_KEY, URL_MAIN} from 'src/base/common/Constants';
+import { JWT_KEY, URL_MAIN } from 'src/base/common/Constants';
 import api from 'src/base/domain/api';
 import Helper from 'src/base/utils/helper';
-import {IRegisterAccount} from './local/IRegisterAccount';
+import { IRegisterAccount } from './local/IRegisterAccount';
 
 export default class AuthService {
   login(studentCode: string, password: string): Promise<any> {
     return api(
       'api/v1/auth/login',
-      {studentCode, password},
+      { studentCode, password },
       {
         method: 'POST',
       },
@@ -16,7 +16,7 @@ export default class AuthService {
   teacherLogin(email: string, password: string): Promise<any> {
     return api(
       'api/v1/auth/teacher/login',
-      {email, password},
+      { email, password },
       {
         method: 'POST',
       },
@@ -47,20 +47,21 @@ export default class AuthService {
     });
   }
 
-  sendOtp({email, studentCode}): Promise<any> {
+  sendOtp({ email, studentCode }): Promise<any> {
     return api(
       'api/v1/auth/send-otp',
       {
         email,
         studentCode,
       },
-      {method: 'POST'},
+      { method: 'POST' },
     );
   }
   async changePass(password, newPassword, reNewPassword): Promise<any> {
     const accessToken = await Helper.getDataStored(JWT_KEY);
+    console.log(accessToken)
     return api(
-      'api/v1/schedule/personal-schedule',
+      'api/v1/auth/change-password',
       {
         password,
         newPassword,
@@ -76,23 +77,11 @@ export default class AuthService {
   }
 
   getInfoUser(): Promise<any> {
-    return api('api/v1/auth/me', null, {method: 'GET'});
+    return api('api/v1/auth/me', null, { method: 'GET' });
   }
 
   getInfoTeacher(): Promise<any> {
-    return api('api/v1/auth/teacher/me', null, {method: 'GET'});
-  }
-
-  changePassword(
-    password: string,
-    rePassword: string,
-    newPassword?: string,
-  ): Promise<any> {
-    return api('api/v1/auth/change-password', {
-      password,
-      rePassword,
-      newPassword,
-    });
+    return api('api/v1/auth/teacher/me', null, { method: 'GET' });
   }
 
   updateProfile(
@@ -111,10 +100,10 @@ export default class AuthService {
     email: string,
     url: string = URL_MAIN + 'change-pass',
   ): Promise<any> {
-    return api('admin/account/v1/user/reset/password', {email, url});
+    return api('admin/account/v1/user/reset/password', { email, url });
   }
 
   changePasswordOtp(password: string, token: string): Promise<any> {
-    return api('admin/account/v1/user/update/otp-password', {password, token});
+    return api('admin/account/v1/user/update/otp-password', { password, token });
   }
 }

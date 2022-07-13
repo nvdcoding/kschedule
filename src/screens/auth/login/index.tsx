@@ -81,7 +81,7 @@ const LoginScreen = ({ navigation }) => {
       setLoading(false);
       // infoUser.data.code === 200 &&
       dispatch(setAccount(infoTeacher.data.data));
-      navigation.navigate(infoTeacher.data.data == 0 ? TEACHER_CHANGE_PASS : HOME_TAB_NAVIGATOR);
+      navigation.navigate(infoTeacher.data.data.isChange == 0 ? TEACHER_CHANGE_PASS : HOME_TAB_NAVIGATOR);
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);

@@ -50,18 +50,23 @@ const TeacherChangePass = ({ navigation }) => {
             }
             setLoading(true);
             const authService = new AuthService();
-            const { data } = await authService.changePassword(
-                passwordOld,
-                passwordNew,
-                passwordConfirm,
-            );
-            if (data.data.statusCode !== 200) {
-                throw data.data.message;
+            try {
+                const { data } = await authService.changePass(
+                    passwordOld,
+                    passwordNew,
+                    passwordConfirm,
+                );
+                if (data.data.statusCode !== 200) {
+                    throw data.data.message;
+                }
+                if (data.data.message === 200) {
+                    throw data.data.message;
+                }
+            } catch (error) {
+                console.log(error)
             }
-            if (data.data.message === 200) {
-                throw data.data.message;
-            }
-            await Helper.storeData(JWT_KEY, data.data.accessToken);
+
+
             setLoading(false);
             navigation.navigate(isTablet ? DRAWER_STACK : HOME_TAB_NAVIGATOR);
         } catch (error) {
@@ -71,9 +76,6 @@ const TeacherChangePass = ({ navigation }) => {
         setPasswordOld(null);
         setPasswordNew(null);
         setPasswordConfirm(null);
-    };
-    const handleShow = () => {
-        setShow(!show);
     };
     return (
         <SafeAreaView style={Styles.container}>
