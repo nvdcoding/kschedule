@@ -1,3 +1,4 @@
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native';
@@ -20,19 +21,21 @@ const Notifi = () => {
   const scheduleService = new ScheduleService();
   const [isLoading, setLoading] = useState(false);
   const [notifyData, setData] = useState([]);
+  const focus = useIsFocused();  // use if focus as shown          
 
   useEffect(() => {
-    (async () => {
+    const fectData = async () => {
       try {
         setLoading(true);
         const { data } = await scheduleService.getNotifications();
         data.code === '200' && setData(data.data.data);
         setLoading(false);
-        console.log(notifyData)
       } catch (error) {
         setLoading(false);
+        console.log("ERR: >>>>>>>", error);
       }
-    })();
+    }
+    fectData();
   }, []);
 
   const renderNotify = useCallback(({ item }) => {
