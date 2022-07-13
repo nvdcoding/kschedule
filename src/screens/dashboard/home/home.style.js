@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import Dimens from 'src/base/common/Dimens';
-import {getSize} from 'src/base/common/responsive';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
 import Color from 'src/theme/Color';
 import Font from 'src/theme/Font';
@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+  DateTimePicker: {
+    color: Color.TEXT_PRIMARY,
+    backgroundColor: '#ccc',
+  },
   contentHome: {
     paddingBottom: 20,
     marginTop: 20,
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
     marginVertical: getSize.v(20),
     elevation: 3,
     shadowColor: Color.GRAY_DEEP,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: 2,
     paddingHorizontal: Dimens.DEVICE_WIDTH * 0.12,

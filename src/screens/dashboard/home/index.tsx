@@ -1,5 +1,6 @@
+import { useFocusEffect } from '@react-navigation/native';
 import isEmpty from 'lodash/isEmpty';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -105,7 +106,7 @@ const HomeScreen = () => {
       setMarked(marked);
     };
     fetchData();
-  }, [infoUser.id]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

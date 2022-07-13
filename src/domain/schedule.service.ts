@@ -60,6 +60,20 @@ export default class ScheduleService {
 
     }
 
+    async editNotify(id, body): Promise<any> {
+        const accessToken = await Helper.getDataStored(JWT_KEY);
+        console.log(body);
+        return api(`api/v1/notifications/${id}`, {
+            ...body
+        }, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            method: "PUT"
+        });
+
+    }
+
     async getPersonalSchedule(): Promise<any> {
         const accessToken = await Helper.getDataStored(JWT_KEY);
         return api('api/v1/schedule/personal-schedule', {}, {

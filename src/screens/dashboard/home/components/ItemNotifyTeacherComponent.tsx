@@ -6,7 +6,7 @@ import { Text } from 'src/components';
 import Color from 'src/theme/Color';
 import styles from './style';
 
-const ItemNotifyComponent = ({ item, handleItem }) => {
+const ItemNotifyTeacherComponent = ({ item, handleItem }) => {
   return (
     <TouchableOpacity style={styles.itemNotify} activeOpacity={0.5}>
       <TouchableOpacity onPress={handleItem} style={styles.btnRemoveNotify}>
@@ -19,4 +19,4 @@ const ItemNotifyComponent = ({ item, handleItem }) => {
   );
 };
 
-export default memo(ItemNotifyComponent);
+export default memo(ItemNotifyTeacherComponent);

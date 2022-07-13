@@ -1,5 +1,5 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,19 +8,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {getIconComponent} from 'src/assets/icon';
-import {isTablet} from 'src/base/common/Constants';
-import {getSize} from 'src/base/common/responsive';
+import { getIconComponent } from 'src/assets/icon';
+import { isTablet } from 'src/base/common/Constants';
+import { getSize } from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {notifyInvalid} from 'src/base/utils/Utils';
-import {Block, Spinner} from 'src/components';
+import { notifyInvalid } from 'src/base/utils/Utils';
+import { Block, Spinner } from 'src/components';
 import ScheduleService from 'src/domain/schedule.service';
+import { navigationRef } from 'src/navigation/actions';
+import { HOME_SCREEN } from 'src/navigation/screen';
 import Color from 'src/theme/Color';
 import styles from './home.style';
 
 const Icon = getIconComponent('ionicons');
 
-const AddScheduleScreeen = () => {
+const AddScheduleScreeen = ({ navigation }) => {
   let currentMonth =
     new Date().getMonth() + 1 >= 10
       ? new Date().getMonth() + 1
@@ -85,20 +87,21 @@ const AddScheduleScreeen = () => {
       if (!note) {
         throw 'Vui lòng nhập tiêu đề';
       }
-      console.log(textDate, textTime);
       setLoading(true);
       const scheduleService = new ScheduleService();
-      const {data} = await scheduleService.addPersonalSchedule({
+      const { data } = await scheduleService.addPersonalSchedule({
         title,
         note,
         date: textDate,
         time: textTime,
       });
-      console.log(data.data);
       if (data.data.statusCode != 200) {
         throw data.data.message;
       }
       setLoading(false);
+
+      navigation.navigate(HOME_SCREEN);
+
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);
@@ -125,8 +128,8 @@ const AddScheduleScreeen = () => {
               <TextInput
                 style={[
                   styles.inputBlock,
-                  {paddingTop: 20},
-                  {paddingBottom: 50},
+                  { paddingTop: 20 },
+                  { paddingBottom: 50 },
                 ]}
                 placeholder="Nội dung"
                 placeholderTextColor={'#EB144C'}
@@ -136,20 +139,20 @@ const AddScheduleScreeen = () => {
               <Text
                 style={[
                   styles.inputBlock,
-                  {fontWeight: 'bold'},
-                  {borderWidth: 0},
+                  { fontWeight: 'bold' },
+                  { borderWidth: 0 },
                 ]}>
                 Set time
               </Text>
               <TouchableOpacity onPress={showTimepicker}>
-                <Text style={[styles.inputBlock, {textAlign: 'center'}]}>
+                <Text style={[styles.inputBlock, { textAlign: 'center' }]}>
                   {textTime}
                 </Text>
                 {/* <Button onPress={showTimepicker} title="Show time picker!" /> */}
               </TouchableOpacity>
               <Block marginHorizontal={30}>
                 <TouchableOpacity
-                  style={[styles.btnLogin, {fontSize: 20, fontWeight: 'bold'}]}
+                  style={[styles.btnLogin, { fontSize: 20, fontWeight: 'bold' }]}
                   activeOpacity={0.5}
                   onPress={handleAdd}>
                   <Text style={styles.textLogin}>Lưu</Text>

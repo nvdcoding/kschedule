@@ -18,6 +18,7 @@ import { debug } from 'src/base/utils/DebugUtil';
 import { notifyInvalid } from 'src/base/utils/Utils';
 import { Block, Spinner } from 'src/components';
 import ScheduleService from 'src/domain/schedule.service';
+import { NOTIFI_SCREEN, NOTIFI_TEACHER_SCREEN } from 'src/navigation/screen';
 import Color from 'src/theme/Color';
 import styles from './home.style';
 const AddNotifyScreen = ({ navigation }) => {
@@ -64,12 +65,18 @@ const AddNotifyScreen = ({ navigation }) => {
         throw "Vui lòng điền đủ thông tin";
       }
       setLoading(true);
-      const res = await scheduleService.addNotify(title, content, textDate, value);
-      if (res.data.data.statusCode != 200) {
-        throw res.data.data.message;
+      try {
+        const res = await scheduleService.addNotify(title, content, textDate, value);
+        if (res.data.data.statusCode != 200) {
+          throw res.data.data.message;
+        }
+      } catch (error) {
+        console.log(error)
       }
+
       notifyInvalid("Thêm thành công!");
       setLoading(false);
+      navigation.navigate(NOTIFI_TEACHER_SCREEN);
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);

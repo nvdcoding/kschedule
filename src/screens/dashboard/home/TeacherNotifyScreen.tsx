@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
 import { getSize } from 'src/base/common/responsive';
@@ -14,6 +16,7 @@ import api from 'src/base/domain/api';
 import { keyExtractor } from 'src/base/utils/Utils';
 import { Block, Spinner } from 'src/components';
 import ModalBox from 'src/components/ModalBox';
+import ScheduleService from 'src/domain/schedule.service';
 import { ADD_NOTIFY_SCREEN } from 'src/navigation/screen';
 import { IUserState } from 'src/redux/slices/accountSlice';
 import { IRootState } from 'src/redux/store';
@@ -27,11 +30,22 @@ const NotifiTeacher = ({ navigation }) => {
   const [dataNotify, setDataNotify] = useState([]);
   const [showModal, setShowModal] = useState<0 | 1 | 2>(0);
   const [itemSelect, setItemSelect] = useState(null);
-
+  const [content, setContent] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [mode, setMode] = useState('date');
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
   const handleChangeScreen = () => {
     navigation.navigate(ADD_NOTIFY_SCREEN);
   };
-
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
+  };
+  const showDatepicker = e => {
+    showMode('date');
+  };
+  const scheduleService = new ScheduleService();
   useEffect(() => {
     (async () => {
       try {
@@ -59,12 +73,18 @@ const NotifiTeacher = ({ navigation }) => {
     setShowModal(0);
   }, []);
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     setShowModal(0);
     setTimeout(() => {
       setShowModal(2);
     }, 300);
   };
+
+  const sendEdit = async () => {
+    console.log({ title, content: content, date: value });
+    return;
+    const res = await scheduleService.editNotify(itemSelect.id, { title, content: content, date: value });
+  }
 
   return (
     <SafeAreaView style={Styles.container}>
@@ -118,27 +138,50 @@ const NotifiTeacher = ({ navigation }) => {
           )}
           {showModal === 2 && (
             <>
-              <Text style={styles.title}>Title</Text>
+              <Text style={styles.title}>Tiêu đề</Text>
               <TextInput
                 style={styles.inputEdit}
-                value={itemSelect.title}
+                value={title}
                 placeholder={'Nhập tiêu đề'}
+                onChangeText={setTitle}
+                editable
+                defaultValue={itemSelect.title}
               />
-              <Text style={styles.title}>Content</Text>
+              <Text style={styles.title}>Nội dung</Text>
               <TextInput
                 style={styles.inputEdit}
-                value={itemSelect.content}
-                placeholder={'Nhập tiêu đề'}
+                defaultValue={itemSelect.content}
+                placeholder={'Nhập nội dung'}
+                editable
+                onChangeText={setContent}
+                value={content}
               />
-              <Text style={styles.title}>Class</Text>
-              <TextInput
-                style={styles.inputEdit}
-                value={itemSelect.className}
-                placeholder={'Nhập tiêu đề'}
+              <Text style={styles.title}>Thời gian</Text>
+              <TouchableOpacity
+                style={styles.blockDateNoti}
+                onPress={showDatepicker}>
+                <Icon
+                  name="calendar-outline"
+                  color="#ccc"
+                  size={getSize.m(20)}
+                />
+                <Text style={styles.textDateNoti}>qưe</Text>
+              </TouchableOpacity>
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                textColor="red"
+                style={styles.DateTimePicker}
+              // onChange={onChange}
               />
               <TouchableOpacity
                 activeOpacity={0.5}
-                style={[styles.btnLogin, { backgroundColor: Color.GREEN }]}>
+                style={[styles.btnLogin, { backgroundColor: Color.GREEN }]}
+                onPress={sendEdit}
+              >
                 <Text>Edit</Text>
               </TouchableOpacity>
             </>
