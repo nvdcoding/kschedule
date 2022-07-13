@@ -3,7 +3,8 @@ import {JWT_KEY} from 'src/base/common/Constants';
 
 import Helper from '../utils/helper';
 
-const apiServerUrl = 'http://learnit-kma.me/';
+const apiServerUrl =
+  'https://dd7b-2405-4803-fe8f-2b80-fc67-a6b5-6e76-81c1.ngrok.io';
 // const apiServerUrl = 'http://dev.learn.goedu.asia/api/';
 
 const getAxiosInstance = async () => {

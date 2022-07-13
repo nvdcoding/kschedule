@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
 
   btnGoLogin: {
-    backgroundColor: Color.GREEN,
+    backgroundColor: Color.TEXT_PRIMARY,
     height: getSize.m(48),
     borderRadius: getSize.m(24),
     position: 'absolute',

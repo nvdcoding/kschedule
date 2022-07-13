@@ -87,7 +87,7 @@ const ChangeSecurityScreen = ({navigation}) => {
               <Icon
                 name={'arrow-back-outline'}
                 size={getSize.m(24)}
-                color={Color.RED}
+                color={Color.TEXT_PRIMARY}
               />
             </TouchableOpacity>
             <Text style={styles.textTitle}>Bảo mật & mật khẩu</Text>
@@ -139,20 +139,24 @@ const ChangeSecurityScreen = ({navigation}) => {
                       onChangeText={setPasswordConfirm}
                       editable
                     />
-                    <Block marginHorizontal={30}>
-                      <TouchableOpacity
-                        style={styles.btnLogin}
-                        activeOpacity={0.5}
-                        onPress={changePass}>
-                        <Text style={styles.textLogin}>{t('SAVE_PASS')}</Text>
-                      </TouchableOpacity>
-                    </Block>
                   </View>
                 )}
               </View>
             </Block>
           </View>
         </ScrollView>
+      </Block>
+      <Block
+        marginHorizontal={30}
+        style={{
+          marginBottom: getSize.m(30),
+        }}>
+        <TouchableOpacity
+          style={styles.btnLogin}
+          activeOpacity={0.5}
+          onPress={changePass}>
+          <Text style={styles.textLogin}>{t('SAVE_PASS')}</Text>
+        </TouchableOpacity>
       </Block>
       {isLoading && (
         <Spinner mode={'overlay'} size={'large'} color={Color.TEXT_PRIMARY} />

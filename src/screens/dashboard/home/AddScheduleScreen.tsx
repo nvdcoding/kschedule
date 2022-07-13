@@ -85,7 +85,6 @@ const AddScheduleScreeen = () => {
       if (!note) {
         throw 'Vui lòng nhập tiêu đề';
       }
-      console.log(textDate, textTime);
       setLoading(true);
       const scheduleService = new ScheduleService();
       const {data} = await scheduleService.addPersonalSchedule({
@@ -94,9 +93,14 @@ const AddScheduleScreeen = () => {
         date: textDate,
         time: textTime,
       });
-      console.log(data.data);
-      if (data.data.statusCode != 200) {
+      if (data.data.statusCode !== 200) {
         throw data.data.message;
+      }
+      if (data.data.statusCode === 200) {
+        setTitle('');
+        setNote('');
+        setTextTime(timeCurrent);
+        throw 'Thêm lịch thành công!';
       }
       setLoading(false);
     } catch (error) {
@@ -111,14 +115,18 @@ const AddScheduleScreeen = () => {
           <View style={styles.containerHome}>
             <Text style={styles.header}>Thêm công việc cá nhân</Text>
             <TouchableOpacity style={styles.blockDate} onPress={showDatepicker}>
-              <Icon name="calendar-outline" color="#ccc" size={getSize.m(15)} />
+              <Icon
+                name="calendar-outline"
+                color="#203a87"
+                size={getSize.m(20)}
+              />
               <Text style={styles.textDate}>{textDate}</Text>
             </TouchableOpacity>
             <View style={styles.content}>
               <TextInput
                 style={styles.inputBlock}
                 placeholder="Tiêu đề"
-                placeholderTextColor={'#EB144C'}
+                placeholderTextColor={`${Color.WHITE}80`}
                 value={title}
                 onChangeText={setTitle}
               />
@@ -129,7 +137,7 @@ const AddScheduleScreeen = () => {
                   {paddingBottom: 50},
                 ]}
                 placeholder="Nội dung"
-                placeholderTextColor={'#EB144C'}
+                placeholderTextColor={`${Color.WHITE}80`}
                 value={note}
                 onChangeText={setNote}
               />
@@ -138,26 +146,31 @@ const AddScheduleScreeen = () => {
                   styles.inputBlock,
                   {fontWeight: 'bold'},
                   {borderWidth: 0},
+                  {backgroundColor: '#fff'},
                 ]}>
                 Set time
               </Text>
               <TouchableOpacity onPress={showTimepicker}>
-                <Text style={[styles.inputBlock, {textAlign: 'center'}]}>
+                <Text
+                  style={[
+                    styles.inputBlock,
+                    {textAlign: 'center', color: '#fff', marginTop: 7},
+                  ]}>
                   {textTime}
                 </Text>
                 {/* <Button onPress={showTimepicker} title="Show time picker!" /> */}
               </TouchableOpacity>
-              <Block marginHorizontal={30}>
-                <TouchableOpacity
-                  style={[styles.btnLogin, {fontSize: 20, fontWeight: 'bold'}]}
-                  activeOpacity={0.5}
-                  onPress={handleAdd}>
-                  <Text style={styles.textLogin}>Lưu</Text>
-                </TouchableOpacity>
-              </Block>
             </View>
           </View>
         </ScrollView>
+        <Block marginHorizontal={30} style={[styles.blockBtnLogin]}>
+          <TouchableOpacity
+            style={[styles.btnLogin, {fontSize: 20, fontWeight: 'bold'}]}
+            activeOpacity={0.5}
+            onPress={handleAdd}>
+            <Text style={styles.textLogin}>Lưu</Text>
+          </TouchableOpacity>
+        </Block>
       </Block>
       {show && (
         <DateTimePicker

@@ -1,6 +1,5 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
-import React, { useEffect, useState } from 'react';
-
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,16 +10,16 @@ import {
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { isTablet } from 'src/base/common/Constants';
-import { getSize } from 'src/base/common/responsive';
+import {isTablet} from 'src/base/common/Constants';
+import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import { debug } from 'src/base/utils/DebugUtil';
-import { notifyInvalid } from 'src/base/utils/Utils';
-import { Block, Spinner } from 'src/components';
+import {debug} from 'src/base/utils/DebugUtil';
+import {notifyInvalid} from 'src/base/utils/Utils';
+import {Block, Spinner} from 'src/components';
 import ScheduleService from 'src/domain/schedule.service';
 import Color from 'src/theme/Color';
 import styles from './home.style';
-const AddNotifyScreen = ({ navigation }) => {
+const AddNotifyScreen = ({navigation}) => {
   let currentMonth =
     new Date().getMonth() + 1 >= 10
       ? new Date().getMonth() + 1
@@ -43,12 +42,19 @@ const AddNotifyScreen = ({ navigation }) => {
     (async () => {
       try {
         setLoading(true);
-        const { data } = await scheduleService.getClasses();
+        const {data} = await scheduleService.getClasses();
         const result = data.data.data.map(e => {
           return {
             label: e.name,
-            value: e.id
-          }
+            value: e.id,
+            icon: () => (
+              <Icon
+                name={'ios-school-outline'}
+                size={getSize.m(24)}
+                color="#637c7b"
+              />
+            ),
+          };
         });
         data.data.statusCode === 200 && setItems(result);
         setLoading(false);
@@ -61,25 +67,32 @@ const AddNotifyScreen = ({ navigation }) => {
   const sendNoti = async () => {
     try {
       if (!title || !content || !textDate || !value) {
-        throw "Vui lòng điền đủ thông tin";
+        throw 'Vui lòng điền đủ thông tin';
       }
       setLoading(true);
-      const res = await scheduleService.addNotify(title, content, textDate, value);
-      if (res.data.data.statusCode != 200) {
+      const res = await scheduleService.addNotify(
+        title,
+        content,
+        textDate,
+        value,
+      );
+      if (res.data.data.statusCode !== 200) {
         throw res.data.data.message;
       }
-      notifyInvalid("Thêm thành công!");
+      if (res.data.data.statusCode === 200) {
+        throw 'Thêm thành công!';
+      }
+      notifyInvalid('Thêm thành công!');
       setLoading(false);
     } catch (error) {
       setLoading(false);
       notifyInvalid(error);
     }
-
   };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date.toLocaleDateString();
-    console.log(currentDate)
+    console.log(currentDate);
     setShow(false);
     setDate(currentDate);
     let tempDate = new Date(currentDate);
@@ -101,7 +114,7 @@ const AddNotifyScreen = ({ navigation }) => {
   };
   return (
     <SafeAreaView
-      style={[Styles.container, { backgroundColor: Color.BACKGROUND }]}>
+      style={[Styles.container, {backgroundColor: Color.BACKGROUND}]}>
       <Block style={[styles.content, isTablet && styles.contentTablet]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <TouchableOpacity
@@ -111,7 +124,7 @@ const AddNotifyScreen = ({ navigation }) => {
             <Icon
               name={'arrow-back-outline'}
               size={getSize.m(24)}
-              color={Color.RED}
+              color={Color.TEXT_PRIMARY}
             />
           </TouchableOpacity>
           <View style={styles.containerHome}>
@@ -122,14 +135,14 @@ const AddNotifyScreen = ({ navigation }) => {
                 onPress={showDatepicker}>
                 <Icon
                   name="calendar-outline"
-                  color="#ccc"
+                  color="#c2281d"
                   size={getSize.m(20)}
                 />
                 <Text style={styles.textDateNoti}>{textDate}</Text>
               </TouchableOpacity>
             </View>
             <Block>
-              <Text style={[styles.title, { color: Color.TEXT_COLOR }]}>
+              <Text style={[styles.title, {color: Color.TEXT_COLOR}]}>
                 Tiêu đề
               </Text>
               <TextInput
@@ -140,7 +153,7 @@ const AddNotifyScreen = ({ navigation }) => {
                 onChangeText={setTitle}
                 editable
               />
-              <Text style={[styles.title, { color: Color.TEXT_COLOR }]}>
+              <Text style={[styles.title, {color: Color.TEXT_COLOR}]}>
                 Nội dung
               </Text>
               <TextInput
@@ -158,19 +171,26 @@ const AddNotifyScreen = ({ navigation }) => {
                 setOpen={setOpen}
                 setValue={setValue}
                 setItems={setItems}
+                searchable={true}
+                searchPlaceholder="Tìm lớp..."
+                placeholder="Chọn lớp gửi thông báo"
+                placeholderStyle={{
+                  color: 'grey',
+                  fontWeight: 'bold',
+                }}
                 extendableBadgeContainer
               />
             </Block>
-            <Block marginHorizontal={30}>
-              <TouchableOpacity
-                style={[styles.btnLogin]}
-                activeOpacity={0.5}
-                onPress={sendNoti}>
-                <Text style={styles.textLogin}>Gửi thông báo</Text>
-              </TouchableOpacity>
-            </Block>
           </View>
         </ScrollView>
+        <Block marginHorizontal={30} style={[styles.blockBtnLogin]}>
+          <TouchableOpacity
+            style={[styles.btnLogin]}
+            activeOpacity={0.5}
+            onPress={sendNoti}>
+            <Text style={styles.textLogin}>Gửi thông báo</Text>
+          </TouchableOpacity>
+        </Block>
       </Block>
       {show && (
         <DateTimePicker

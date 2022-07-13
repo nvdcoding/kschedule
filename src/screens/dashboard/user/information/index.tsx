@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-import { useTranslation } from 'react-i18next';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
+import {useTranslation} from 'react-i18next';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSize } from 'src/base/common/responsive';
+import {useDispatch, useSelector} from 'react-redux';
+import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import { debug } from 'src/base/utils/DebugUtil';
-import { notifyInvalid } from 'src/base/utils/Utils';
-import { Block, Spinner } from 'src/components';
+import {debug} from 'src/base/utils/DebugUtil';
+import {notifyInvalid} from 'src/base/utils/Utils';
+import {Block, Spinner} from 'src/components';
 import AuthService from 'src/domain/auth.service';
-import { IUserState, setAccount } from 'src/redux/slices/accountSlice';
-import { IRootState } from 'src/redux/store';
+import {IUserState, setAccount} from 'src/redux/slices/accountSlice';
+import {IRootState} from 'src/redux/store';
 import InputComponent from 'src/screens/auth/components/InputComponent';
 import Color from 'src/theme/Color';
 import styles from './information.style';
 
-const ChangeInformationScreen = ({ navigation }) => {
-  const { t } = useTranslation();
+const ChangeInformationScreen = ({navigation}) => {
+  const {t} = useTranslation();
   const infoUser = useSelector<IRootState, IUserState>(state => state.infoUser);
   const [isLoading, setLoading] = useState(false);
   const [name, setName] = useState(infoUser.name);
@@ -48,7 +48,7 @@ const ChangeInformationScreen = ({ navigation }) => {
         includeBase64: true,
       });
       const data = makeUploadFormData(result);
-      const { secure_url } = await fetch(
+      const {secure_url} = await fetch(
         `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
         {
           method: 'post',
@@ -58,8 +58,7 @@ const ChangeInformationScreen = ({ navigation }) => {
         .then(res => res.json())
         .catch(e => console.log(e));
       setAvatar(secure_url);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
   const send = async () => {
     try {
@@ -71,13 +70,12 @@ const ChangeInformationScreen = ({ navigation }) => {
       }
       setLoading(true);
       const authService = new AuthService();
-      const { data } = await authService.updateProfile(name, phone, avatar);
+      const {data} = await authService.updateProfile(name, phone, avatar);
       // if (data.data.statusCode !== 200) {
       //   throw data.data.message;
       //   // throw data.description;
       // }
       const infoUser = await authService.getInfoUser();
-      console.log('123123', infoUser.data.data);
       setLoading(false);
       dispatch(setAccount(infoUser.data.data));
       notifyInvalid('Cập nhập thông tin thành công!');
@@ -97,7 +95,7 @@ const ChangeInformationScreen = ({ navigation }) => {
             <Icon
               name={'arrow-back-outline'}
               size={getSize.m(24)}
-              color={Color.RED}
+              color={Color.TEXT_PRIMARY}
             />
           </TouchableOpacity>
           <Text style={styles.textTitle}>Thông tin chung</Text>
@@ -110,14 +108,18 @@ const ChangeInformationScreen = ({ navigation }) => {
               value={name}
               editable
             />
-            <InputComponent
-              title={'Mã sinh viên'}
-              placeholder={'Nhập mã sinh viên..'}
-              marginBottom={25}
-              onChangeText={setCode}
-              value={code}
-              editable={false}
-            />
+            {infoUser.role === 2 ? (
+              <Text>&nbsp</Text>
+            ) : (
+              <InputComponent
+                title={'Mã sinh viên'}
+                placeholder={'Nhập mã sinh viên..'}
+                marginBottom={25}
+                onChangeText={setCode}
+                value={code}
+                editable={false}
+              />
+            )}
             <InputComponent
               title={'Email'}
               placeholder={'Nhập email'}
@@ -151,6 +153,8 @@ const ChangeInformationScreen = ({ navigation }) => {
               </View> */}
           </Block>
         </View>
+      </Block>
+      <Block>
         <TouchableOpacity
           style={{
             height: getSize.m(44),
@@ -162,19 +166,20 @@ const ChangeInformationScreen = ({ navigation }) => {
             marginBottom: getSize.m(15),
           }}
           onPress={pickImageWithGallery}>
-          <Text>Gallery</Text>
+          <Text>Upload Ảnh</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
             height: getSize.m(44),
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: Color.GREEN,
+            backgroundColor: Color.TEXT_PRIMARY,
             marginHorizontal: getSize.m(20),
             borderRadius: getSize.m(10),
+            marginBottom: getSize.m(40),
           }}
           onPress={send}>
-          <Text>Gửi</Text>
+          <Text>Cập nhật</Text>
         </TouchableOpacity>
       </Block>
       {isLoading && (

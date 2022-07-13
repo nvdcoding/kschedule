@@ -71,29 +71,25 @@ const InformationScreen = ({navigation}) => {
                   <Icon
                     name={'person-circle'}
                     size={getSize.m(26)}
-                    color={Color.BLUE_HOLDER}
+                    color="#6495c2"
                   />
                   <Text style={styles.settingUser}>{t('INFORMATION')}</Text>
                 </View>
                 <Icon
                   name={'chevron-forward-sharp'}
-                  size={getSize.m(26)}
+                  size={getSize.m(20)}
                   color={'#999999'}
                 />
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.ItemInfo} onPress={changeSync}>
                 <View style={styles.mainItem}>
-                  <Icon
-                    name={'person-circle'}
-                    size={getSize.m(26)}
-                    color={Color.BLUE_HOLDER}
-                  />
+                  <Icon name={'sync'} size={getSize.m(26)} color="#d12d21" />
                   <Text style={styles.settingUser}>Đồng bộ</Text>
                 </View>
                 <Icon
                   name={'chevron-forward-sharp'}
-                  size={getSize.m(26)}
+                  size={getSize.m(20)}
                   color={'#999999'}
                 />
               </TouchableOpacity>
@@ -102,12 +98,12 @@ const InformationScreen = ({navigation}) => {
                 style={styles.ItemInfo}
                 onPress={changeSecurity}>
                 <View style={styles.mainItem}>
-                  <Icon name={'key'} size={getSize.m(26)} color={'#F1EF4C'} />
+                  <Icon name={'key'} size={getSize.m(26)} color={'#d1a41a'} />
                   <Text style={styles.settingUser}>{t('SECURITY')}</Text>
                 </View>
                 <Icon
                   name={'chevron-forward-sharp'}
-                  size={getSize.m(26)}
+                  size={getSize.m(20)}
                   color={'#999999'}
                 />
               </TouchableOpacity>

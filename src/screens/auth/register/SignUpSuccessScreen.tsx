@@ -1,20 +1,13 @@
 import React from 'react';
 
 import {useTranslation} from 'react-i18next';
-import {
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Images} from 'src/assets/images';
 import {isTablet} from 'src/base/common/Constants';
 import {getSize} from 'src/base/common/responsive';
 import Styles from 'src/base/common/Styles';
-import {
-  Block,
-  Image,
-  Text,
-} from 'src/components';
+import {Block, Image, Text} from 'src/components';
 import {LOGIN_SCREEN} from 'src/navigation/screen';
 import Color from 'src/theme/Color';
 
@@ -48,7 +41,7 @@ const SignUpSuccessScreen = ({navigation}) => {
           <Icon
             name={'arrow-back-outline'}
             size={getSize.m(24)}
-            color={Color.GREEN}
+            color={Color.TEXT_PRIMARY}
           />
         </TouchableOpacity>
         <Text style={styles.textSignSuccess}>{t('REGISTER_SUCCESS')}</Text>

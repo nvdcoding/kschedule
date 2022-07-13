@@ -9,8 +9,11 @@ const styles = StyleSheet.create({
   },
 
   itemNotify: {
-    backgroundColor: '#212924',
-    borderRadius: getSize.m(20),
+    backgroundColor: '#d8edf2',
+    borderColor: '#abe8f5',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: getSize.m(16),
     paddingVertical: getSize.m(15),
     paddingHorizontal: getSize.m(20),
     marginHorizontal: getSize.m(20),
@@ -26,7 +29,7 @@ const styles = StyleSheet.create({
   },
 
   titleNotify: {
-    color: Color.WHITE,
+    color: '#502f29',
     fontFamily: Font.font_SVN_700,
     fontSize: getSize.m(16, 0.3),
     marginRight: getSize.m(24),
@@ -34,15 +37,15 @@ const styles = StyleSheet.create({
 
   contentNotify: {
     fontFamily: Font.font_SVN_400,
-    fontSize: getSize.m(12, 0.3),
-    color: '#BCE1C6',
+    fontSize: getSize.m(13, 0.5),
+    color: '#565150',
     marginTop: getSize.m(8),
   },
 
   timeNotify: {
-    fontSize: getSize.m(8, 0.3),
+    fontSize: getSize.m(10, 0.5),
     fontFamily: Font.font_SVN_400,
-    color: '#BCE1C6',
+    color: '#443e3d',
     marginTop: getSize.m(15),
   },
 });

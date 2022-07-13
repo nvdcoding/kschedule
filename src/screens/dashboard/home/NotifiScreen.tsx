@@ -33,7 +33,7 @@ const Notifi = () => {
         setLoading(false);
       }
     })();
-  }, [notifyData]);
+  }, []);
 
   const renderNotify = useCallback(({item}) => {
     return <ItemNotifyComponent item={item} />;

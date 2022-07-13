@@ -10,12 +10,13 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   containerHome: {
-    marginTop: getSize.m(20),
+    marginTop: getSize.m(10),
     display: 'flex',
     flexDirection: 'column',
     paddingLeft: getSize.m(15),
     paddingRight: getSize.m(15),
     width: Dimens.DEVICE_WIDTH,
+    height: Dimens.DEVICE_HEIGHT,
   },
   content: {
     flex: 1,
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
     color: Color.TEXT_PRIMARY,
   },
   btnBack: {
+    marginLeft: getSize.m(10),
     marginTop: 20,
   },
   avtUser: {
@@ -159,11 +161,11 @@ const styles = StyleSheet.create({
   },
   statusY: {
     fontSize: getSize.m(15),
-    color: Color.TEXT_SECONDARY,
+    color: Color.TEXT_PRIMARY,
   },
   statusN: {
     fontSize: getSize.m(15),
-    color: Color.TEXT_PRIMARY,
+    color: Color.RED_HOLDER,
   },
   Notes: {
     overflow: 'visible',
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
     marginTop: getSize.m(15),
   },
   notesTitle: {
-    color: Color.TEXT_PRIMARY,
+    color: Color.RED_HOLDER,
     fontWeight: '500',
     fontSize: getSize.m(15),
     marginRight: getSize.m(10),
@@ -300,20 +302,23 @@ const styles = StyleSheet.create({
   },
   // add todo
   header: {
-    marginTop: 60,
+    marginTop: getSize.m(20),
+    textAlign: 'center',
     fontSize: 25,
     fontWeight: 'bold',
-    color: '#EB144C',
+    color: Color.TEXT_PRIMARY,
   },
   inputBlock: {
     marginTop: 30,
     paddingBottom: 15,
     paddingTop: 15,
     fontSize: 20,
-    color: '#EB144C',
+    backgroundColor: Color.BACKGROUND_PRIMARY,
+    paddingHorizontal: getSize.m(10),
+    color: '#404f50',
     borderRadius: 7,
-    borderWidth: 1.5,
-    borderColor: '#EB144C',
+    // borderWidth: 1.5,
+    // borderColor: '#EB144C',
     width: Dimens.DEVICE_WIDTH * 0.9,
   },
   buttonSave: {
@@ -329,12 +334,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#EB144C',
   },
   textDate: {
-    color: '#ccc',
-    fontSize: getSize.m(15),
+    marginLeft: getSize.m(5),
+    color: '#203a87',
+    fontWeight: '500',
+    fontSize: getSize.m(20),
   },
   blockDate: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   DateTimePicker: {
     color: Color.TEXT_PRIMARY,
@@ -379,11 +388,11 @@ const styles = StyleSheet.create({
     marginRight: getSize.m(30),
   },
   headerNoti: {
-    marginTop: 10,
+    marginTop: getSize.m(0),
     fontSize: 25,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#EB144C',
+    color: Color.TEXT_PRIMARY,
   },
   blockDateNoti: {
     display: 'flex',
@@ -393,7 +402,7 @@ const styles = StyleSheet.create({
   },
   textDateNoti: {
     marginLeft: getSize.m(7),
-    color: '#ccc',
+    color: '#c2281d',
     fontSize: getSize.m(20),
   },
 
@@ -439,10 +448,13 @@ const styles = StyleSheet.create({
 
   inputEdit: {
     height: getSize.m(44),
-    backgroundColor: Color.GRAY,
+    backgroundColor: Color.BACKGROUND_PRIMARY,
     borderRadius: getSize.m(10),
     paddingHorizontal: getSize.m(10),
     marginBottom: getSize.m(15),
+  },
+  blockBtnLogin: {
+    marginBottom: getSize.m(20),
   },
 });
 
